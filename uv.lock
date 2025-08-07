@@ -323,6 +323,7 @@ dev = [
     { name = "pytest-cov", version = "5.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "pytest-cov", version = "6.2.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "python-semantic-release" },
+    { name = "ruff" },
     { name = "safety" },
     { name = "twine" },
 ]
@@ -352,6 +353,7 @@ dev = [
     { name = "pytest-benchmark", specifier = ">=4.0.0" },
     { name = "pytest-cov", specifier = ">=5.0.0" },
     { name = "python-semantic-release", specifier = ">=8.0.0" },
+    { name = "ruff", specifier = ">=0.12.7" },
     { name = "safety", specifier = ">=3.6.0" },
     { name = "twine", specifier = ">=6.1.0" },
 ]
