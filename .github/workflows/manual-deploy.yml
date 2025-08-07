@@ -1,0 +1,62 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging  
+          - prod
+      image_tag:
+        description: 'Docker image tag to deploy'
+        required: true
+        type: string
+        default: 'latest'
+      deployment_type:
+        description: 'Deployment strategy'
+        required: true
+        type: choice
+        options:
+          - rolling
+          - blue-green
+        default: 'rolling'
+
+jobs:
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Show deployment info
+      run: |
+        echo "🚀 Manual Deployment Started"
+        echo "=========================="
+        echo "Environment: ${{ github.event.inputs.environment }}"
+        echo "Image Tag: ${{ github.event.inputs.image_tag }}"
+        echo "Strategy: ${{ github.event.inputs.deployment_type }}"
+        echo ""
+        
+        if [ "${{ github.event.inputs.deployment_type }}" = "blue-green" ]; then
+          echo "🔄 Blue-Green Deployment Process:"
+          echo "1. ✅ Validate deployment inputs"
+          echo "2. 🔍 Check if image exists: ghcr.io/dkdndes/pybiorythm:${{ github.event.inputs.image_tag }}"
+          echo "3. 🚢 Deploy to inactive slot"
+          echo "4. 🏥 Run health checks"
+          echo "5. 🔀 Switch traffic (manual approval required)"
+          echo "6. 🧹 Clean up old deployment"
+        else
+          echo "📈 Rolling Deployment Process:"
+          echo "1. ✅ Validate deployment inputs" 
+          echo "2. 🔍 Check if image exists: ghcr.io/dkdndes/pybiorythm:${{ github.event.inputs.image_tag }}"
+          echo "3. 🚢 Rolling update deployment"
+          echo "4. 🏥 Wait for pods to be ready"
+        fi
+        
+        echo ""
+        echo "✅ Deployment simulation completed!"
+        echo "📋 Ready for actual deployment to ${{ github.event.inputs.environment }} environment"
