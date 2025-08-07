@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
@@ -64,9 +64,10 @@ jobs:
         python -c "
         import json
         import datetime
+        import uuid
         from pathlib import Path
         
-        # Load SBOM
+        # Load SBOM or create new
         sbom_file = Path('sbom-complete.json')
         if sbom_file.exists():
             with open(sbom_file) as f:
@@ -74,8 +75,8 @@ jobs:
         else:
             sbom = {
                 'bomFormat': 'CycloneDX',
-                'specVersion': '1.4',
-                'serialNumber': 'urn:uuid:$(uuidgen)',
+                'specVersion': '1.5',
+                'serialNumber': f'urn:uuid:{uuid.uuid4()}',
                 'version': 1
             }
         
@@ -336,7 +337,7 @@ jobs:
         "
 
     - name: Upload Docker SBOM artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sbom-docker
         path: |
@@ -357,17 +358,17 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Download Python SBOM
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: sbom-python
 
     - name: Download Docker SBOM
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: sbom-docker
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
@@ -391,7 +392,7 @@ jobs:
         # Create combined SBOM
         combined_sbom = {
             'bomFormat': 'CycloneDX',
-            'specVersion': '1.4',
+            'specVersion': '1.5',
             'serialNumber': f'urn:uuid:pybiorythm-combined-{datetime.datetime.utcnow().strftime(\"%Y%m%d%H%M%S\")}',
             'version': 1,
             'metadata': {
@@ -507,7 +508,7 @@ jobs:
 
     - name: Upload combined SBOM to release
       if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: |
           sbom-combined.json
@@ -515,7 +516,7 @@ jobs:
           SBOM_SUMMARY.md
 
     - name: Upload combined SBOM artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sbom-combined
         path: |
