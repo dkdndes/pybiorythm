@@ -367,5 +367,6 @@ uv pip install -e .
 
 - **Read**: [Testing Guide](testing.md)
 - **Review**: [Code Quality Standards](code-quality.md)
+- **Test Workflows**: [Local GitHub Actions](../deployment/local-github-actions.md)
 - **Contribute**: [Contributing Guidelines](contributing.md)
 - **Architecture**: [Project Architecture](architecture.md)

@@ -62,6 +62,7 @@ nav:
     - Docker: deployment/docker.md
     - Kubernetes: deployment/kubernetes.md
     - Local Testing: deployment/local-testing.md
+    - Local GitHub Actions: deployment/local-github-actions.md
     - Security: deployment/security.md
   - Workflows:
     - GitHub Actions: workflows/github-actions.md
