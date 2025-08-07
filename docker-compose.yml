@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  biorythm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: biorythm:latest
+    container_name: biorythm-app
+    stdin_open: true  # Keep STDIN open for interactive mode
+    tty: true         # Allocate a pseudo-TTY for interactive mode
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    # For command line usage with arguments
+    # Uncomment and modify as needed:
+    # command: ["python", "main.py", "-y", "1990", "-m", "5", "-d", "15"]
+    
+    # Volume mount for output files (optional)
+    # volumes:
+    #   - ./output:/app/output
+    
+    # Health check override
+    healthcheck:
+      test: ["CMD", "python", "-c", "import biorythm; print('Health check passed')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Optional: Development container with tests (not recommended for production)
+  biorythm-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    image: biorythm:dev
+    container_name: biorythm-dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    profiles:
+      - dev  # Only start with --profile dev
+    command: ["bash"]

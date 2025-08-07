@@ -1,0 +1,55 @@
+# Exclude test files and coverage reports
+tests/
+htmlcov/
+.coverage
+.pytest_cache/
+pytest.ini
+
+# Exclude development files
+.git/
+.gitignore
+.github/
+README.md
+LICENSE
+
+# Exclude Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+.env
+
+# Exclude IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+*.egg-info/
+
+# Exclude documentation
+docs/
+
+# Exclude temporary files
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# Exclude development tools configuration
+.ruff_cache/
+.mypy_cache/
+.coverage.*
+
+# Keep only essential files for runtime
+!biorythm.py
+!main.py
+!pyproject.toml
+!uv.lock

@@ -446,9 +446,10 @@ class BiorhythmCalculator:
             }
             timeseries.append(entry)
             if is_critical:
+                cycles_str = ", ".join(critical_cycles)
                 critical_days.append({
                     "date": current_date.strftime("%Y-%m-%d"),
-                    "cycles": critical_cycles
+                    "cycles": f"{cycles_str} cycle(s) near zero"
                 })
 
         # Meta info
@@ -471,6 +472,7 @@ class BiorhythmCalculator:
                 "chart_orientation": chart_orientation,
                 "days": self.days,
                 "width": self.width,
+                "scientific_warning": "⚠️  SCIENTIFIC WARNING ⚠️\nBiorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\nMultiple peer-reviewed studies have found NO correlation between\nbiorhythm cycles and human performance beyond random chance.\nThis program is provided for ENTERTAINMENT PURPOSES ONLY."
             },
             "cycle_repeats": {
                 "physical_emotional_repeat_in_days": next_23_28,
@@ -510,43 +512,46 @@ class UserInterface:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def get_user_input(self) -> Tuple[int, int, int, str]:
+    def get_user_input(self) -> Tuple[int, int, int, str, int]:
         try:
             print("\nBiorhythm Chart Generator (Pseudoscience Demonstration):")
             print("Historical Context:")
             print("• Developed by Wilhelm Fliess (friend of Sigmund Freud) in 1890s")
             print("• Popularized in USA during 1970s by Bernard Gittelson")
             print("• Extensively tested - no scientific evidence found")
-            print("• All 134+ studies confirm it has no predictive value")
-            print()
+            print("• All 134+ studies confirm it has no predictive value\n")
             year_input = input(f"  Enter your birth YEAR ({MIN_YEAR}-{MAX_YEAR}): ").strip()
             month_input = input("  Enter your birth MONTH (1-12): ").strip()
             day_input = input("  Enter your birth DAY (1-31): ").strip()
             print("\nChart Orientation:")
             print("  1. Vertical (traditional, top-to-bottom timeline)")
             print("  2. Horizontal (left-to-right timeline)")
-            orientation_input = input("  Choose orientation (1 or 2, default=1): ").strip()
-            try:
-                year = int(year_input)
-                month = int(month_input)
-                day = int(day_input)
-            except ValueError as e:
-                raise DateValidationError(f"Invalid number format: {str(e)}") from e
+            print("  3. JSON (vertical data)")
+            print("  4. JSON (horizontal data)")
+            orientation_input = input("  Choose orientation (1,2,3,4) [default=1]: ").strip()
+            days_input = input("  Enter number of days to plot [default=20]: ").strip()
+
+            year = int(year_input)
+            month = int(month_input)
+            day = int(day_input)
+            days = int(days_input) if days_input else 20
+
             orientation = "vertical"
             if orientation_input == "2":
                 orientation = "horizontal"
-            elif orientation_input and orientation_input != "1":
+            elif orientation_input == "3":
+                orientation = "json-vertical"
+            elif orientation_input == "4":
+                orientation = "json-horizontal"
+            elif orientation_input and orientation_input not in ("1", "2", "3", "4"):
                 print(f"Invalid orientation choice '{orientation_input}', using vertical")
             self.logger.info(
-                f"User input received: {year}-{month:02d}-{day:02d}, orientation={orientation}"
+                f"User input received: {year}-{month:02d}-{day:02d}, orientation={orientation}, days={days}"
             )
-            return year, month, day, orientation
-        except KeyboardInterrupt:
-            self.logger.info("User cancelled input")
-            raise DateValidationError("Input cancelled by user")
-        except EOFError:
-            self.logger.info("EOF encountered during input")
-            raise DateValidationError("Unexpected end of input")
+            return year, month, day, orientation, days
+        except Exception as e:
+            self.logger.error(f"Input error: {e}")
+            raise DateValidationError("Invalid input")
 
 # --- Utility and entrypoint ---
 def setup_logging(level: int = logging.INFO) -> None:
@@ -568,7 +573,9 @@ def main(
     month: Optional[int] = None,
     day: Optional[int] = None,
     orientation: str = "vertical",
+    days: Optional[int] = None,
 ) -> None:
+    import json
     logger = logging.getLogger(__name__)
     print("\n" + "!" * 70)
     print("⚠️  SCIENTIFIC WARNING ⚠️")
@@ -578,17 +585,44 @@ def main(
     print("This program is provided for ENTERTAINMENT PURPOSES ONLY.")
     print("!" * 70)
     try:
-        if year is None or month is None or day is None:
+        if year is None or month is None or day is None or days is None:
             ui = UserInterface()
-            year, month, day, orientation = ui.get_user_input()
+            year, month, day, orientation, days = ui.get_user_input()
         birthdate = DateValidator.create_validated_date(year, month, day)
         logger.info(f"Birth date validated: {birthdate.strftime('%Y-%m-%d')}")
         width = get_terminal_width()
-        # --- Set days/minimum height for vertical chart
-        days = 20 if orientation == "vertical" else None
-        calculator = BiorhythmCalculator(width=width, orientation=orientation)
+        # Default days for vertical if not provided
+        if orientation == "vertical" and not days:
+            days = 20
+        if days < 1:
+            raise ChartParameterError("Days to plot must be a positive integer")
+        if orientation.lower() in ("json-vertical", "json-horizontal"):
+            width = MIN_CHART_WIDTH
+        else:
+            width = max(width, MIN_CHART_WIDTH)
+        logger.info(f"Initializing BiorhythmCalculator with width={width}, orientation={orientation}, days={days}")
+        if orientation.lower() not in ("vertical", "horizontal", "json-vertical", "json-horizontal"):
+            raise ChartParameterError(
+                f"Invalid orientation '{orientation}', must be 'vertical', 'horizontal', 'json-vertical', or 'json-horizontal'"
+            )
+        # For JSON outputs, pass the base orientation to the calculator
+        calc_orientation = "vertical" if orientation.lower().startswith("json-") else orientation
+        calculator = BiorhythmCalculator(width=width, days=days, orientation=calc_orientation)
         print()  # Add spacing before chart
-        calculator.generate_chart(birthdate)
+
+        if orientation.lower() == "json-vertical":
+            payload = calculator.generate_timeseries_json(
+                birthdate, chart_orientation="vertical"
+            )
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+        elif orientation.lower() == "json-horizontal":
+            payload = calculator.generate_timeseries_json(
+                birthdate, chart_orientation="horizontal"
+            )
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+        else:
+            calculator.generate_chart(birthdate)
+
         logger.info("Chart generation completed successfully")
     except DateValidationError as e:
         logger.error(f"Date validation error: {str(e)}")
