@@ -37,7 +37,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv pip install --system python-semantic-release>=8.0.0
+        uv pip install --system python-semantic-release>=9.0.0
         uv pip install --system -e .
 
     - name: Configure Git
@@ -50,11 +50,16 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_COMMITTER_NAME: "semantic-release"
         GIT_COMMITTER_EMAIL: "semantic-release@github.com"
-        GIT_AUTHOR_NAME: "semantic-release"
+        GIT_AUTHOR_NAME: "semantic-release" 
         GIT_AUTHOR_EMAIL: "semantic-release@github.com"
       run: |
+        echo "Running semantic-release version check..."
         semantic-release version --print
+        
+        echo "Running semantic-release version..."
         semantic-release version
+        
+        echo "Running semantic-release publish..."
         semantic-release publish
 
     - name: Update version in files
