@@ -2,6 +2,7 @@
 """
 Pytest configuration and shared fixtures.
 """
+
 import pytest
 from datetime import datetime
 from biorythm import BiorhythmCalculator
