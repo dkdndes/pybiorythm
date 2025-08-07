@@ -2,6 +2,15 @@
 
 This guide covers Docker deployment on Apple M2 Mac with Docker Desktop and Kubernetes integration.
 
+!!! info "CLI Container Deployment"
+    **PyBiorythm containers run CLI applications**, not web servers. The deployment patterns shown here demonstrate:
+    
+    - **Interactive containers** for development and testing
+    - **Batch processing** with Docker Compose
+    - **One-shot containers** for generating charts
+    
+    References to health endpoints and load balancers are **demonstration examples** of production deployment patterns for web applications.
+
 ## 🏗️ Architecture Considerations
 
 ### Your Setup
@@ -17,6 +26,26 @@ This guide covers Docker deployment on Apple M2 Mac with Docker Desktop and Kube
 4. **Compatibility**: Some images may not have ARM64 variants
 
 ## 🚀 Quick Start
+
+### CLI Container Usage Patterns
+
+```bash
+# One-shot biorhythm generation
+docker run --rm pybiorythm:latest python main.py -y 1990 -m 5 -d 15
+
+# Interactive CLI session
+docker run -it --rm pybiorythm:latest
+
+# Generate JSON output and save to host
+docker run --rm -v $(pwd)/output:/output pybiorythm:latest \
+  sh -c "python main.py -y 1990 -m 5 -d 15 --orientation json-vertical > /output/biorhythm.json"
+
+# Health check verification
+docker run --rm pybiorythm:latest python -c "import biorythm; print('✅ Container healthy')"
+
+# Development with volume mount
+docker run -it --rm -v $(pwd):/app -w /app python:3.12-slim bash
+```
 
 ### 1. Build for Local Development (ARM64)
 ```bash
@@ -188,7 +217,7 @@ docker system prune -f
 ### Container Security
 - **Non-root user**: Containers run as `biorythm` user
 - **Minimal base**: Uses `python:3.12-slim`
-- **Health checks**: Built-in health monitoring
+- **Health checks**: Built-in CLI health monitoring (Docker HEALTHCHECK)
 - **Resource limits**: Prevents resource exhaustion
 
 ### Kubernetes Security

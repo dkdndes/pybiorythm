@@ -2,6 +2,14 @@
 
 This guide explains the complete CI/CD pipeline and deployment strategies for the pybiorythm application across development, staging, and production environments.
 
+!!! info "CLI Application Notice"
+    **PyBiorythm is a command-line interface (CLI) application**, not a web service. The HTTP server deployment patterns, health endpoints, and load balancer configurations described in this guide are **demonstration examples** showing how to implement such features in production applications.
+    
+    For actual PyBiorythm deployments, the application runs as:
+    - **Batch processing jobs** in Kubernetes CronJobs
+    - **One-time containers** for generating biorhythm charts
+    - **Development containers** with interactive CLI access
+
 ## 📋 Overview
 
 ### Environment Strategy
@@ -178,22 +186,49 @@ kubectl patch service pybiorythm-prod -p '{"spec":{"selector":{"slot":"blue"}}}'
 
 ## 📊 Monitoring and Observability
 
-### Health Checks
-All deployments include:
+### Health Checks (Demonstration Examples)
+HTTP-based deployments typically include:
 - **Readiness Probe**: Checks if container is ready to serve traffic
-- **Liveness Probe**: Restarts container if unhealthy
+- **Liveness Probe**: Restarts container if unhealthy  
 - **Startup Probe**: Allows slow-starting containers
 
-### Available Endpoints
+!!! note "CLI Application Health Checks"
+    For PyBiorythm CLI deployments, health verification is done through:
+    - **Import Test**: `python -c "import biorythm; print('OK')"`
+    - **Calculation Test**: Running actual biorhythm calculations
+    - **Dependencies Check**: Verifying all required packages load correctly
+
+### Available Endpoints (Demonstration Only)
 ```bash
-# Health check
+# NOTE: These endpoints are demonstration examples for HTTP-based applications
+# PyBiorythm is a CLI application and does not provide HTTP endpoints
+
+# Health check (example for web services)
 curl http://app-url/health
 
-# Metrics (if enabled)
+# Metrics (example for web services)
 curl http://app-url/metrics
 
-# Version info
+# Version info (example for web services)
 curl http://app-url/version
+```
+
+### Actual CLI Health Verification
+```bash
+# Verify CLI application health
+docker run --rm pybiorythm:latest python -c "import biorythm; print('✅ Health check OK')"
+
+# Test biorhythm calculation
+docker run --rm pybiorythm:latest python main.py -y 1990 -m 5 -d 15
+
+# Verify all dependencies
+docker run --rm pybiorythm:latest python -c "
+import biorythm.core
+import datetime
+calc = biorythm.core.BiorhythmCalculator()
+result = calc.calculate_biorhythm(datetime.datetime(1990, 5, 15), datetime.datetime.now())
+print('✅ CLI application healthy')
+"
 ```
 
 ### Monitoring Commands
@@ -362,5 +397,14 @@ Environment-specific settings are stored in `.github/environments/*.env` files:
 3. Scan all images for vulnerabilities
 4. Keep dependencies updated
 5. Monitor security advisories
+
+## Next Steps
+
+- **Docker Deployment**: [Docker Setup Guide](docker.md) for container-specific deployment
+- **Kubernetes**: [Kubernetes Guide](kubernetes.md) for cluster deployment
+- **Security**: [Security & Compliance](security.md) for security best practices
+- **CI/CD Workflows**: [GitHub Actions](../workflows/github-actions.md) for automation details
+- **Local Testing**: [Local GitHub Actions](local-github-actions.md) for testing deployments locally
+- **Development**: [Architecture Overview](../developer-guide/architecture.md) for understanding the application structure
 
 This deployment guide provides comprehensive coverage of all deployment scenarios and strategies for the pybiorythm application.
