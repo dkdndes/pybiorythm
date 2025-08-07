@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
-[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
+[![Coverage](https://img.shields.io/badge/coverage-89.66%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
 [![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](Dockerfile)
 [![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
@@ -285,7 +285,7 @@ pip install pandas  # For JSON timeseries testing
 
 ### Running Tests
 
-The project includes comprehensive test coverage (90%+) with pytest and automated coverage reporting:
+The project includes comprehensive test coverage (89.66%) with pytest and automated coverage reporting:
 
 ```bash
 # Run all tests with coverage (recommended)
@@ -320,7 +320,7 @@ The project maintains high test coverage across all components:
 
 | Component | Coverage | Description |
 |-----------|----------|-------------|
-| **Total Project** | **90%** | Overall test coverage across all modules |
+| **Total Project** | **89.66%** | Overall test coverage across all modules |
 | `biorythm.py` | 78% | Core biorhythm calculation and chart generation |
 | `main.py` | 96% | Command line interface and argument parsing |
 | All test files | 99%+ | Self-testing coverage verification |
@@ -404,9 +404,10 @@ pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_feature_e
 ### Code Quality & Continuous Integration
 
 **Quality Metrics:**
-- ✅ **90% Test Coverage** with automated reporting
+- ✅ **89.66% Test Coverage** with automated reporting
 - ✅ **72 Passing Tests** across all components  
 - ✅ **Ruff Code Formatting** and linting compliance
+- ✅ **Zero Security Issues** (Bandit + Safety scanned)
 - ✅ **Type Hints** for better code documentation
 - ✅ **Comprehensive Error Handling** with user-friendly messages
 
@@ -428,8 +429,9 @@ pytest --cov=. --cov-fail-under=85 && ruff check . && ruff format --check .
 
 **Pre-commit Quality Gates:**
 - All tests must pass (72/72)
-- Coverage must be ≥ 85% (currently 90%)
+- Coverage must be ≥ 85% (currently 89.66%)
 - Code must pass ruff linting
+- Zero security vulnerabilities (126 packages scanned)
 - No unhandled type errors
 
 ## CI/CD & Automation

@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
-[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
+[![Coverage](https://img.shields.io/badge/coverage-89.66%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
 [![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/Dockerfile)
 [![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
@@ -27,7 +27,7 @@ PyBiorythm is a modern Python library that implements the classical biorhythm th
     - **Configurable Parameters**: Adjustable chart width, time periods, and orientations
 
 === "Developer Friendly"
-    - **90% Test Coverage** with comprehensive test suite
+    - **89.66% Test Coverage** with comprehensive test suite
     - **Modern Python**: Type hints, dataclasses, and clean architecture
     - **Docker Support**: Multi-stage builds for production deployment
     - **CI/CD Ready**: GitHub Actions workflows for quality assurance
