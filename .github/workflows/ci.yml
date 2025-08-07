@@ -41,8 +41,8 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 5
       run: |
-        uv pip install --system -e . --timeout 300
-        uv pip install --system pytest pytest-cov ruff --timeout 300
+        uv pip install --system -e .
+        uv pip install --system pytest pytest-cov ruff
 
     - name: Lint with Ruff
       run: |
@@ -86,8 +86,8 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e . --timeout 300
-        uv pip install --system safety bandit[toml] --timeout 300
+        uv pip install --system -e .
+        uv pip install --system safety bandit[toml]
 
     - name: Run safety check (dependency vulnerabilities)
       run: safety check --json
@@ -185,7 +185,7 @@ jobs:
     - name: Install build dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system build twine --timeout 300
+        uv pip install --system build twine
 
     - name: Build package
       run: python -m build
@@ -249,8 +249,8 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e . --timeout 300
-        uv pip install --system pytest --timeout 300
+        uv pip install --system -e .
+        uv pip install --system pytest
 
     - name: Run integration tests
       run: |
@@ -295,8 +295,8 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e . --timeout 300
-        uv pip install --system pytest pytest-benchmark --timeout 300
+        uv pip install --system -e .
+        uv pip install --system pytest pytest-benchmark
 
     - name: Run performance benchmarks
       run: |
@@ -350,8 +350,8 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e . --timeout 300
-        uv pip install --system cyclonedx-bom --timeout 300
+        uv pip install --system -e .
+        uv pip install --system cyclonedx-bom
 
     - name: Generate Python SBOM
       run: |
