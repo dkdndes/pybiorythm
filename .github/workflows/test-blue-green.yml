@@ -1,0 +1,36 @@
+name: Test Blue-Green Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - prod
+      image_tag:
+        description: 'Image tag to deploy'
+        required: true
+        type: string
+      deployment_slot:
+        description: 'Deployment slot (blue/green)'
+        required: true
+        type: choice
+        options:
+          - blue
+          - green
+
+jobs:
+  test-deploy:
+    name: Test Blue-Green Deployment
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Show inputs
+      run: |
+        echo "Environment: ${{ github.event.inputs.environment }}"
+        echo "Image tag: ${{ github.event.inputs.image_tag }}"
+        echo "Deployment slot: ${{ github.event.inputs.deployment_slot }}"
+        echo "Blue-Green deployment test completed!"
