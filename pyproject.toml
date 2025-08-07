@@ -60,6 +60,11 @@ dev = [
     "safety>=3.6.0",
     "twine>=6.1.0",
 ]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.16",
+    "mkdocs-mermaid2-plugin>=1.2.1",
+]
 
 [tool.hatch.version]
 source = "vcs"
