@@ -1,6 +1,6 @@
 # Biorhythm
 
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://python.org)
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
 [![Coverage](https://img.shields.io/badge/coverage-89.66%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
@@ -448,7 +448,7 @@ uv run pytest --cov=. --cov-fail-under=85 && uv run ruff check . && uv run ruff 
 The project includes comprehensive GitHub Actions for continuous integration and deployment:
 
 **🔄 CI/CD Pipeline (`ci.yml`)**
-- Multi-version Python testing (3.8-3.12)
+- Multi-version Python testing (3.9-3.12)
 - Code quality checks with Ruff
 - Security scanning with Bandit and Safety  
 - Docker build and testing
