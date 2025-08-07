@@ -41,8 +41,7 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 5
       run: |
-        uv pip install --system -e .[dev]
-        uv pip install --system pytest pytest-cov ruff
+        uv sync --group dev
 
     - name: Lint with Ruff
       run: |
@@ -87,8 +86,7 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system safety bandit[toml]
+        uv sync --group dev
 
     - name: Run safety check (dependency vulnerabilities)
       run: safety check --json
@@ -203,7 +201,7 @@ jobs:
     - name: Install build dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system build twine
+        uv sync --group dev
 
     - name: Build package
       run: python -m build
@@ -267,8 +265,7 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system pytest
+        uv sync --group dev
 
     - name: Run integration tests
       run: |
@@ -327,8 +324,7 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system pytest pytest-benchmark
+        uv sync --group dev
 
     - name: Run performance benchmarks
       run: |
@@ -382,8 +378,7 @@ jobs:
     - name: Install dependencies
       timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system cyclonedx-bom
+        uv sync --group dev
 
     - name: Generate BSI compliant SBOM
       run: |

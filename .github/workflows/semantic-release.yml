@@ -37,8 +37,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv pip install --system python-semantic-release>=9.0.0
-        uv pip install --system -e .
+        uv sync --group dev
 
     - name: Configure Git
       run: |

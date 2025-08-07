@@ -37,8 +37,7 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        uv pip install --system build twine
-        uv pip install --system -e .
+        uv sync --group dev
 
     - name: Build package
       run: python -m build
@@ -122,7 +121,7 @@ jobs:
 
     - name: Install build dependencies
       run: |
-        uv pip install --system build twine
+        uv sync --group dev
 
     - name: Build package
       run: python -m build
