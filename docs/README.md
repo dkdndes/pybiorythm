@@ -46,6 +46,7 @@ Welcome to the comprehensive documentation for PyBiorythm - a Python library for
 | **Command line** | [CLI Reference](user-guide/cli.md) |
 | **Docker deployment** | [Docker Guide](deployment/docker.md) |
 | **Development** | [Dev Setup](developer-guide/setup.md) |
+| **Local GitHub Actions** | [act Testing](deployment/local-github-actions.md) |
 | **API integration** | [API Reference](api/calculator.md) |
 
 ## 🔬 Scientific Disclaimer

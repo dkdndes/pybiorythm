@@ -2,6 +2,9 @@
 
 This setup allows you to test GitHub Actions workflows locally using `act` and direct command execution.
 
+!!! tip "Comprehensive act Guide"
+    **📖 For detailed act usage, configuration, and troubleshooting, see: [Local GitHub Actions Testing](local-github-actions.md)**
+
 ## Quick Start
 
 ### 1. Fast Local Testing (Recommended)
