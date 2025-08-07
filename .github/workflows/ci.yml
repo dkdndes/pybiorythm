@@ -389,10 +389,9 @@ jobs:
       run: |
         # Generate base SBOM for CI validation
         uv pip list --format freeze > requirements-freeze.txt
-        cyclonedx-py requirements \
-          --format json \
-          --output-file sbom-base-ci.json \
-          --input-file requirements-freeze.txt
+        cyclonedx-py requirements requirements-freeze.txt \
+          --output-format json \
+          --output-file sbom-base-ci.json
         
         # Transform to BSI TR-03183-2-2 compliant format
         python -c "
