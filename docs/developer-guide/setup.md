@@ -4,7 +4,7 @@ This guide will help you set up a development environment for contributing to Py
 
 ## Prerequisites
 
-- **Python 3.8+** (3.12 recommended)
+- **Python 3.9+** (3.12 recommended)
 - **Git** for version control
 - **uv** package manager (recommended) or pip
 - **Docker** (optional, for container testing)

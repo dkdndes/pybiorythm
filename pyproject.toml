@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "A Python library for biorhythm calculations"
 readme = "README.md"
 license = {file = "LICENSE"}
-requires-python = ">=3.8,<3.13"
+requires-python = ">=3.9,<3.13"
 authors = [
     {name = "Peter Rosemann", email = "dkdndes@gmail.com"},
 ]
@@ -22,7 +22,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -51,8 +50,7 @@ Issues = "https://github.com/peterrosemann/biorythm/issues"
 dev = [
     "bandit[toml]>=1.7.10",
     "build>=1.2.2.post1",
-    "cyclonedx-bom>=5.5.0",
-    "cyclonedx-py>=6.6.0",
+    "cyclonedx-bom>=7.0.0",
     "pandas>=2.0.3",
     "pytest>=8.3.5",
     "pytest-benchmark>=4.0.0",
