@@ -194,8 +194,8 @@ class TestMainFunction:
 class TestIntegration:
     """Integration tests that test the full command line workflow."""
 
-    @patch("biorythm.BiorhythmCalculator")
-    @patch("biorythm.DateValidator.create_validated_date")
+    @patch("biorythm.core.BiorhythmCalculator")
+    @patch("biorythm.core.DateValidator.create_validated_date")
     @patch("sys.argv", ["main.py", "-y", "1990", "-m", "5", "-d", "15"])
     def test_integration_flow(self, mock_date_validator, mock_calculator_class):
         """Test the integration flow from command line to biorhythm calculation."""
