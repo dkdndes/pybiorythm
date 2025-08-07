@@ -371,14 +371,15 @@ jobs:
         
         ## 🚀 Next Steps
         
-        ${{ github.event.inputs.switch_traffic == 'true' && '### ✅ Traffic Switched
-        Traffic has been switched to the ' || '### 🔄 Manual Traffic Switch Required
-        To switch traffic to the ' }}${{ github.event.inputs.deployment_slot }} slot${{ github.event.inputs.switch_traffic == 'true' && '' || ', run:' }}
+        ### Traffic Status
+        - **Traffic Switched**: ${{ github.event.inputs.switch_traffic == 'true' && 'Yes ✅' || 'No ❌' }}
+        - **Active Slot**: ${{ github.event.inputs.deployment_slot }}
         
-        ${{ github.event.inputs.switch_traffic == 'false' && '```bash
-        # Switch traffic manually
-        kubectl patch service pybiorythm-' || '' }}${{ github.event.inputs.switch_traffic == 'false' && github.event.inputs.environment || '' }}${{ github.event.inputs.switch_traffic == 'false' && ' -p '"'"'{"spec":{"selector":{"slot":"' || '' }}${{ github.event.inputs.switch_traffic == 'false' && github.event.inputs.deployment_slot || '' }}${{ github.event.inputs.switch_traffic == 'false' && '"}}}'"'"'
-        ```' || '' }}
+        ### Manual Traffic Switch
+        To switch traffic to the ${{ github.event.inputs.deployment_slot }} slot:
+        \`\`\`bash
+        kubectl patch service pybiorythm-${{ github.event.inputs.environment }} -p '{"spec":{"selector":{"slot":"${{ github.event.inputs.deployment_slot }}"}}}'
+        \`\`\`
         
         ### 📊 Monitor Deployment
         \`\`\`bash
