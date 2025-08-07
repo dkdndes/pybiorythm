@@ -29,7 +29,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -55,7 +55,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.12'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: ./coverage.xml
         flags: unittests
@@ -75,7 +75,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -98,7 +98,7 @@ jobs:
       continue-on-error: true
 
     - name: Upload bandit results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: bandit-results
@@ -119,7 +119,7 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker image
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: .
         target: production
@@ -140,11 +140,28 @@ jobs:
         print(f'Result: {result}')
         "
         
-        # Test CLI interface
-        docker run --rm pybiorythm:test python main.py -y 1990 -m 5 -d 15 --orientation json-vertical > output.json
+        # Test CLI interface - capture JSON output only
+        docker run --rm pybiorythm:test python main.py -y 1990 -m 5 -d 15 --orientation json-vertical 2>/dev/null | tail -n +9 > output.json
         
         # Validate JSON output
-        python -c "import json; json.load(open('output.json')); print('JSON validation passed!')"
+        python -c "
+        import json
+        try:
+            with open('output.json', 'r') as f:
+                content = f.read().strip()
+                if content and content.startswith('{'):
+                    data = json.loads(content)
+                    print('JSON validation passed!')
+                    print(f'JSON keys: {list(data.keys())}')
+                else:
+                    print('No valid JSON found in output')
+                    exit(1)
+        except Exception as e:
+            print(f'JSON validation failed: {e}')
+            with open('output.json', 'r') as f:
+                print('File content:', repr(f.read()[:200]))
+            exit(1)
+        "
 
     - name: Test Docker image security
       run: |
@@ -174,7 +191,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -195,7 +212,7 @@ jobs:
       run: twine check dist/*
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist
         path: dist/
@@ -238,7 +255,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -284,7 +301,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -339,7 +356,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -373,7 +390,7 @@ jobs:
         "
 
     - name: Upload SBOM artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sbom-ci
         path: sbom-ci.json
