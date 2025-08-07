@@ -276,11 +276,17 @@ for birthdate in test_birthdates:
 git clone https://github.com/peterrosemann/biorythm.git
 cd biorythm
 
-# Install development dependencies
+# Install UV (recommended package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install development dependencies with UV
+uv sync --group dev
+
+# Or with pip (alternative)
 pip install -e ".[dev]"
 
-# Install additional testing dependencies
-pip install pandas  # For JSON timeseries testing
+# Additional testing dependencies (if needed)
+uv add --group dev pandas  # For JSON timeseries testing
 ```
 
 ### Running Tests
@@ -289,29 +295,30 @@ The project includes comprehensive test coverage (89.66%) with pytest and automa
 
 ```bash
 # Run all tests with coverage (recommended)
-pytest
+uv run pytest
+# Or: pytest (if using activated venv)
 
 # Run tests with verbose output
-pytest -v
+uv run pytest -v
 
 # Run specific test file
-pytest tests/test_biorhythm_calculator.py
+uv run pytest tests/test_biorhythm_calculator.py
 
 # Run tests with detailed coverage report
-pytest --cov=. --cov-report=term-missing
+uv run pytest --cov=. --cov-report=term-missing
 
 # Generate HTML coverage report
-pytest --cov=. --cov-report=html
+uv run pytest --cov=. --cov-report=html
 # Open htmlcov/index.html in browser to view detailed coverage
 
 # Run only fast tests (exclude slow integration tests)
-pytest -m "not slow"
+uv run pytest -m "not slow"
 
 # Run only JSON-related tests
-pytest -k "json"
+uv run pytest -k "json"
 
 # Fail if coverage drops below 85%
-pytest --cov-fail-under=85
+uv run pytest --cov-fail-under=85
 ```
 
 ### Test Coverage Details
@@ -392,13 +399,13 @@ Special tests for developers using the JSON timeseries data:
 
 ```bash
 # Test pandas integration
-pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_pandas_integration
+uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_pandas_integration
 
 # Test statistical properties
-pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_statistical_properties
+uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_statistical_properties
 
 # Test feature engineering capabilities  
-pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_feature_engineering_potential
+uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_feature_engineering_potential
 ```
 
 ### Code Quality & Continuous Integration
@@ -415,16 +422,16 @@ pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_feature_e
 
 ```bash
 # Code formatting
-ruff format .
+uv run ruff format .
 
 # Linting and style checks
-ruff check .
+uv run ruff check .
 
 # Type checking (if mypy is installed)
-mypy biorythm.py
+uv run mypy biorythm.py
 
 # Run all quality checks with coverage
-pytest --cov=. --cov-fail-under=85 && ruff check . && ruff format --check .
+uv run pytest --cov=. --cov-fail-under=85 && uv run ruff check . && uv run ruff format --check .
 ```
 
 **Pre-commit Quality Gates:**
@@ -535,10 +542,10 @@ See [`SEMANTIC_VERSIONING.md`](SEMANTIC_VERSIONING.md) for complete documentatio
 
 ```bash
 # Test with large datasets (marked as slow)
-pytest -m slow
+uv run pytest -m slow
 
 # Test JSON serialization with large data
-pytest tests/test_json_timeseries.py::TestJSONSerializationAndStorage::test_large_dataset_generation
+uv run pytest tests/test_json_timeseries.py::TestJSONSerializationAndStorage::test_large_dataset_generation
 ```
 
 ## Docker Deployment
