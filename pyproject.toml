@@ -111,3 +111,9 @@ ignore_token_for_push = false
 [tool.semantic_release.publish]
 dist_glob_patterns = ["dist/*"]
 upload_to_vcs_release = true
+
+[tool.ruff]
+extend-exclude = ["_version.py"]
+
+[tool.ruff.format]
+exclude = ["_version.py"]
