@@ -49,30 +49,13 @@ MIT License
 
 FOR ENTERTAINMENT PURPOSES ONLY - NOT SCIENTIFICALLY VALID.
 """
-#!/usr/bin/env python3
-"""
-Enhanced Python module for generating biorhythm charts.
-Plots a chart of physical, emotional, and intellectual cycles based on the
-pseudoscientific biorhythm theory developed by Wilhelm Fliess in the late 19th century.
-
-https://en.wikipedia.org/wiki/Biorhythm_(pseudoscience)
-
-IMPORTANT DISCLAIMER:
-This software implements the biorhythm theory, which is considered PSEUDOSCIENCE.
-Extensive scientific research has found NO VALIDITY to biorhythm theory beyond
-coincidence. Multiple controlled studies have consistently failed to find any
-correlation between the proposed 23, 28, and 33-day cycles and human performance
-or life events. This implementation is provided FOR ENTERTAINMENT PURPOSES ONLY
-and should NOT be used for making any important life decisions.
-"""
 
 import logging
 import math
-import sys
 import shutil
+import sys
 from datetime import datetime, timedelta
-from typing import Optional, Tuple, List
-import numpy as np
+from typing import List, Optional, Tuple
 
 # Constants
 PHYSICAL_CYCLE_DAYS = 23
@@ -85,15 +68,19 @@ MIN_YEAR = 1
 MAX_YEAR = 9999
 CRITICAL_DAY_THRESHOLD = 0.05
 
+
 # --- Exception Classes ---
 class BiorhythmError(Exception):
     pass
 
+
 class DateValidationError(BiorhythmError):
     pass
 
+
 class ChartParameterError(BiorhythmError):
     pass
+
 
 # --- Core Classes ---
 class BiorhythmCalculator:
@@ -117,7 +104,8 @@ class BiorhythmCalculator:
 
     def _validate_orientation(self, orientation: str) -> None:
         if not isinstance(orientation, str) or orientation.lower() not in [
-            "vertical", "horizontal",
+            "vertical",
+            "horizontal",
         ]:
             raise ChartParameterError(
                 f"Orientation must be 'vertical' or 'horizontal', got: {orientation}"
@@ -296,7 +284,9 @@ class BiorhythmCalculator:
             print()
             print("ℹ️  No critical days in the displayed period.")
 
-    def _create_horizontal_chart(self, birthdate: datetime, plot_date: datetime) -> None:
+    def _create_horizontal_chart(
+        self, birthdate: datetime, plot_date: datetime
+    ) -> None:
         """
         Draws a 'wave matrix' for each cycle: rows = amplitude levels (high=+1, low=-1), columns=days.
         """
@@ -313,7 +303,7 @@ class BiorhythmCalculator:
         dates = [start_date + timedelta(days=i) for i in range(days)]
         shortdate_format = "%d.%m."
 
-        for (label, period, mark, mark_crit) in cycles:
+        for label, period, mark, mark_crit in cycles:
             # Prepare matrix
             mat = [[" " for _ in range(width)] for _ in range(chart_height)]
             for col, current_date in enumerate(dates):
@@ -322,7 +312,7 @@ class BiorhythmCalculator:
                 # Map -1...+1 → row 0..height-1 (invert so top is +1)
                 row = int(round((1 - val) / 2 * (chart_height - 1)))
                 # Is this the plot date?
-                is_plot = (current_date == plot_date)
+                is_plot = current_date == plot_date
                 # Is this a critical day?
                 crit = abs(val) <= CRITICAL_DAY_THRESHOLD
                 char = mark_crit if crit else (mark.upper() if is_plot else mark)
@@ -343,7 +333,9 @@ class BiorhythmCalculator:
                     date_axis[i + j] = c
         print(f"{'Date':<12}: {''.join(date_axis)}")
 
-    def _create_combined_horizontal_wave_matrix(self, birthdate: datetime, plot_date: datetime) -> None:
+    def _create_combined_horizontal_wave_matrix(
+        self, birthdate: datetime, plot_date: datetime
+    ) -> None:
         """
         Draws all three biorhythm curves in one 2D ASCII chart (height=20, width=terminal).
         Overlapping cycles are marked with * (2 overlap) or ! (all three).
@@ -366,7 +358,9 @@ class BiorhythmCalculator:
             for col, date in enumerate(dates):
                 days_alive = (date - birthdate).days
                 val = math.sin((2 * math.pi * days_alive) / period)
-                row = int(round((1 - val) / 2 * (chart_height - 1)))  # top=+1, bottom=-1
+                row = int(
+                    round((1 - val) / 2 * (chart_height - 1))
+                )  # top=+1, bottom=-1
                 pos.append((row, col))
             waves.append(pos)
 
@@ -374,7 +368,7 @@ class BiorhythmCalculator:
         mat = [[" " for _ in range(width)] for _ in range(chart_height)]
         for idx, wave in enumerate(waves):
             symbol = cycles[idx][0]
-            for (row, col) in wave:
+            for row, col in wave:
                 current = mat[row][col]
                 # For overlaps:
                 if current == " ":
@@ -400,7 +394,6 @@ class BiorhythmCalculator:
             print("".join(mat[r]))
 
         # Draw zero axis (amplitude=0)
-        zero_row = chart_height // 2
         axis_line = [" " for _ in range(width)]
         axis_line[center_col] = "|"
         print(f"{'Zero Axis':<12}: {''.join(axis_line)}")
@@ -415,13 +408,15 @@ class BiorhythmCalculator:
                     date_labels[i + j] = c
         print(f"{'Date':<12}: {''.join(date_labels)}")
         print()
-        print("Legend: p=Physical  e=Emotional  i=Intellectual  *=2 overlap  !=3 overlap")
+        print(
+            "Legend: p=Physical  e=Emotional  i=Intellectual  *=2 overlap  !=3 overlap"
+        )
 
     def generate_timeseries_json(
         self,
         birthdate: datetime,
         plot_date: datetime = None,
-        chart_orientation: str = "vertical"
+        chart_orientation: str = "vertical",
     ) -> dict:
         """
         Generate a biorhythm timeseries and critical days JSON payload for analytics use.
@@ -434,23 +429,29 @@ class BiorhythmCalculator:
         for day_offset in range(self.days):
             current_date = start_date + timedelta(days=day_offset)
             days_alive = (current_date - birthdate).days
-            physical, emotional, intellectual = self.calculate_biorhythm_values(birthdate, current_date)
-            is_critical, critical_cycles = self.is_critical_day(physical, emotional, intellectual)
+            physical, emotional, intellectual = self.calculate_biorhythm_values(
+                birthdate, current_date
+            )
+            is_critical, critical_cycles = self.is_critical_day(
+                physical, emotional, intellectual
+            )
             entry = {
                 "date": current_date.strftime("%Y-%m-%d"),
                 "days_alive": days_alive,
                 "physical": float(physical),
                 "emotional": float(emotional),
                 "intellectual": float(intellectual),
-                "critical_cycles": critical_cycles
+                "critical_cycles": critical_cycles,
             }
             timeseries.append(entry)
             if is_critical:
                 cycles_str = ", ".join(critical_cycles)
-                critical_days.append({
-                    "date": current_date.strftime("%Y-%m-%d"),
-                    "cycles": f"{cycles_str} cycle(s) near zero"
-                })
+                critical_days.append(
+                    {
+                        "date": current_date.strftime("%Y-%m-%d"),
+                        "cycles": f"{cycles_str} cycle(s) near zero",
+                    }
+                )
 
         # Meta info
         days_alive = (plot_date - birthdate).days
@@ -467,19 +468,19 @@ class BiorhythmCalculator:
                 "cycle_lengths_days": {
                     "physical": PHYSICAL_CYCLE_DAYS,
                     "emotional": EMOTIONAL_CYCLE_DAYS,
-                    "intellectual": INTELLECTUAL_CYCLE_DAYS
+                    "intellectual": INTELLECTUAL_CYCLE_DAYS,
                 },
                 "chart_orientation": chart_orientation,
                 "days": self.days,
                 "width": self.width,
-                "scientific_warning": "⚠️  SCIENTIFIC WARNING ⚠️\nBiorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\nMultiple peer-reviewed studies have found NO correlation between\nbiorhythm cycles and human performance beyond random chance.\nThis program is provided for ENTERTAINMENT PURPOSES ONLY."
+                "scientific_warning": "⚠️  SCIENTIFIC WARNING ⚠️\nBiorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\nMultiple peer-reviewed studies have found NO correlation between\nbiorhythm cycles and human performance beyond random chance.\nThis program is provided for ENTERTAINMENT PURPOSES ONLY.",
             },
             "cycle_repeats": {
                 "physical_emotional_repeat_in_days": next_23_28,
-                "all_cycles_repeat_in_days": next_all
+                "all_cycles_repeat_in_days": next_all,
             },
             "critical_days": critical_days,
-            "data": timeseries
+            "data": timeseries,
         }
 
 
@@ -508,6 +509,7 @@ class DateValidator:
             raise DateValidationError("Birth date cannot be in the future")
         return date_obj
 
+
 class UserInterface:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -520,7 +522,9 @@ class UserInterface:
             print("• Popularized in USA during 1970s by Bernard Gittelson")
             print("• Extensively tested - no scientific evidence found")
             print("• All 134+ studies confirm it has no predictive value\n")
-            year_input = input(f"  Enter your birth YEAR ({MIN_YEAR}-{MAX_YEAR}): ").strip()
+            year_input = input(
+                f"  Enter your birth YEAR ({MIN_YEAR}-{MAX_YEAR}): "
+            ).strip()
             month_input = input("  Enter your birth MONTH (1-12): ").strip()
             day_input = input("  Enter your birth DAY (1-31): ").strip()
             print("\nChart Orientation:")
@@ -528,7 +532,9 @@ class UserInterface:
             print("  2. Horizontal (left-to-right timeline)")
             print("  3. JSON (vertical data)")
             print("  4. JSON (horizontal data)")
-            orientation_input = input("  Choose orientation (1,2,3,4) [default=1]: ").strip()
+            orientation_input = input(
+                "  Choose orientation (1,2,3,4) [default=1]: "
+            ).strip()
             days_input = input("  Enter number of days to plot [default=20]: ").strip()
 
             year = int(year_input)
@@ -544,7 +550,9 @@ class UserInterface:
             elif orientation_input == "4":
                 orientation = "json-horizontal"
             elif orientation_input and orientation_input not in ("1", "2", "3", "4"):
-                print(f"Invalid orientation choice '{orientation_input}', using vertical")
+                print(
+                    f"Invalid orientation choice '{orientation_input}', using vertical"
+                )
             self.logger.info(
                 f"User input received: {year}-{month:02d}-{day:02d}, orientation={orientation}, days={days}"
             )
@@ -552,6 +560,7 @@ class UserInterface:
         except Exception as e:
             self.logger.error(f"Input error: {e}")
             raise DateValidationError("Invalid input")
+
 
 # --- Utility and entrypoint ---
 def setup_logging(level: int = logging.INFO) -> None:
@@ -561,12 +570,14 @@ def setup_logging(level: int = logging.INFO) -> None:
         handlers=[logging.StreamHandler(sys.stdout)],
     )
 
+
 def get_terminal_width(default=80, min_width=40):
     try:
         width = shutil.get_terminal_size().columns
         return max(width, min_width)
     except Exception:
         return default
+
 
 def main(
     year: Optional[int] = None,
@@ -576,6 +587,7 @@ def main(
     days: Optional[int] = None,
 ) -> None:
     import json
+
     logger = logging.getLogger(__name__)
     print("\n" + "!" * 70)
     print("⚠️  SCIENTIFIC WARNING ⚠️")
@@ -600,14 +612,25 @@ def main(
             width = MIN_CHART_WIDTH
         else:
             width = max(width, MIN_CHART_WIDTH)
-        logger.info(f"Initializing BiorhythmCalculator with width={width}, orientation={orientation}, days={days}")
-        if orientation.lower() not in ("vertical", "horizontal", "json-vertical", "json-horizontal"):
+        logger.info(
+            f"Initializing BiorhythmCalculator with width={width}, orientation={orientation}, days={days}"
+        )
+        if orientation.lower() not in (
+            "vertical",
+            "horizontal",
+            "json-vertical",
+            "json-horizontal",
+        ):
             raise ChartParameterError(
                 f"Invalid orientation '{orientation}', must be 'vertical', 'horizontal', 'json-vertical', or 'json-horizontal'"
             )
         # For JSON outputs, pass the base orientation to the calculator
-        calc_orientation = "vertical" if orientation.lower().startswith("json-") else orientation
-        calculator = BiorhythmCalculator(width=width, days=days, orientation=calc_orientation)
+        calc_orientation = (
+            "vertical" if orientation.lower().startswith("json-") else orientation
+        )
+        calculator = BiorhythmCalculator(
+            width=width, days=days, orientation=calc_orientation
+        )
         print()  # Add spacing before chart
 
         if orientation.lower() == "json-vertical":
@@ -639,6 +662,7 @@ def main(
         logger.critical(f"Unexpected error: {str(e)}")
         print(f"Fatal error: {str(e)}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     setup_logging(level=logging.INFO)
