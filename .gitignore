@@ -136,3 +136,7 @@ Thumbs.db
 
 # Semantic Release
 .semantic_release/
+
+# Claude AI assistant files (should never be committed)
+CLAUDE.md
+.claude/
