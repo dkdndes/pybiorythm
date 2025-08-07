@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for Biorythm
 # Stage 1: Build stage with dependencies
-FROM python:3.12-slim AS builder
+FROM python:3.13-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY biorythm.py main.py ./
 
 # Stage 2: Production stage - minimal runtime image
-FROM python:3.12-slim AS production
+FROM python:3.13-slim AS production
 
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash biorythm
