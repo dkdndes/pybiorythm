@@ -42,10 +42,11 @@ jobs:
     - name: Generate Python SBOM
       run: |
         # Generate SBOM from pip-installed packages
+        uv pip list --format freeze > requirements-freeze.txt
         cyclonedx-py requirements \
           --format json \
           --output-file sbom-python.json \
-          --input-file <(uv pip list --format freeze)
+          --input-file requirements-freeze.txt
         
         # Generate SBOM from pyproject.toml
         cyclonedx-py poetry \
@@ -527,7 +528,7 @@ jobs:
 
     - name: Comment PR with SBOM summary
       if: github.event_name == 'pull_request'
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           const fs = require('fs');
