@@ -617,6 +617,16 @@ MIT License - see [LICENSE](LICENSE) file for details.
 4. Add tests if applicable
 5. Submit a pull request
 
+## Documentation
+
+For comprehensive documentation, see the `/docs` directory:
+
+- **User Guide**: [Quick Start](docs/user-guide/quick-start.md) | [CLI Reference](docs/user-guide/cli.md) | [Output Formats](docs/user-guide/output-formats.md)
+- **API Reference**: [Calculator API](docs/api/calculator.md) | [Core Functions](docs/api/core.md) | [JSON Schema](docs/api/json-schema.md)
+- **Developer Guide**: [Setup](docs/developer-guide/setup.md) | [Testing](docs/developer-guide/testing.md) | [Architecture](docs/developer-guide/architecture.md)
+- **Deployment**: [Docker](docs/deployment/docker.md) | [Kubernetes](docs/deployment/kubernetes.md) | [Security](docs/deployment/security.md)
+- **Workflows**: [GitHub Actions](docs/workflows/github-actions.md) | [Blue-Green Deployment](docs/workflows/blue-green.md)
+
 ## Educational Resources
 
 - [Wikipedia: Biorhythm (pseudoscience)](https://en.wikipedia.org/wiki/Biorhythm_(pseudoscience))
