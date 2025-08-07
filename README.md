@@ -1,9 +1,11 @@
 # Biorhythm
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
-[![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/peterrosemann/biorythm)
-[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/peterrosemann/biorythm)
+[![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
+[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
+[![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
 [![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](Dockerfile)
+[![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
@@ -429,6 +431,52 @@ pytest --cov=. --cov-fail-under=85 && ruff check . && ruff format --check .
 - Coverage must be ≥ 85% (currently 90%)
 - Code must pass ruff linting
 - No unhandled type errors
+
+## CI/CD & Automation
+
+### GitHub Actions Workflows
+
+The project includes comprehensive GitHub Actions for continuous integration and deployment:
+
+**🔄 CI/CD Pipeline (`ci.yml`)**
+- Multi-version Python testing (3.8-3.12)
+- Code quality checks with Ruff
+- Security scanning with Bandit and Safety  
+- Docker build and testing
+- Performance benchmarking
+- Coverage reporting to Codecov
+
+**🐳 Docker Publishing (`docker-publish.yml`)**
+- Multi-architecture container builds (AMD64, ARM64)
+- GitHub Container Registry publishing
+- Vulnerability scanning with Trivy
+- Security compliance validation
+
+**🚀 Release Management (`release.yml`)**
+- Automated GitHub releases
+- PyPI package publishing
+- Docker image tagging and distribution
+- Release validation and testing
+
+**🔒 Security Analysis (`codeql.yml`)**
+- CodeQL static analysis
+- Weekly automated security scans
+- Vulnerability detection and reporting
+
+**🔍 Dependency Review (`dependency-review.yml`)**
+- Automated dependency vulnerability scanning
+- License compliance checking
+- PR-based dependency analysis
+
+### Automation Features
+
+- **📦 Dependabot:** Weekly automated dependency updates
+- **🛡️ Security:** Continuous vulnerability monitoring
+- **📋 Templates:** Standardized issue and PR templates  
+- **✅ Quality Gates:** Automated quality enforcement
+- **📊 Monitoring:** Performance and coverage tracking
+
+See [`.github/WORKFLOWS.md`](.github/WORKFLOWS.md) for detailed workflow documentation.
 
 ### Running Performance Tests
 
