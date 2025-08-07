@@ -126,3 +126,7 @@ Thumbs.db
 
 # Ruff
 .ruff_cache/
+
+# Semantic Release
+CHANGELOG.md
+.semantic_release/

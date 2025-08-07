@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_run:
+    workflows: ["Semantic Release"]
+    types:
+      - completed
 
 permissions:
   contents: write

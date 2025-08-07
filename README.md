@@ -474,6 +474,17 @@ The project includes comprehensive GitHub Actions for continuous integration and
 - Supply chain transparency and security
 - Automated SBOM attestation and publishing
 
+**🔄 Semantic Release (`semantic-release.yml`)**
+- Automated version management with semantic versioning
+- Conventional commits for version calculation
+- Automatic changelog generation and GitHub releases
+- Integration with PyPI publishing and Docker builds
+
+**✅ Commit Validation (`commit-lint.yml`)**
+- Conventional commit message format enforcement
+- Automated PR feedback for invalid commits
+- Integration with semantic versioning workflow
+
 ### Automation Features
 
 - **📦 Dependabot:** Weekly automated dependency updates
@@ -482,8 +493,41 @@ The project includes comprehensive GitHub Actions for continuous integration and
 - **✅ Quality Gates:** Automated quality enforcement
 - **📊 Monitoring:** Performance and coverage tracking
 - **📋 SBOM:** Automated Software Bill of Materials generation
+- **🔄 Semantic Versioning:** Automated version management with conventional commits
 
 See [`.github/WORKFLOWS.md`](.github/WORKFLOWS.md) for detailed workflow documentation.
+
+## Semantic Versioning & Conventional Commits
+
+This project uses **Semantic Versioning** (SemVer) with **Conventional Commits** for automated version management:
+
+### Commit Format
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Commit Types & Versioning
+- **feat**: New feature → **MINOR** version bump (0.1.0 → 0.2.0)
+- **fix**: Bug fix → **PATCH** version bump (0.1.0 → 0.1.1)  
+- **perf**: Performance → **PATCH** version bump
+- **docs, style, refactor, test, build, ci, chore**: No version bump
+- **BREAKING CHANGE** in footer → **MAJOR** version bump (0.1.0 → 1.0.0)
+
+### Examples
+```bash
+feat: add horizontal chart support
+fix: resolve date validation error
+docs: update installation instructions
+chore: update dependencies
+```
+
+**Version Location**: `pyproject.toml`, `biorythm/__init__.py`, `_version.py` (auto-managed)
+
+See [`SEMANTIC_VERSIONING.md`](SEMANTIC_VERSIONING.md) for complete documentation.
 
 ### Running Performance Tests
 
