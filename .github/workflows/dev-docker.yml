@@ -1,0 +1,385 @@
+name: Development Docker Build
+
+on:
+  push:
+    branches: [ develop, 'feature/**', 'bugfix/**', 'hotfix/**' ]
+  pull_request:
+    branches: [ develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Generate development version number
+  version:
+    name: Generate Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      short_sha: ${{ steps.version.outputs.short_sha }}
+      branch_name: ${{ steps.version.outputs.branch_name }}
+      environment: ${{ steps.version.outputs.environment }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Generate development version
+      id: version
+      run: |
+        # Get current version from git tags or default
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.1.0")
+        VERSION_BASE=${LAST_TAG#v}
+        
+        # Get short SHA and sanitized branch name
+        SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-8)
+        BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/[^a-zA-Z0-9-]/-/g' | tr '[:upper:]' '[:lower:]')
+        
+        # Determine environment based on branch or input
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          ENVIRONMENT="${{ github.event.inputs.environment }}"
+        elif [[ "$BRANCH_NAME" == "develop" ]]; then
+          ENVIRONMENT="staging"
+        elif [[ "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix) ]]; then
+          ENVIRONMENT="dev"
+        else
+          ENVIRONMENT="dev"
+        fi
+        
+        # Generate version based on environment
+        if [ "$ENVIRONMENT" = "prod" ]; then
+          VERSION="$VERSION_BASE"
+        elif [ "$ENVIRONMENT" = "staging" ]; then
+          VERSION="$VERSION_BASE-staging.$SHORT_SHA"
+        else
+          VERSION="$VERSION_BASE-dev.$BRANCH_NAME.$SHORT_SHA"
+        fi
+        
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+        echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+        echo "environment=$ENVIRONMENT" >> $GITHUB_OUTPUT
+        
+        echo "Generated version: $VERSION"
+        echo "Environment: $ENVIRONMENT"
+        echo "Branch: $BRANCH_NAME"
+
+  # Build and push Docker images
+  build-and-push:
+    name: Build & Push Docker
+    runs-on: ubuntu-latest
+    needs: version
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=${{ needs.version.outputs.version }}
+          type=raw,value=${{ needs.version.outputs.environment }}-latest
+          type=raw,value=${{ needs.version.outputs.environment }}-${{ needs.version.outputs.short_sha }}
+          type=sha,prefix=${{ needs.version.outputs.environment }}-{{branch}}-
+        labels: |
+          org.opencontainers.image.version=${{ needs.version.outputs.version }}
+          org.opencontainers.image.revision=${{ github.sha }}
+          org.opencontainers.image.environment=${{ needs.version.outputs.environment }}
+          org.opencontainers.image.branch=${{ needs.version.outputs.branch_name }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      id: build
+      with:
+        context: .
+        target: production
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha,scope=${{ needs.version.outputs.environment }}
+        cache-to: type=gha,mode=max,scope=${{ needs.version.outputs.environment }}
+        build-args: |
+          VERSION=${{ needs.version.outputs.version }}
+          BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+          VCS_REF=${{ github.sha }}
+
+    - name: Test Docker image
+      run: |
+        # Test the built image
+        docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }} python -c "
+        import biorythm
+        from datetime import datetime
+        calc = biorythm.BiorhythmCalculator()
+        result = calc.calculate_biorhythm_values(datetime(1990, 5, 15), datetime(2023, 6, 1))
+        print('Docker image test passed!')
+        print(f'Version: ${{ needs.version.outputs.version }}')
+        print(f'Environment: ${{ needs.version.outputs.environment }}')
+        print(f'Result: {result}')
+        "
+
+    - name: Run security scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload security scan results
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'trivy-results.sarif'
+      if: always()
+
+  # Generate deployment manifests
+  generate-manifests:
+    name: Generate Deployment Manifests
+    runs-on: ubuntu-latest
+    needs: [version, build-and-push]
+    if: success()
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create Kubernetes manifests
+      run: |
+        mkdir -p manifests/${{ needs.version.outputs.environment }}
+        
+        # Create deployment manifest
+        cat > manifests/${{ needs.version.outputs.environment }}/deployment.yaml << EOF
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: pybiorythm-${{ needs.version.outputs.environment }}
+          namespace: pybiorythm-${{ needs.version.outputs.environment }}
+          labels:
+            app: pybiorythm
+            environment: ${{ needs.version.outputs.environment }}
+            version: ${{ needs.version.outputs.version }}
+        spec:
+          replicas: 2
+          strategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxSurge: 1
+              maxUnavailable: 0
+          selector:
+            matchLabels:
+              app: pybiorythm
+              environment: ${{ needs.version.outputs.environment }}
+          template:
+            metadata:
+              labels:
+                app: pybiorythm
+                environment: ${{ needs.version.outputs.environment }}
+                version: ${{ needs.version.outputs.version }}
+            spec:
+              containers:
+              - name: pybiorythm
+                image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
+                ports:
+                - containerPort: 8080
+                env:
+                - name: ENVIRONMENT
+                  value: "${{ needs.version.outputs.environment }}"
+                - name: VERSION
+                  value: "${{ needs.version.outputs.version }}"
+                resources:
+                  requests:
+                    memory: "64Mi"
+                    cpu: "50m"
+                  limits:
+                    memory: "256Mi"
+                    cpu: "200m"
+                readinessProbe:
+                  exec:
+                    command:
+                    - python
+                    - -c
+                    - "import biorythm; print('Ready')"
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                livenessProbe:
+                  exec:
+                    command:
+                    - python
+                    - -c
+                    - "import biorythm; print('Alive')"
+                  initialDelaySeconds: 15
+                  periodSeconds: 20
+        EOF
+
+        # Create service manifest
+        cat > manifests/${{ needs.version.outputs.environment }}/service.yaml << EOF
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: pybiorythm-${{ needs.version.outputs.environment }}
+          namespace: pybiorythm-${{ needs.version.outputs.environment }}
+          labels:
+            app: pybiorythm
+            environment: ${{ needs.version.outputs.environment }}
+        spec:
+          selector:
+            app: pybiorythm
+            environment: ${{ needs.version.outputs.environment }}
+          ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
+          type: ClusterIP
+        EOF
+
+        # Create namespace manifest
+        cat > manifests/${{ needs.version.outputs.environment }}/namespace.yaml << EOF
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: pybiorythm-${{ needs.version.outputs.environment }}
+          labels:
+            environment: ${{ needs.version.outputs.environment }}
+            app: pybiorythm
+        EOF
+
+    - name: Create Docker Compose for local development
+      run: |
+        cat > docker-compose.${{ needs.version.outputs.environment }}.yml << EOF
+        version: '3.8'
+        services:
+          pybiorythm-${{ needs.version.outputs.environment }}:
+            image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
+            container_name: pybiorythm-${{ needs.version.outputs.environment }}
+            environment:
+              - ENVIRONMENT=${{ needs.version.outputs.environment }}
+              - VERSION=${{ needs.version.outputs.version }}
+            ports:
+              - "8080:8080"
+            restart: unless-stopped
+            labels:
+              - "traefik.enable=true"
+              - "traefik.http.routers.pybiorythm-${{ needs.version.outputs.environment }}.rule=Host(\`pybiorythm-${{ needs.version.outputs.environment }}.localhost\`)"
+              - "traefik.http.services.pybiorythm-${{ needs.version.outputs.environment }}.loadbalancer.server.port=8080"
+        
+        networks:
+          default:
+            external:
+              name: pybiorythm-network
+        EOF
+
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-manifests-${{ needs.version.outputs.environment }}-${{ needs.version.outputs.short_sha }}
+        path: |
+          manifests/
+          docker-compose.${{ needs.version.outputs.environment }}.yml
+        retention-days: 30
+
+  # Create deployment summary
+  deployment-summary:
+    name: Deployment Summary
+    runs-on: ubuntu-latest
+    needs: [version, build-and-push, generate-manifests]
+    if: success()
+
+    steps:
+    - name: Create deployment summary
+      run: |
+        cat >> $GITHUB_STEP_SUMMARY << EOF
+        # 🚀 Deployment Summary
+        
+        ## 📦 Built Image
+        - **Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}\`
+        - **Environment**: \`${{ needs.version.outputs.environment }}\`
+        - **Version**: \`${{ needs.version.outputs.version }}\`
+        - **Branch**: \`${{ needs.version.outputs.branch_name }}\`
+        - **SHA**: \`${{ needs.version.outputs.short_sha }}\`
+        
+        ## 🏷️ Available Tags
+        - \`${{ needs.version.outputs.environment }}-latest\`
+        - \`${{ needs.version.outputs.environment }}-${{ needs.version.outputs.short_sha }}\`
+        - \`${{ needs.version.outputs.version }}\`
+        
+        ## 🚢 Quick Deploy Commands
+        
+        ### Docker Run
+        \`\`\`bash
+        docker run -p 8080:8080 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
+        \`\`\`
+        
+        ### Docker Compose
+        \`\`\`bash
+        docker-compose -f docker-compose.${{ needs.version.outputs.environment }}.yml up -d
+        \`\`\`
+        
+        ### Kubernetes
+        \`\`\`bash
+        kubectl apply -f manifests/${{ needs.version.outputs.environment }}/
+        \`\`\`
+        
+        ## 🔄 Blue-Green Deployment
+        Current deployment can be switched using:
+        \`\`\`bash
+        # Switch traffic to new version (blue-green)
+        kubectl patch service pybiorythm-${{ needs.version.outputs.environment }} -p '{"spec":{"selector":{"version":"${{ needs.version.outputs.version }}"}}}'
+        \`\`\`
+        EOF
+
+    - name: Comment on PR with deployment info
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const deploymentInfo = `
+          ## 🚀 Development Build Ready
+          
+          **Environment**: \`${{ needs.version.outputs.environment }}\`
+          **Version**: \`${{ needs.version.outputs.version }}\`
+          **Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}\`
+          
+          ### Quick Test
+          \`\`\`bash
+          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }} python main.py -y 1990 -m 5 -d 15
+          \`\`\`
+          
+          ### Available for deployment to ${{ needs.version.outputs.environment }} environment
+          `;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: deploymentInfo
+          });
