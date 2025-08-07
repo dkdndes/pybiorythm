@@ -45,12 +45,12 @@ jobs:
 
     - name: Lint with Ruff
       run: |
-        ruff check .
-        ruff format --check .
+        uv run ruff check .
+        uv run  ruff format --check .
 
     - name: Run tests with coverage
       run: |
-        pytest --cov=. --cov-report=xml --cov-report=term-missing --cov-fail-under=85
+        uv run pytest --cov=. --cov-report=xml --cov-report=term-missing --cov-fail-under=85
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.12'
@@ -89,10 +89,10 @@ jobs:
         uv sync --group dev
 
     - name: Run safety check (dependency vulnerabilities)
-      run: safety check --json
+      run: uv run safety check --json
 
     - name: Run bandit security linter
-      run: bandit -r . -f json -o bandit-report.json
+      run: uv run bandit -r . -f json -o bandit-report.json
       continue-on-error: true
 
     - name: Upload bandit results
