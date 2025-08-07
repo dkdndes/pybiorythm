@@ -43,10 +43,9 @@ jobs:
       run: |
         # Generate base SBOM from pip-installed packages
         uv pip list --format freeze > requirements-freeze.txt
-        cyclonedx-py requirements \
-          --format json \
-          --output-file sbom-base.json \
-          --input-file requirements-freeze.txt
+        cyclonedx-py requirements requirements-freeze.txt \
+          --output-format json \
+          --output-file sbom-base.json
 
     - name: Enhance SBOM with BSI TR-03183-2-2 compliance
       run: |
