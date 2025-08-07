@@ -43,13 +43,14 @@ jobs:
         python-version: '3.12'
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
-        version: '0.4.10'
+        version: 'latest'
 
-    - name: Install documentation dependencies
+    - name: Install and sync documentation dependencies
       run: |
-        uv sync --group docs
+        uv sync
+        uv tool install mkdocs --with mkdocs-material --with mkdocs-mermaid2-plugin
 
     - name: Configure Git for MkDocs
       run: |
@@ -58,7 +59,7 @@ jobs:
 
     - name: Build documentation
       run: |
-        mkdocs build --verbose --clean
+        uv tool run mkdocs build --verbose --clean
 
     - name: Upload documentation artifacts
       uses: actions/upload-artifact@v4
