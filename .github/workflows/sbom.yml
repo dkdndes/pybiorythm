@@ -40,7 +40,7 @@ jobs:
 
     - name: Generate Python SBOM
       run: |
-        # Generate base SBOM from pip-installed packages
+        # Generate base SBOM from UV-managed packages
         uv pip list --format freeze > requirements-freeze.txt
         cyclonedx-py requirements requirements-freeze.txt \
           --output-format json \
@@ -454,9 +454,9 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install CycloneDX tools
+    - name: Install development dependencies
       run: |
-        pip install cyclonedx-bom
+        uv sync --group dev
 
     - name: Create combined SBOM
       run: |

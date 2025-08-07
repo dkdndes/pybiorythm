@@ -49,8 +49,7 @@ jobs:
 
     - name: Install and sync documentation dependencies
       run: |
-        uv sync
-        uv tool install mkdocs --with mkdocs-material --with mkdocs-mermaid2-plugin
+        uv sync --group docs
 
     - name: Configure Git for MkDocs
       run: |
@@ -59,7 +58,7 @@ jobs:
 
     - name: Build documentation
       run: |
-        uv tool run mkdocs build --verbose --clean
+        uv run mkdocs build --verbose --clean
 
     - name: Upload documentation artifacts
       uses: actions/upload-artifact@v4
