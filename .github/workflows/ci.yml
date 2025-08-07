@@ -57,7 +57,7 @@ jobs:
       if: matrix.python-version == '3.12'
       uses: codecov/codecov-action@v5
       with:
-        file: ./coverage.xml
+        files: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -275,17 +275,31 @@ jobs:
         # Test CLI with various inputs
         python main.py -y 1990 -m 5 -d 15
         python main.py -y 1985 -m 12 -d 25 --orientation horizontal --days 30
-        python main.py -y 2000 -m 1 -d 1 --orientation json-vertical > test_output.json
+        
+        # Test CLI JSON output - capture JSON only, filter out warnings
+        python main.py -y 2000 -m 1 -d 1 --orientation json-vertical 2>/dev/null | tail -n +9 > test_output.json
         
         # Validate JSON structure
         python -c "
         import json
-        with open('test_output.json') as f:
-            data = json.load(f)
-        assert 'meta' in data
-        assert 'data' in data
-        assert 'cycle_repeats' in data
-        print('Integration tests passed!')
+        try:
+            with open('test_output.json', 'r') as f:
+                content = f.read().strip()
+                if content and content.startswith('{'):
+                    data = json.loads(content)
+                    assert 'meta' in data
+                    assert 'data' in data
+                    assert 'cycle_repeats' in data
+                    print('Integration tests passed!')
+                    print(f'JSON keys: {list(data.keys())}')
+                else:
+                    print('No valid JSON found in output')
+                    exit(1)
+        except Exception as e:
+            print(f'JSON validation failed: {e}')
+            with open('test_output.json', 'r') as f:
+                print('File content:', repr(f.read()[:200]))
+            exit(1)
         "
 
   # Job 7: Performance Benchmark
@@ -374,10 +388,11 @@ jobs:
     - name: Generate Python SBOM
       run: |
         # Generate basic SBOM for CI validation
+        uv pip list --format freeze > requirements-freeze.txt
         cyclonedx-py requirements \
           --format json \
           --output-file sbom-ci.json \
-          --input-file <(uv pip list --format freeze)
+          --input-file requirements-freeze.txt
 
     - name: Validate SBOM
       run: |
