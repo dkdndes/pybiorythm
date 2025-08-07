@@ -120,8 +120,8 @@ class TestEdgeCasesAndSpecificLines:
 class TestMainWithDifferentParams:
     """Test main function with different parameter combinations."""
 
-    @patch("biorythm.BiorhythmCalculator")
-    @patch("biorythm.DateValidator.create_validated_date")
+    @patch("biorythm.core.BiorhythmCalculator")
+    @patch("biorythm.core.DateValidator.create_validated_date")
     def test_main_with_horizontal_orientation(
         self, mock_date_validator, mock_calculator_class
     ):
@@ -136,8 +136,8 @@ class TestMainWithDifferentParams:
 
         mock_calculator.generate_chart.assert_called_with(mock_date)
 
-    @patch("biorythm.BiorhythmCalculator")
-    @patch("biorythm.DateValidator.create_validated_date")
+    @patch("biorythm.core.BiorhythmCalculator")
+    @patch("biorythm.core.DateValidator.create_validated_date")
     def test_main_with_different_days_param(
         self, mock_date_validator, mock_calculator_class
     ):
