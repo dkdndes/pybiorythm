@@ -80,7 +80,7 @@ version_variables = [
     "biorythm/__init__.py:__version__",
     "_version.py:__version__",
 ]
-build_command = "uv add --dev build && uv run python -m build"
+build_command = "uv run python -m build"
 dist_path = "dist/"
 upload_to_vcs_release = true
 
