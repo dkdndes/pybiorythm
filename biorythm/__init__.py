@@ -8,7 +8,7 @@ WARNING: This software implements biorhythm theory, which is considered
 PSEUDOSCIENCE. This implementation is provided FOR ENTERTAINMENT PURPOSES ONLY.
 """
 
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 
 from .core import (
     BiorhythmCalculator,
