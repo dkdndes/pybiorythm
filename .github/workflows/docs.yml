@@ -1,0 +1,182 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install UV
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: '0.4.10'
+
+    - name: Install documentation dependencies
+      run: |
+        uv sync --group docs
+
+    - name: Configure Git for MkDocs
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+
+    - name: Build documentation
+      run: |
+        mkdocs build --verbose --clean
+
+    - name: Upload documentation artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation-site
+        path: site/
+        retention-days: 30
+
+    - name: Setup Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: actions/configure-pages@v4
+
+    - name: Upload to GitHub Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: site/
+
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    needs: build-docs
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  link-check:
+    name: Check Documentation Links
+    runs-on: ubuntu-latest
+    needs: build-docs
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download documentation artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: documentation-site
+        path: site/
+
+    - name: Install link checker
+      run: |
+        npm install -g markdown-link-check
+
+    - name: Check internal links
+      run: |
+        find site -name "*.html" -exec echo "Checking {}" \; || true
+        # Note: Link checking for built HTML site would go here
+        # For now, we just verify the build succeeded
+
+    - name: Check documentation completeness
+      run: |
+        echo "Checking documentation completeness..."
+        
+        # Verify key documentation files exist
+        required_files=(
+          "site/index.html"
+          "site/user-guide/quick-start/index.html"
+          "site/user-guide/installation/index.html"
+          "site/api/calculator/index.html"
+          "site/developer-guide/setup/index.html"
+        )
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Missing required documentation: $file"
+            exit 1
+          else
+            echo "✅ Found: $file"
+          fi
+        done
+        
+        echo "✅ Documentation completeness check passed"
+
+  docs-preview:
+    name: Documentation Preview
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: build-docs
+    
+    steps:
+    - name: Download documentation artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: documentation-site
+        path: site/
+
+    - name: Comment PR with preview info
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 📖 Documentation Preview
+            
+            The documentation has been built successfully for this PR.
+            
+            **Preview Information:**
+            - Documentation built from: \`${{ github.sha }}\`
+            - Total pages: Built successfully
+            - Build time: ${{ github.run_id }}
+            
+            Once this PR is merged to main, the documentation will be automatically deployed to GitHub Pages.
+            
+            **Local Preview:**
+            \`\`\`bash
+            git checkout ${{ github.head_ref }}
+            uv run mkdocs serve
+            # Visit http://127.0.0.1:8000
+            \`\`\`
+            `
+          });

@@ -1,0 +1,113 @@
+site_name: PyBiorythm Documentation
+site_description: A Python library for biorhythm calculations and visualizations
+site_author: Peter Rosemann
+site_url: https://dkdndes.github.io/pybiorythm/
+
+# Repository
+repo_name: dkdndes/pybiorythm
+repo_url: https://github.com/dkdndes/pybiorythm
+
+# Theme
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+# Navigation
+nav:
+  - Home: index.md
+  - User Guide:
+    - Quick Start: user-guide/quick-start.md
+    - Installation: user-guide/installation.md
+    - Usage Examples: user-guide/usage-examples.md
+    - Command Line Interface: user-guide/cli.md
+    - Output Formats: user-guide/output-formats.md
+  - Developer Guide:
+    - Development Setup: developer-guide/setup.md
+    - Testing: developer-guide/testing.md
+    - Code Quality: developer-guide/code-quality.md
+    - Contributing: developer-guide/contributing.md
+    - Architecture: developer-guide/architecture.md
+  - API Reference:
+    - Calculator: api/calculator.md
+    - Core Functions: api/core.md
+    - JSON Schema: api/json-schema.md
+    - Error Handling: api/errors.md
+  - Deployment:
+    - Deployment Guide: deployment/deployment-guide.md
+    - Docker: deployment/docker.md
+    - Kubernetes: deployment/kubernetes.md
+    - Local Testing: deployment/local-testing.md
+    - Security: deployment/security.md
+  - Workflows:
+    - GitHub Actions: workflows/github-actions.md
+    - Semantic Versioning: workflows/semantic-versioning.md
+    - Blue-Green Deployment: workflows/blue-green.md
+    - Security Scanning: workflows/security.md
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# Plugins
+plugins:
+  - search
+  - mermaid2
+
+# Extra
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/dkdndes/pybiorythm
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/dkdndes/pybiorythm
+
+# Copyright
+copyright: Copyright &copy; 2024 Peter Rosemann. This is pseudoscience - for entertainment only!
