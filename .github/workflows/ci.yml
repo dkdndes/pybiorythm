@@ -10,7 +10,7 @@ on:
 
 env:
   PYTHON_VERSION: '3.12'
-  UV_VERSION: '0.4.10'
+  UV_VERSION: 'latest'
 
 jobs:
   # Job 1: Code Quality and Testing
@@ -34,7 +34,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 
@@ -80,7 +80,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 
@@ -196,7 +196,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
 
     - name: Install UV and build tools
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 
@@ -260,7 +260,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 
@@ -320,7 +320,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 
@@ -375,7 +375,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
       with:
         version: ${{ env.UV_VERSION }}
 

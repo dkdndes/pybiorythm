@@ -31,7 +31,9 @@ jobs:
         python-version: '3.12'
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: 'latest'
 
     - name: Install dependencies and build
       run: |
@@ -114,7 +116,9 @@ jobs:
         python-version: '3.12'
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v2
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: 'latest'
 
     - name: Install build dependencies
       run: |
