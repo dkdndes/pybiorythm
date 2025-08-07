@@ -4,9 +4,9 @@
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
 [![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
-[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](Dockerfile)
+[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/Dockerfile)
 [![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/LICENSE)
 
 Welcome to PyBiorythm - a comprehensive Python library for generating biorhythm charts and timeseries data.
 
@@ -73,37 +73,7 @@ docker build -t biorythm:latest .
 docker run -it biorythm:latest
 ```
 
-### Basic Usage
-
-```python
-from datetime import datetime
-from biorythm import BiorhythmCalculator
-
-# Create calculator instance
-calc = BiorhythmCalculator(width=60, days=30, orientation="vertical")
-
-# Generate chart for someone born May 15, 1990
-birthdate = datetime(1990, 5, 15)
-calc.generate_chart(birthdate)
-
-# Generate JSON timeseries data
-json_data = calc.generate_timeseries_json(birthdate)
-print(json_data)
-```
-
-### Command Line Usage
-
-```bash
-# Interactive mode
-python main.py
-
-# Command line with arguments
-python main.py -y 1990 -m 5 -d 15
-
-# Different chart orientations
-python main.py -y 1990 -m 5 -d 15 --orientation horizontal
-python main.py -y 1990 -m 5 -d 15 --orientation json-vertical
-```
+See the [Quick Start Guide](user-guide/quick-start.md) for detailed usage instructions and examples.
 
 ## Documentation Structure
 
@@ -145,56 +115,18 @@ python main.py -y 1990 -m 5 -d 15 --orientation json-vertical
 
 ## Chart Examples
 
-### Vertical Chart (Traditional)
-```
-Mon May 15    p     :     e i    
-Tue May 16       p  :  e      i  
-Wed May 17          : p    e   i 
-Thu May 18          :   p     e i
-Fri May 19          :      p e  i
-```
-
-### Horizontal Chart (Timeline)
-```
-BIORHYTHM WAVE (all cycles)
-                    e               
-            p               i       
-                        e           
-```
-
-### JSON Output Structure
-
-```json
-{
-  "meta": {
-    "generator": "biorythm",
-    "version": "1.2.1",
-    "birthdate": "1990-05-15",
-    "plot_date": "2025-08-07",
-    "days_alive": 12837,
-    "cycle_lengths_days": {
-      "physical": 23,
-      "emotional": 28,
-      "intellectual": 33
-    }
-  },
-  "data": [
-    {
-      "date": "2025-07-24",
-      "physical": -0.8987940462991669,
-      "emotional": 0.9744583088414919,
-      "intellectual": -0.9510565162951536
-    }
-  ]
-}
-```
+For chart examples and detailed output format documentation, see:
+- [Output Formats Guide](user-guide/output-formats.md) - All chart types and formats
+- [Usage Examples](user-guide/usage-examples.md) - Practical use cases 
+- [JSON Schema](api/json-schema.md) - Complete JSON structure reference
 
 ## What's Next?
 
 - **New Users**: Start with the [Quick Start Guide](user-guide/quick-start.md)
-- **Developers**: Check out the [Development Setup](developer-guide/setup.md)
-- **Data Scientists**: Explore the [JSON Schema](api/json-schema.md)
-- **DevOps**: Review the [Deployment Guide](deployment/deployment-guide.md)
+- **Developers**: Check out the [Development Setup](developer-guide/setup.md) and [Architecture Overview](developer-guide/architecture.md)
+- **Contributors**: Review the [Code Quality Standards](developer-guide/code-quality.md) and [Contributing Guidelines](developer-guide/contributing.md)
+- **Data Scientists**: Explore the [JSON Schema](api/json-schema.md) and [Output Formats](user-guide/output-formats.md)
+- **DevOps**: Review the [Deployment Guide](deployment/deployment-guide.md) and [Security Best Practices](deployment/security.md)
 
 ## Version Information
 
