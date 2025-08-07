@@ -1,0 +1,23 @@
+# act configuration file for Docker Desktop on M2 Mac
+# Platform mappings for container sizes
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+-P ubuntu-24.04=catthehacker/ubuntu:act-24.04
+-P ubuntu-22.04=catthehacker/ubuntu:act-22.04
+
+# Default platform
+--platform ubuntu-latest=catthehacker/ubuntu:act-latest
+
+# Docker Desktop on M2 Mac configuration
+--container-daemon-socket unix:///Users/peterrosemann/.docker/run/docker.sock
+--container-architecture linux/amd64
+
+# Environment variables
+--env PYTHON_VERSION=3.12
+--env UV_VERSION=0.4.10
+--env DOCKER_BUILDKIT=1
+
+# Performance optimizations for M2 Mac
+--container-cap-add SYS_PTRACE
+
+# Verbose output for debugging
+--verbose

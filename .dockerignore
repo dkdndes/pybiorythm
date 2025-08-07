@@ -9,8 +9,6 @@ pytest.ini
 .git/
 .gitignore
 .github/
-README.md
-LICENSE
 
 # Exclude Python cache and virtual environments
 __pycache__/
