@@ -113,6 +113,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Local testing secrets and act configuration
+.secrets
+.secrets.backup
+.env
+.input
+.vars
+
 # IDEs
 .vscode/
 .idea/
