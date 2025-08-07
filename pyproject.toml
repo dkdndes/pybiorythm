@@ -49,11 +49,15 @@ Issues = "https://github.com/peterrosemann/biorythm/issues"
 
 [dependency-groups]
 dev = [
+    "bandit>=1.7.10",
     "build>=1.2.2.post1",
+    "cyclonedx-bom>=5.5.0",
     "pandas>=2.0.3",
     "pytest>=8.3.5",
+    "pytest-benchmark>=4.0.0",
     "pytest-cov>=5.0.0",
     "python-semantic-release>=8.0.0",
+    "safety>=3.6.0",
     "twine>=6.1.0",
 ]
 
