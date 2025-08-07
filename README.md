@@ -468,6 +468,12 @@ The project includes comprehensive GitHub Actions for continuous integration and
 - License compliance checking
 - PR-based dependency analysis
 
+**📋 SBOM Generation (`sbom.yml`)**
+- Software Bill of Materials generation with CycloneDX
+- Python and Docker component tracking
+- Supply chain transparency and security
+- Automated SBOM attestation and publishing
+
 ### Automation Features
 
 - **📦 Dependabot:** Weekly automated dependency updates
@@ -475,6 +481,7 @@ The project includes comprehensive GitHub Actions for continuous integration and
 - **📋 Templates:** Standardized issue and PR templates  
 - **✅ Quality Gates:** Automated quality enforcement
 - **📊 Monitoring:** Performance and coverage tracking
+- **📋 SBOM:** Automated Software Bill of Materials generation
 
 See [`.github/WORKFLOWS.md`](.github/WORKFLOWS.md) for detailed workflow documentation.
 

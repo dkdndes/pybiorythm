@@ -310,3 +310,54 @@ jobs:
         else:
             print('Performance benchmark passed')
         "
+
+  # Job 8: SBOM Generation (Quick)
+  sbom-quick:
+    name: Generate SBOM
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install UV
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: ${{ env.UV_VERSION }}
+
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e .
+        uv pip install --system cyclonedx-bom
+
+    - name: Generate Python SBOM
+      run: |
+        # Generate basic SBOM for CI validation
+        cyclonedx-py requirements \
+          --format json \
+          --output-file sbom-ci.json \
+          --input-file <(uv pip list --format freeze)
+
+    - name: Validate SBOM
+      run: |
+        python -c "
+        import json
+        with open('sbom-ci.json') as f:
+            sbom = json.load(f)
+        assert sbom['bomFormat'] == 'CycloneDX'
+        print(f'✅ SBOM generated with {len(sbom.get(\"components\", []))} components')
+        "
+
+    - name: Upload SBOM artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom-ci
+        path: sbom-ci.json
+        retention-days: 7

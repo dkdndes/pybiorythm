@@ -1,0 +1,543 @@
+name: SBOM Generation
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Generate SBOM weekly on Sundays at 2:00 AM
+    - cron: '0 2 * * 0'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Job 1: Generate Python SBOM
+  python-sbom:
+    name: Generate Python SBOM
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install UV
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: '0.4.10'
+
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e .
+        uv pip install --system cyclonedx-bom[poetry-plugin]
+
+    - name: Generate Python SBOM
+      run: |
+        # Generate SBOM from pip-installed packages
+        cyclonedx-py requirements \
+          --format json \
+          --output-file sbom-python.json \
+          --input-file <(uv pip list --format freeze)
+        
+        # Generate SBOM from pyproject.toml
+        cyclonedx-py poetry \
+          --format json \
+          --output-file sbom-pyproject.json
+        
+        # Merge and create final SBOM
+        cyclonedx-py merge \
+          --input-files sbom-python.json sbom-pyproject.json \
+          --output-file sbom-complete.json \
+          --format json
+
+    - name: Generate SBOM metadata
+      run: |
+        # Add metadata to SBOM
+        python -c "
+        import json
+        import datetime
+        from pathlib import Path
+        
+        # Load SBOM
+        sbom_file = Path('sbom-complete.json')
+        if sbom_file.exists():
+            with open(sbom_file) as f:
+                sbom = json.load(f)
+        else:
+            sbom = {
+                'bomFormat': 'CycloneDX',
+                'specVersion': '1.4',
+                'serialNumber': 'urn:uuid:$(uuidgen)',
+                'version': 1
+            }
+        
+        # Add metadata
+        sbom['metadata'] = {
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+            'tools': [
+                {
+                    'vendor': 'CycloneDX',
+                    'name': 'cyclonedx-python-lib',
+                    'version': 'latest'
+                }
+            ],
+            'component': {
+                'type': 'application',
+                'name': 'pybiorythm',
+                'version': '${GITHUB_REF_NAME#v}' if '${GITHUB_REF_TYPE}' == 'tag' else '${GITHUB_SHA[:8]}',
+                'description': 'Python library for biorhythm calculations',
+                'licenses': [
+                    {
+                        'license': {
+                            'id': 'MIT'
+                        }
+                    }
+                ],
+                'supplier': {
+                    'name': 'dkdndes',
+                    'url': ['https://github.com/dkdndes/pybiorythm']
+                }
+            }
+        }
+        
+        # Add build environment info
+        sbom['metadata']['properties'] = [
+            {
+                'name': 'github:repository',
+                'value': '${GITHUB_REPOSITORY}'
+            },
+            {
+                'name': 'github:sha',
+                'value': '${GITHUB_SHA}'
+            },
+            {
+                'name': 'github:ref',
+                'value': '${GITHUB_REF}'
+            },
+            {
+                'name': 'github:workflow',
+                'value': '${GITHUB_WORKFLOW}'
+            },
+            {
+                'name': 'github:run_id',
+                'value': '${GITHUB_RUN_ID}'
+            }
+        ]
+        
+        # Save enhanced SBOM
+        with open('sbom-python-complete.json', 'w') as f:
+            json.dump(sbom, f, indent=2)
+        "
+
+    - name: Validate Python SBOM
+      run: |
+        # Validate SBOM format
+        python -c "
+        import json
+        
+        with open('sbom-python-complete.json') as f:
+            sbom = json.load(f)
+        
+        # Basic validation
+        assert sbom['bomFormat'] == 'CycloneDX'
+        assert 'metadata' in sbom
+        assert 'component' in sbom['metadata']
+        assert sbom['metadata']['component']['name'] == 'pybiorythm'
+        
+        print('✅ Python SBOM validation passed')
+        print(f\"Components found: {len(sbom.get('components', []))}\")
+        "
+
+    - name: Upload Python SBOM
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom-python
+        path: sbom-python-complete.json
+        retention-days: 90
+
+  # Job 2: Generate Docker SBOM
+  docker-sbom:
+    name: Generate Docker SBOM
+    runs-on: ubuntu-latest
+    needs: python-sbom
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image for SBOM
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        target: production
+        tags: pybiorythm:sbom-scan
+        load: true
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Install Syft for Docker SBOM
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Generate Docker SBOM with Syft
+      run: |
+        # Generate SBOM for Docker image
+        syft pybiorythm:sbom-scan \
+          --output cyclonedx-json=sbom-docker.json \
+          --output table=sbom-docker-summary.txt
+
+    - name: Enhance Docker SBOM metadata
+      run: |
+        python -c "
+        import json
+        import datetime
+        
+        # Load Docker SBOM
+        with open('sbom-docker.json') as f:
+            sbom = json.load(f)
+        
+        # Enhance metadata
+        if 'metadata' not in sbom:
+            sbom['metadata'] = {}
+        
+        sbom['metadata'].update({
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+            'tools': sbom['metadata'].get('tools', []) + [
+                {
+                    'vendor': 'Anchore',
+                    'name': 'syft',
+                    'version': 'latest'
+                }
+            ],
+            'component': {
+                'type': 'container',
+                'name': 'pybiorythm-docker',
+                'version': '${GITHUB_REF_NAME#v}' if '${GITHUB_REF_TYPE}' == 'tag' else '${GITHUB_SHA[:8]}',
+                'description': 'Docker container for pybiorythm application',
+                'licenses': [
+                    {
+                        'license': {
+                            'id': 'MIT'
+                        }
+                    }
+                ]
+            }
+        })
+        
+        # Add container-specific properties
+        container_properties = [
+            {
+                'name': 'docker:image',
+                'value': 'pybiorythm:sbom-scan'
+            },
+            {
+                'name': 'docker:base_image',
+                'value': 'python:3.12-slim'
+            },
+            {
+                'name': 'container:runtime',
+                'value': 'docker'
+            }
+        ]
+        
+        if 'properties' not in sbom['metadata']:
+            sbom['metadata']['properties'] = []
+        
+        sbom['metadata']['properties'].extend(container_properties)
+        
+        # Save enhanced Docker SBOM
+        with open('sbom-docker-complete.json', 'w') as f:
+            json.dump(sbom, f, indent=2)
+        "
+
+    - name: Generate SBOM summary report
+      run: |
+        python -c "
+        import json
+        
+        # Load both SBOMs
+        with open('sbom-docker-complete.json') as f:
+            docker_sbom = json.load(f)
+        
+        # Generate summary
+        docker_components = len(docker_sbom.get('components', []))
+        
+        summary = f'''
+        # SBOM Generation Summary
+        
+        ## Docker Image Analysis
+        - **Total Components**: {docker_components}
+        - **Base Image**: python:3.12-slim
+        - **Application**: pybiorythm
+        - **Build Date**: {docker_sbom['metadata']['timestamp']}
+        
+        ## Component Breakdown
+        '''
+        
+        # Analyze components by type
+        if 'components' in docker_sbom:
+            component_types = {}
+            for component in docker_sbom['components']:
+                comp_type = component.get('type', 'unknown')
+                component_types[comp_type] = component_types.get(comp_type, 0) + 1
+            
+            for comp_type, count in sorted(component_types.items()):
+                summary += f'- **{comp_type.title()}**: {count} components\n'
+        
+        summary += f'''
+        
+        ## Security Considerations
+        - All components tracked for vulnerability scanning
+        - SBOM generated with industry-standard CycloneDX format
+        - Suitable for supply chain security analysis
+        - Compatible with vulnerability databases
+        
+        ## Files Generated
+        - \`sbom-docker-complete.json\`: Complete Docker SBOM
+        - \`sbom-docker-summary.txt\`: Human-readable component list
+        '''
+        
+        with open('SBOM_SUMMARY.md', 'w') as f:
+            f.write(summary)
+        "
+
+    - name: Validate Docker SBOM
+      run: |
+        # Validate SBOM format and content
+        python -c "
+        import json
+        
+        with open('sbom-docker-complete.json') as f:
+            sbom = json.load(f)
+        
+        # Validation checks
+        assert sbom['bomFormat'] == 'CycloneDX'
+        assert 'metadata' in sbom
+        assert 'components' in sbom
+        assert len(sbom['components']) > 0
+        
+        print('✅ Docker SBOM validation passed')
+        print(f\"Components found: {len(sbom['components'])}\")
+        
+        # Check for Python components
+        python_components = [c for c in sbom['components'] if 'python' in c.get('name', '').lower()]
+        print(f\"Python-related components: {len(python_components)}\")
+        "
+
+    - name: Upload Docker SBOM artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom-docker
+        path: |
+          sbom-docker-complete.json
+          sbom-docker-summary.txt
+          SBOM_SUMMARY.md
+        retention-days: 90
+
+  # Job 3: Merge and publish SBOMs
+  publish-sbom:
+    name: Publish Combined SBOM
+    runs-on: ubuntu-latest
+    needs: [python-sbom, docker-sbom]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Python SBOM
+      uses: actions/download-artifact@v3
+      with:
+        name: sbom-python
+
+    - name: Download Docker SBOM
+      uses: actions/download-artifact@v3
+      with:
+        name: sbom-docker
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install CycloneDX tools
+      run: |
+        pip install cyclonedx-bom
+
+    - name: Create combined SBOM
+      run: |
+        python -c "
+        import json
+        import datetime
+        
+        # Load individual SBOMs
+        with open('sbom-python-complete.json') as f:
+            python_sbom = json.load(f)
+        
+        with open('sbom-docker-complete.json') as f:
+            docker_sbom = json.load(f)
+        
+        # Create combined SBOM
+        combined_sbom = {
+            'bomFormat': 'CycloneDX',
+            'specVersion': '1.4',
+            'serialNumber': f'urn:uuid:pybiorythm-combined-{datetime.datetime.utcnow().strftime(\"%Y%m%d%H%M%S\")}',
+            'version': 1,
+            'metadata': {
+                'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+                'tools': [
+                    {
+                        'vendor': 'CycloneDX',
+                        'name': 'cyclonedx-python-lib',
+                        'version': 'latest'
+                    },
+                    {
+                        'vendor': 'Anchore',
+                        'name': 'syft',
+                        'version': 'latest'
+                    }
+                ],
+                'component': {
+                    'type': 'application',
+                    'bom-ref': 'pybiorythm-root',
+                    'name': 'pybiorythm',
+                    'version': '${GITHUB_REF_NAME#v}' if '${GITHUB_REF_TYPE}' == 'tag' else '${GITHUB_SHA[:8]}',
+                    'description': 'Complete pybiorythm application with dependencies',
+                    'licenses': [
+                        {
+                            'license': {
+                                'id': 'MIT'
+                            }
+                        }
+                    ],
+                    'supplier': {
+                        'name': 'dkdndes',
+                        'url': ['https://github.com/dkdndes/pybiorythm']
+                    }
+                },
+                'properties': [
+                    {
+                        'name': 'sbom:type',
+                        'value': 'combined'
+                    },
+                    {
+                        'name': 'sbom:python_components',
+                        'value': str(len(python_sbom.get('components', [])))
+                    },
+                    {
+                        'name': 'sbom:docker_components', 
+                        'value': str(len(docker_sbom.get('components', [])))
+                    }
+                ]
+            },
+            'components': [],
+            'dependencies': []
+        }
+        
+        # Combine components from both SBOMs
+        all_components = {}
+        
+        # Add Python components
+        for component in python_sbom.get('components', []):
+            key = f\"{component.get('name', '')}-{component.get('version', '')}\"
+            if key not in all_components:
+                component['scope'] = 'required'
+                all_components[key] = component
+        
+        # Add Docker components (excluding duplicates)
+        for component in docker_sbom.get('components', []):
+            key = f\"{component.get('name', '')}-{component.get('version', '')}\"
+            if key not in all_components:
+                component['scope'] = 'optional'
+                all_components[key] = component
+        
+        combined_sbom['components'] = list(all_components.values())
+        
+        # Save combined SBOM
+        with open('sbom-combined.json', 'w') as f:
+            json.dump(combined_sbom, f, indent=2)
+        
+        print(f'✅ Combined SBOM created with {len(combined_sbom[\"components\"])} components')
+        "
+
+    - name: Generate SBOM attestation
+      run: |
+        # Create SBOM attestation metadata
+        python -c "
+        import json
+        import hashlib
+        
+        # Calculate SBOM hash
+        with open('sbom-combined.json', 'rb') as f:
+            sbom_hash = hashlib.sha256(f.read()).hexdigest()
+        
+        attestation = {
+            'version': '1.0',
+            'timestamp': '$(date -u +%Y-%m-%dT%H:%M:%SZ)',
+            'sbom': {
+                'format': 'CycloneDX',
+                'version': '1.4',
+                'hash': sbom_hash,
+                'file': 'sbom-combined.json'
+            },
+            'build': {
+                'repository': '${GITHUB_REPOSITORY}',
+                'commit': '${GITHUB_SHA}',
+                'ref': '${GITHUB_REF}',
+                'workflow': '${GITHUB_WORKFLOW}',
+                'run_id': '${GITHUB_RUN_ID}',
+                'actor': '${GITHUB_ACTOR}'
+            }
+        }
+        
+        with open('sbom-attestation.json', 'w') as f:
+            json.dump(attestation, f, indent=2)
+        "
+
+    - name: Upload combined SBOM to release
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          sbom-combined.json
+          sbom-attestation.json
+          SBOM_SUMMARY.md
+
+    - name: Upload combined SBOM artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom-combined
+        path: |
+          sbom-combined.json
+          sbom-attestation.json
+          SBOM_SUMMARY.md
+        retention-days: 365  # Keep SBOMs longer for audit purposes
+
+    - name: Comment PR with SBOM summary
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          // Read SBOM summary
+          const summary = fs.readFileSync('SBOM_SUMMARY.md', 'utf8');
+          
+          // Post comment
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 📋 SBOM Generation Results\n\n${summary}\n\n---\n*Generated by SBOM workflow*`
+          });

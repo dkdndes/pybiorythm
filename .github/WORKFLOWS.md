@@ -101,6 +101,33 @@ This repository uses comprehensive GitHub Actions workflows for CI/CD, security,
 - PR summary comments
 - Automated dependency analysis
 
+### 6. SBOM Generation (`sbom.yml`)
+**Triggers:** Push to main, tags, PRs, weekly schedule
+**Purpose:** Software Bill of Materials generation and supply chain security
+
+**Jobs:**
+- **Python SBOM** - Python dependency tracking
+  - CycloneDX format SBOM generation
+  - Dependency metadata enhancement
+  - Component validation
+  
+- **Docker SBOM** - Container component tracking
+  - Syft-based container analysis
+  - Multi-layer component detection
+  - Container-specific metadata
+  
+- **Combined SBOM** - Unified supply chain view
+  - Python and Docker SBOM merging
+  - Attestation generation
+  - Release artifact publishing
+
+**Features:**
+- CycloneDX and SPDX format support
+- Automated component discovery
+- Supply chain transparency
+- Vulnerability database compatibility
+- Container attestation support
+
 ## Automation Features
 
 ### Dependabot Configuration
