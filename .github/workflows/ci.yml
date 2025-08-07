@@ -17,6 +17,7 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     # Skip CI for semantic-release commits
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, 'chore(release)')"
     strategy:
@@ -38,9 +39,10 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install dependencies
+      timeout-minutes: 5
       run: |
-        uv pip install --system -e .
-        uv pip install --system pytest pytest-cov ruff
+        uv pip install --system -e . --timeout 300
+        uv pip install --system pytest pytest-cov ruff --timeout 300
 
     - name: Lint with Ruff
       run: |
@@ -64,6 +66,7 @@ jobs:
   security:
     name: Security Scan
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     needs: test
     
     steps:
@@ -81,9 +84,10 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install dependencies
+      timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system safety bandit[toml]
+        uv pip install --system -e . --timeout 300
+        uv pip install --system safety bandit[toml] --timeout 300
 
     - name: Run safety check (dependency vulnerabilities)
       run: safety check --json
@@ -103,6 +107,7 @@ jobs:
   docker:
     name: Docker Build & Test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: test
     
     steps:
@@ -160,6 +165,7 @@ jobs:
   build:
     name: Build Package
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     needs: test
     
     steps:
@@ -177,8 +183,9 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install build dependencies
+      timeout-minutes: 3
       run: |
-        uv pip install --system build twine
+        uv pip install --system build twine --timeout 300
 
     - name: Build package
       run: python -m build
@@ -196,6 +203,7 @@ jobs:
   docs:
     name: Documentation
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     
     steps:
     - name: Checkout code
@@ -212,15 +220,16 @@ jobs:
       run: |
         # Check that Docker files exist and are valid
         [ -f Dockerfile ] || exit 1
-        [ -f docker-compose.yml ] || exit 1
+        [ -f docker-compose.local.yml ] || exit 1
         [ -f .dockerignore ] || exit 1
-        [ -f DOCKER.md ] || exit 1
+        [ -f DOCKER_M2_GUIDE.md ] || exit 1
         echo "All Docker documentation files present"
 
   # Job 6: Integration Tests
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     needs: [test, docker]
     
     steps:
@@ -238,9 +247,10 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install dependencies
+      timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system pytest
+        uv pip install --system -e . --timeout 300
+        uv pip install --system pytest --timeout 300
 
     - name: Run integration tests
       run: |
@@ -264,6 +274,7 @@ jobs:
   performance:
     name: Performance Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     needs: test
     if: github.event_name == 'pull_request' || github.event_name == 'push'
     
@@ -282,9 +293,10 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install dependencies
+      timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system pytest pytest-benchmark
+        uv pip install --system -e . --timeout 300
+        uv pip install --system pytest pytest-benchmark --timeout 300
 
     - name: Run performance benchmarks
       run: |
@@ -317,6 +329,7 @@ jobs:
   sbom-quick:
     name: Generate SBOM
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     needs: test
     if: github.event_name == 'pull_request' || github.event_name == 'push'
     
@@ -335,9 +348,10 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Install dependencies
+      timeout-minutes: 3
       run: |
-        uv pip install --system -e .
-        uv pip install --system cyclonedx-bom
+        uv pip install --system -e . --timeout 300
+        uv pip install --system cyclonedx-bom --timeout 300
 
     - name: Generate Python SBOM
       run: |
