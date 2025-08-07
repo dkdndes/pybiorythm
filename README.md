@@ -28,7 +28,7 @@ The easiest way to run the application with all dependencies:
 docker run -it biorythm:latest
 
 # Or build locally
-git clone https://github.com/peterrosemann/biorythm.git
+git clone https://github.com/dkdndes/biorythm.git
 cd biorythm
 docker build -t biorythm:latest .
 docker run -it biorythm:latest
@@ -41,7 +41,7 @@ docker run -it biorythm:latest
 pip install biorythm
 
 # Or install from source
-git clone https://github.com/peterrosemann/biorythm.git
+git clone https://github.com/dkdndes/biorythm.git
 cd biorythm
 pip install .
 ```
