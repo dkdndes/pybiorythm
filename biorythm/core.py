@@ -38,13 +38,6 @@ Chart Orientations:
 - Vertical: Traditional format, time flows top-to-bottom, cycles across width
 - Horizontal: Timeline flows left-to-right, cycles plotted as separate tracks
 
-History:
-01.00 2023-Jun-21 Scott S. Initial release.
-01.01 2024-Nov-25 Scott S. Added plot date percentages.
-02.00 2025-Aug-07 Enhanced version with logging, error handling, and modular design.
-02.01 2025-Aug-07 Added stronger scientific disclaimers and critical days detection.
-02.02 2025-Aug-07 Added horizontal chart orientation (left-to-right timeline).
-
 MIT License
 
 FOR ENTERTAINMENT PURPOSES ONLY - NOT SCIENTIFICALLY VALID.
