@@ -8,8 +8,6 @@ WARNING: This software implements biorhythm theory, which is considered
 PSEUDOSCIENCE. This implementation is provided FOR ENTERTAINMENT PURPOSES ONLY.
 """
 
-__version__ = "1.3.0"
-
 from .core import (
     BiorhythmCalculator,
     DateValidator,
@@ -44,3 +42,10 @@ __all__ = [
     "INTELLECTUAL_CYCLE_DAYS",
     "__version__",
 ]
+
+try:
+    from importlib.metadata import version
+except ImportError:
+    from importlib_metadata import version  # for Python <3.8
+
+__version__ = version("biorythm")

@@ -51,6 +51,7 @@ dev = [
     "bandit[toml]>=1.7.10",
     "build>=1.2.2.post1",
     "cyclonedx-bom>=7.0.0",
+    "hatch>=1.14.1",
     "pandas>=2.0.3",
     "pre-commit>=4.2.0",
     "pytest>=8.3.5",
@@ -59,6 +60,7 @@ dev = [
     "python-semantic-release>=8.0.0",
     "ruff>=0.12.7",
     "safety>=3.6.0",
+    "setuptools-scm>=8.3.1",
     "twine>=6.1.0",
 ]
 docs = [
