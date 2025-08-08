@@ -5,4 +5,4 @@ repos:
         name: Prevent commits to main or develop
         entry: bash -c 'branch="$(git rev-parse --abbrev-ref HEAD)"; if [[ "$branch" =~ ^(main|develop)$ ]]; then echo "✖ Direct commits to $branch are blocked. Create a feature branch."; exit 1; fi'
         language: system
-        stages: [commit]
+        stages: [pre-commit]
