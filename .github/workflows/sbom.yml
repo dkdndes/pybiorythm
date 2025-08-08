@@ -311,7 +311,7 @@ jobs:
         
         sbom['metadata'].update({
             'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
-            'tools': sbom['metadata'].get('tools', []) + [
+            'tools': (sbom['metadata'].get('tools', []) if isinstance(sbom['metadata'].get('tools', []), list) else []) + [
                 {
                     'vendor': 'Anchore',
                     'name': 'syft',
