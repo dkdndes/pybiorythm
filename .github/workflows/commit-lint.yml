@@ -62,10 +62,6 @@ jobs:
             "body-leading-blank": [1, "always"],
             "footer-leading-blank": [1, "always"]
           },
-          "ignores": [
-            "(commit) => commit.includes('-----')",
-            "(commit) => commit.trim() === ''"
-          ]
         }
         EOF
 
