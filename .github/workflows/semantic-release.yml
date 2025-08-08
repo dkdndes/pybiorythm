@@ -85,16 +85,10 @@ jobs:
         if [ ! -z "$NEW_VERSION" ] && [ "$NEW_VERSION" != "0.1.0" ]; then
           echo "Updating version to $NEW_VERSION"
           
-          # Update _version.py
-          echo "__version__ = \"$NEW_VERSION\"" > _version.py
-          
-          # Update biorythm/__init__.py
-          sed -i "s/__version__ = \".*\"/__version__ = \"$NEW_VERSION\"/" biorythm/__init__.py
-          
-          # Commit version updates
-          git add _version.py biorythm/__init__.py
-          git commit -m "chore: update version files to $NEW_VERSION [skip ci]" || true
-          git push origin main || true
+          # Note: Using hatchling dynamic versioning - no manual version file updates needed
+          # Version is automatically determined from git tags by setuptools-scm/hatchling
+          echo "Version $NEW_VERSION will be automatically available via importlib.metadata"
+          # No need to push version file changes with hatchling dynamic versioning
         fi
 
   trigger-workflows:

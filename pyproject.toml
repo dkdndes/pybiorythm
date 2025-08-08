@@ -74,14 +74,13 @@ source = "vcs"
 fallback-version = "0.1.0"
 tag-pattern = "v(?P<version>.*)"
 
-[tool.hatch.build.hooks.vcs]
-version-file = "_version.py"
+# No need for version file with hatchling dynamic versioning
+# Version is available via importlib.metadata
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
 version_variables = [
     "biorythm/__init__.py:__version__",
-    "_version.py:__version__",
 ]
 build_command = "uv run python -m build"
 dist_path = "dist/"

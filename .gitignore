@@ -140,3 +140,6 @@ Thumbs.db
 # Claude AI assistant files (should never be committed)
 CLAUDE.md
 .claude/
+
+# Auto-generated version file (using hatchling dynamic versioning)
+_version.py
