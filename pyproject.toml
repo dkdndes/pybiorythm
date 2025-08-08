@@ -78,7 +78,7 @@ tag-pattern = "v(?P<version>.*)"
 # Version is available via importlib.metadata
 
 [tool.semantic_release]
-build_command = "uv run python -m build"
+build_command = "uv build"
 dist_path = "dist/"
 upload_to_vcs_release = true
 
@@ -91,21 +91,25 @@ prerelease = false
 match = "develop"
 prerelease_token = "dev"
 prerelease = true
+upload_to_vcs_release = false
 
 [tool.semantic_release.branches.feature]
 match = "feat/*"
 prerelease_token = "alpha"
 prerelease = true
+upload_to_vcs_release = false
 
 [tool.semantic_release.branches.bugfix]
 match = "fix/*"
 prerelease_token = "beta"
 prerelease = true
+upload_to_vcs_release = false
 
 [tool.semantic_release.branches.chore]
 match = "chore/*"
 prerelease_token = "dev"
 prerelease = true
+upload_to_vcs_release = false
 
 [tool.semantic_release.changelog]
 template_dir = "templates"
