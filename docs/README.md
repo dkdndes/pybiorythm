@@ -4,9 +4,13 @@
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
 [![Coverage](https://img.shields.io/badge/coverage-90.33%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
-[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/Dockerfile)
+[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](../Dockerfile)
 [![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/LICENSE)
+[![SBOM](https://github.com/dkdndes/pybiorythm/actions/workflows/sbom.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/sbom.yml)
+[![Documentation](https://github.com/dkdndes/pybiorythm/actions/workflows/docs.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/docs.yml)
+[![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
+[![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
 Welcome to PyBiorythm - a comprehensive Python library for generating biorhythm charts and timeseries data.
 
