@@ -126,7 +126,7 @@ For chart examples and detailed output format documentation, see:
 
 - **New Users**: Start with the [Quick Start Guide](user-guide/quick-start.md)
 - **Developers**: Check out the [Development Setup](developer-guide/setup.md) and [Architecture Overview](developer-guide/architecture.md)
-- **Contributors**: Review the [Code Quality Standards](developer-guide/code-quality.md) and [Contributing Guidelines](developer-guide/contributing.md)
+- **Contributors**: Review the [Branching & Workflow Guide](developer-guide/branching-workflow.md), [Code Quality Standards](developer-guide/code-quality.md) and [Contributing Guidelines](developer-guide/contributing.md)
 - **Data Scientists**: Explore the [JSON Schema](api/json-schema.md) and [Output Formats](user-guide/output-formats.md)
 - **DevOps**: Review the [Deployment Guide](deployment/deployment-guide.md) and [Security Best Practices](deployment/security.md)
 
