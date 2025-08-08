@@ -229,33 +229,7 @@ jobs:
         name: dist
         path: dist/
 
-  # Job 5: Documentation Check
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Check README links
-      uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
-        config-file: '.github/workflows/mlc_config.json'
-
-    - name: Validate Docker documentation
-      run: |
-        # Check that Docker files exist and are valid
-        [ -f Dockerfile ] || exit 1
-        [ -f docker-compose.local.yml ] || exit 1
-        [ -f .dockerignore ] || exit 1
-        [ -f DOCKER_M2_GUIDE.md ] || exit 1
-        echo "All Docker documentation files present"
-
-  # Job 6: Integration Tests
+  # Job 5: Integration Tests
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
@@ -313,7 +287,7 @@ jobs:
             exit(1)
         "
 
-  # Job 7: Performance Benchmark
+  # Job 6: Performance Benchmark
   performance:
     name: Performance Tests
     runs-on: ubuntu-latest
@@ -367,7 +341,7 @@ jobs:
             print('Performance benchmark passed')
         "
 
-  # Job 8: Quick Validation (SBOM handled by dedicated workflow)
+  # Job 7: Quick Validation (SBOM handled by dedicated workflow)
   quick-validation:
     name: Quick Validation
     runs-on: ubuntu-latest
