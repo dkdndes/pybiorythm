@@ -52,6 +52,7 @@ dev = [
     "build>=1.2.2.post1",
     "cyclonedx-bom>=7.0.0",
     "pandas>=2.0.3",
+    "pre-commit>=4.2.0",
     "pytest>=8.3.5",
     "pytest-benchmark>=4.0.0",
     "pytest-cov>=5.0.0",
