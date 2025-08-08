@@ -2,6 +2,8 @@
 
 PyBiorythm implements comprehensive security scanning and compliance workflows throughout the CI/CD pipeline.
 
+**Security Lead**: Peter Rosemann (dkdndes@gmail.com)
+
 ## Security Pipeline Overview
 
 ```mermaid

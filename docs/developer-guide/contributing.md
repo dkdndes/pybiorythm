@@ -2,6 +2,9 @@
 
 We welcome contributions to PyBiorythm! This document outlines the development process and standards.
 
+**Project Maintainer**: Peter Rosemann (dkdndes@gmail.com)  
+**GitHub**: [dkdndes](https://github.com/dkdndes)
+
 ## Getting Started
 
 1. **Fork** the repository on GitHub

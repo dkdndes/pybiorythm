@@ -2,6 +2,8 @@
 
 PyBiorythm uses a structured exception hierarchy for comprehensive error handling.
 
+**Author**: Peter Rosemann (dkdndes@gmail.com)
+
 ## Exception Hierarchy
 
 ```python

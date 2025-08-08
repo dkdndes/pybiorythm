@@ -2,6 +2,8 @@
 
 PyBiorythm maintains high code quality through comprehensive linting, testing, and automated checks.
 
+**Maintained by**: Peter Rosemann (dkdndes@gmail.com)
+
 ## Code Quality Tools
 
 ### Ruff (Linting & Formatting)

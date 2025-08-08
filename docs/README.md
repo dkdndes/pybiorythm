@@ -135,4 +135,5 @@ For chart examples and detailed output format documentation, see:
 **Current Version**: 1.2.1  
 **Python Compatibility**: 3.9+  
 **License**: MIT  
+**Author**: Peter Rosemann (dkdndes@gmail.com)  
 **Repository**: [GitHub](https://github.com/dkdndes/pybiorythm)
