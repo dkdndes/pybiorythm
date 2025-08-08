@@ -1,647 +1,224 @@
-# Biorhythm
+# PyBiorythm - Educational GitHub Actions Showcase
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://python.org)
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
-[![Coverage](https://img.shields.io/badge/coverage-89.66%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
+[![Coverage](https://img.shields.io/badge/coverage-90.33%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
-[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](Dockerfile)
-[![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
-A Python library for generating biorhythm charts and timeseries data based on the pseudoscientific biorhythm theory.
+> **Educational Note**: This project serves as a **comprehensive example of modern DevOps practices** and GitHub Actions workflows. While it implements biorhythm calculations (pseudoscience), its primary purpose is to demonstrate professional CI/CD pipelines, security practices, and deployment strategies.
 
-## � Scientific Disclaimer
+## 🎓 What You'll Learn
 
-**This software implements biorhythm theory, which is considered PSEUDOSCIENCE.** Extensive scientific research has found NO VALIDITY to biorhythm theory beyond coincidence. Multiple controlled studies have consistently failed to find any correlation between the proposed 23, 28, and 33-day cycles and human performance or life events.
+This repository showcases **10 production-ready GitHub Actions workflows** that demonstrate:
 
-**This implementation is provided FOR ENTERTAINMENT PURPOSES ONLY** and should NOT be used for making any important life decisions.
+- **Automated Testing & Quality Gates** - Multi-version Python testing, coverage enforcement, linting
+- **Security-First Development** - CodeQL analysis, dependency scanning, SBOM generation
+- **Multi-Environment Deployments** - Dev/staging/prod with blue-green deployment strategies  
+- **Docker Multi-Architecture Builds** - ARM64/AMD64 container builds with security scanning
+- **Semantic Release Automation** - Conventional commits driving automated versioning
+- **Documentation Automation** - MkDocs deployment to GitHub Pages
+- **Local Development Tools** - `act` for local GitHub Actions testing
 
-## Installation
+## 🚀 Quick Start
 
-### Option 1: Docker (Recommended)
-
-The easiest way to run the application with all dependencies:
-
-```bash
-# Pull and run (when published to Docker Hub)
-docker run -it biorythm:latest
-
-# Or build locally
-git clone https://github.com/dkdndes/biorythm.git
-cd biorythm
-docker build -t biorythm:latest .
-docker run -it biorythm:latest
-```
-
-### Option 2: Python Package
+### Installation
 
 ```bash
-# Install from PyPI (when published)
+# Install the package
 pip install biorythm
 
-# Or install from source
-git clone https://github.com/dkdndes/biorythm.git
-cd biorythm
-pip install .
+# Or install from source  
+git clone https://github.com/dkdndes/pybiorythm.git
+cd pybiorythm
+pip install -e .
 ```
 
-## Quick Start
-
-### Command Line Usage
-
-```bash
-# Interactive mode
-python main.py
-
-# Command line with arguments
-python main.py -y 1990 -m 5 -d 15
-
-# Different chart orientations
-python main.py -y 1990 -m 5 -d 15 --orientation horizontal
-python main.py -y 1990 -m 5 -d 15 --orientation vertical --days 30
-
-# Generate JSON output for data analysis
-python main.py -y 1990 -m 5 -d 15 --orientation json-vertical
-python main.py -y 1990 -m 5 -d 15 --orientation json-horizontal
-```
-
-### Programmatic Usage
+### Basic Usage
 
 ```python
 from datetime import datetime
 from biorythm import BiorhythmCalculator
 
-# Create calculator instance
-calc = BiorhythmCalculator(width=60, days=30, orientation="vertical")
+# Create calculator
+calc = BiorhythmCalculator(width=60, days=30)
 
 # Generate chart for someone born May 15, 1990
 birthdate = datetime(1990, 5, 15)
 calc.generate_chart(birthdate)
 
-# Generate JSON timeseries data
+# Generate JSON data for analysis
 json_data = calc.generate_timeseries_json(birthdate)
-print(json_data)
 ```
 
-## Chart Types
-
-### Vertical Chart (Traditional)
-Time flows top-to-bottom, cycles displayed across width:
-```
-Mon May 15    p     :     e i    
-Tue May 16       p  :  e      i  
-Wed May 17          : p    e   i 
-```
-
-### Horizontal Chart (Timeline)
-Time flows left-to-right, cycles displayed as wave patterns:
-```
-BIORHYTHM WAVE (all cycles)
-                    e               
-            p               i       
-                        e           
-```
-
-### JSON Output
-Structured data suitable for analysis, visualization, and testing.
-
-## Features
-
-- **Multiple Output Formats**: ASCII charts (vertical/horizontal) and JSON data
-- **Critical Day Detection**: Identifies days when cycles cross zero
-- **Cycle Information**: Shows when cycles repeat (644 days for physical+emotional, 21,252 days for all three)
-- **Scientific Context**: Includes historical background and scientific disclaimers
-- **Robust Error Handling**: Input validation and comprehensive error messages
-- **Configurable Parameters**: Adjustable chart width, time periods, and orientations
-
-## API Reference
-
-### BiorhythmCalculator
-
-Main class for generating biorhythm calculations and charts.
-
-```python
-BiorhythmCalculator(width=55, days=29, orientation="vertical")
-```
-
-**Parameters:**
-- `width` (int): Chart width in characters (minimum 12)
-- `days` (int): Number of days to plot
-- `orientation` (str): "vertical" or "horizontal"
-
-**Methods:**
-
-#### `generate_chart(birthdate, plot_date=None)`
-Generate and print ASCII chart to stdout.
-
-#### `generate_timeseries_json(birthdate, plot_date=None, chart_orientation="vertical")`
-Generate JSON payload with timeseries data and metadata.
-
-#### `calculate_biorhythm_values(birthdate, target_date)`
-Calculate raw cycle values for a specific date.
-
-Returns tuple: `(physical, emotional, intellectual)` values between -1.0 and +1.0.
-
-## Command Line Arguments
-
-```
-python main.py [OPTIONS]
-
-Options:
-  -y, --year YEAR              Birth year (1-9999)
-  -m, --month MONTH            Birth month (1-12)  
-  -d, --day DAY                Birth day (1-31)
-  --orientation {vertical,horizontal,json-vertical,json-horizontal}
-                               Chart orientation (default: vertical)
-  --days DAYS                  Number of days to plot (default: 29)
-  -h, --help                   Show help message
-```
-
-## JSON Data Format for Developers
-
-The `generate_timeseries_json()` method produces structured data perfect for:
-- Time series analysis and visualization
-- Testing data for analytics applications
-- Machine learning training data
-- Statistical analysis of periodic patterns
-
-### Sample JSON Structure
-
-```json
-{
-  "meta": {
-    "generator": "biorhythm_enhanced.py",
-    "version": "2025-08-07",
-    "birthdate": "1990-05-15",
-    "plot_date": "2025-08-07",
-    "days_alive": 12837,
-    "cycle_lengths_days": {
-      "physical": 23,
-      "emotional": 28,
-      "intellectual": 33
-    },
-    "chart_orientation": "vertical",
-    "days": 29,
-    "width": 55,
-    "scientific_warning": "�  SCIENTIFIC WARNING �\nBiorhythm theory is PSEUDOSCIENCE..."
-  },
-  "cycle_repeats": {
-    "physical_emotional_repeat_in_days": 457,
-    "all_cycles_repeat_in_days": 8415
-  },
-  "critical_days": [
-    {
-      "date": "2025-08-05",
-      "cycles": "Physical cycle(s) near zero"
-    }
-  ],
-  "data": [
-    {
-      "date": "2025-07-24",
-      "days_alive": 12823,
-      "physical": -0.8987940462991669,
-      "emotional": 0.9744583088414919,
-      "intellectual": -0.9510565162951536,
-      "critical_cycles": []
-    },
-    ...
-  ]
-}
-```
-
-### Using JSON Data for Testing
-
-The JSON output is ideal for:
-
-**Time Series Analysis:**
-```python
-import json
-import pandas as pd
-
-# Load biorhythm data
-with open('biorhythm_data.json', 'r') as f:
-    data = json.load(f)
-
-# Convert to DataFrame
-df = pd.DataFrame(data['data'])
-df['date'] = pd.to_datetime(df['date'])
-df.set_index('date', inplace=True)
-
-# Analyze periodic patterns
-print(df[['physical', 'emotional', 'intellectual']].describe())
-```
-
-**Mock Data Generation:**
-```python
-# Generate test data for different birthdates
-from datetime import datetime, timedelta
-from biorythm import BiorhythmCalculator
-
-calc = BiorhythmCalculator(days=365)  # Full year
-test_birthdates = [
-    datetime(1980, 1, 1),
-    datetime(1990, 6, 15),
-    datetime(2000, 12, 31)
-]
-
-for birthdate in test_birthdates:
-    data = calc.generate_timeseries_json(birthdate)
-    # Use data for testing your analytics pipeline
-```
-
-## Historical Context
-
-- **Developer**: Wilhelm Fliess (1858-1928), German otolaryngologist and friend of Sigmund Freud
-- **Period**: Late 19th century (1890s)
-- **Popularization**: United States in the 1970s by Bernard Gittelson
-- **Scientific Status**: Thoroughly debunked by multiple peer-reviewed studies
-
-## Cycle Information
-
-- **Physical Cycle**: 23 days (coordination, strength, well-being)
-- **Emotional Cycle**: 28 days (creativity, sensitivity, mood)  
-- **Intellectual Cycle**: 33 days (alertness, analytical functioning)
-
-**Pattern Repetition:**
-- Physical + Emotional cycles repeat every 644 days (1.76 years)
-- All three cycles repeat every 21,252 days (58.18 years)
-
-## Development
-
-### Setting Up Development Environment
-
-```bash
-# Clone the repository
-git clone https://github.com/peterrosemann/biorythm.git
-cd biorythm
-
-# Install UV (recommended package manager)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Install development dependencies with UV
-uv sync --group dev
-
-# Or with pip (alternative)
-pip install -e ".[dev]"
-
-# Additional testing dependencies (if needed)
-uv add --group dev pandas  # For JSON timeseries testing
-```
-
-### Running Tests
-
-The project includes comprehensive test coverage (89.66%) with pytest and automated coverage reporting:
-
-```bash
-# Run all tests with coverage (recommended)
-uv run pytest
-# Or: pytest (if using activated venv)
-
-# Run tests with verbose output
-uv run pytest -v
-
-# Run specific test file
-uv run pytest tests/test_biorhythm_calculator.py
-
-# Run tests with detailed coverage report
-uv run pytest --cov=. --cov-report=term-missing
-
-# Generate HTML coverage report
-uv run pytest --cov=. --cov-report=html
-# Open htmlcov/index.html in browser to view detailed coverage
-
-# Run only fast tests (exclude slow integration tests)
-uv run pytest -m "not slow"
-
-# Run only JSON-related tests
-uv run pytest -k "json"
-
-# Fail if coverage drops below 85%
-uv run pytest --cov-fail-under=85
-```
-
-### Test Coverage Details
-
-The project maintains high test coverage across all components:
-
-| Component | Coverage | Description |
-|-----------|----------|-------------|
-| **Total Project** | **89.66%** | Overall test coverage across all modules |
-| `biorythm.py` | 78% | Core biorhythm calculation and chart generation |
-| `main.py` | 96% | Command line interface and argument parsing |
-| All test files | 99%+ | Self-testing coverage verification |
-
-**Coverage Infrastructure:**
-- Automated coverage measurement with `pytest-cov`
-- HTML reports for detailed line-by-line analysis
-- Minimum coverage threshold enforcement (85%)
-- Coverage exclusions for non-testable patterns (pragma: no cover, __main__, etc.)
-- Integration with development workflow
-
-### Test Structure
-
-```
-tests/
-├── __init__.py                   # Test package initialization
-├── conftest.py                   # Shared fixtures and configuration
-├── test_biorhythm_calculator.py # Core functionality tests (31 tests)
-├── test_biorythm_coverage.py    # Coverage-focused tests (9 tests)
-├── test_main.py                  # Command line interface tests (18 tests)
-└── test_json_timeseries.py      # JSON output and data analysis tests (14 tests)
-
-Configuration:
-├── pytest.ini                   # Pytest and coverage configuration
-└── htmlcov/                     # Generated HTML coverage reports
-```
-
-### Test Categories
-
-**Unit Tests** (`test_biorhythm_calculator.py`):
-- BiorhythmCalculator class functionality
-- Date validation and error handling
-- Mathematical calculations accuracy
-- Chart generation output validation
-
-**Coverage Tests** (`test_biorythm_coverage.py`):
-- Horizontal chart generation methods
-- Different chart orientations (vertical/horizontal)
-- JSON timeseries output functionality
-- Edge cases and critical day detection
-- Parameter validation and error handling
-
-**CLI Tests** (`test_main.py`):
-- Command line argument parsing
-- Integration with main biorhythm module
-- Error handling for invalid inputs
-- Help and usage message validation
-
-**JSON & Analytics Tests** (`test_json_timeseries.py`):
-- JSON schema validation
-- Data structure for timeseries analysis
-- Pandas DataFrame integration
-- Statistical properties validation
-- Feature engineering capabilities
-- Multi-subject analysis support
-
-### Test Fixtures
-
-Common test fixtures available in `conftest.py`:
-- `sample_birthdate`: Standard birthdate for testing
-- `basic_calculator`: Pre-configured calculator instance
-- `json_calculator`: Calculator optimized for JSON testing
-- `sample_json_data`: Pre-generated JSON data
-- `multiple_birthdates`: Set of birthdates for comparative testing
-
-### Testing Data Analysis Features
-
-Special tests for developers using the JSON timeseries data:
-
-```bash
-# Test pandas integration
-uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_pandas_integration
-
-# Test statistical properties
-uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_statistical_properties
-
-# Test feature engineering capabilities  
-uv run pytest tests/test_json_timeseries.py::TestTimeseriesDataAnalysis::test_feature_engineering_potential
-```
-
-### Code Quality & Continuous Integration
-
-**Quality Metrics:**
-- ✅ **89.66% Test Coverage** with automated reporting
-- ✅ **72 Passing Tests** across all components  
-- ✅ **Ruff Code Formatting** and linting compliance
-- ✅ **Zero Security Issues** (Bandit + Safety scanned)
-- ✅ **Type Hints** for better code documentation
-- ✅ **Comprehensive Error Handling** with user-friendly messages
-
-**Code Quality Tools:**
-
-```bash
-# Code formatting
-uv run ruff format .
-
-# Linting and style checks
-uv run ruff check .
-
-# Type checking (if mypy is installed)
-uv run mypy biorythm.py
-
-# Run all quality checks with coverage
-uv run pytest --cov=. --cov-fail-under=85 && uv run ruff check . && uv run ruff format --check .
-```
-
-**Pre-commit Quality Gates:**
-- All tests must pass (72/72)
-- Coverage must be ≥ 85% (currently 89.66%)
-- Code must pass ruff linting
-- Zero security vulnerabilities (126 packages scanned)
-- No unhandled type errors
-
-## CI/CD & Automation
-
-### GitHub Actions Workflows
-
-The project includes comprehensive GitHub Actions for continuous integration and deployment:
-
-**🔄 CI/CD Pipeline (`ci.yml`)**
-- Multi-version Python testing (3.9-3.12)
-- Code quality checks with Ruff
-- Security scanning with Bandit and Safety  
-- Docker build and testing
-- Performance benchmarking
-- Coverage reporting to Codecov
-
-**🐳 Docker Publishing (`docker-publish.yml`)**
-- Multi-architecture container builds (AMD64, ARM64)
-- GitHub Container Registry publishing
-- Vulnerability scanning with Trivy
-- Security compliance validation
-
-**🚀 Release Management (`release.yml`)**
-- Automated GitHub releases
-- PyPI package publishing
-- Docker image tagging and distribution
-- Release validation and testing
-
-**🔒 Security Analysis (`codeql.yml`)**
-- CodeQL static analysis
-- Weekly automated security scans
-- Vulnerability detection and reporting
-
-**🔍 Dependency Review (`dependency-review.yml`)**
-- Automated dependency vulnerability scanning
-- License compliance checking
-- PR-based dependency analysis
-
-**📋 SBOM Generation (`sbom.yml`)**
-- Software Bill of Materials generation with CycloneDX
-- Python and Docker component tracking
-- Supply chain transparency and security
-- Automated SBOM attestation and publishing
-
-**🔄 Semantic Release (`semantic-release.yml`)**
-- Automated version management with semantic versioning
-- Conventional commits for version calculation
-- Automatic changelog generation and GitHub releases
-- Integration with PyPI publishing and Docker builds
-
-**✅ Commit Validation (`commit-lint.yml`)**
-- Conventional commit message format enforcement
-- Automated PR feedback for invalid commits
-- Integration with semantic versioning workflow
-
-### Automation Features
-
-- **📦 Dependabot:** Weekly automated dependency updates
-- **🛡️ Security:** Continuous vulnerability monitoring
-- **📋 Templates:** Standardized issue and PR templates  
-- **✅ Quality Gates:** Automated quality enforcement
-- **📊 Monitoring:** Performance and coverage tracking
-- **📋 SBOM:** Automated Software Bill of Materials generation
-- **🔄 Semantic Versioning:** Automated version management with conventional commits
-
-See [`.github/WORKFLOWS.md`](.github/WORKFLOWS.md) for detailed workflow documentation.
-
-## Semantic Versioning & Conventional Commits
-
-This project uses **Semantic Versioning** (SemVer) with **Conventional Commits** for automated version management:
-
-### Commit Format
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-### Commit Types & Versioning
-- **feat**: New feature → **MINOR** version bump (0.1.0 → 0.2.0)
-- **fix**: Bug fix → **PATCH** version bump (0.1.0 → 0.1.1)  
-- **perf**: Performance → **PATCH** version bump
-- **docs, style, refactor, test, build, ci, chore**: No version bump
-- **BREAKING CHANGE** in footer → **MAJOR** version bump (0.1.0 → 1.0.0)
-
-### Examples
-```bash
-feat: add horizontal chart support
-fix: resolve date validation error
-docs: update installation instructions
-chore: update dependencies
-```
-
-**Version Location**: `pyproject.toml`, `biorythm/__init__.py`, `_version.py` (auto-managed)
-
-See [`SEMANTIC_VERSIONING.md`](SEMANTIC_VERSIONING.md) for complete documentation.
-
-### Running Performance Tests
-
-```bash
-# Test with large datasets (marked as slow)
-uv run pytest -m slow
-
-# Test JSON serialization with large data
-uv run pytest tests/test_json_timeseries.py::TestJSONSerializationAndStorage::test_large_dataset_generation
-```
-
-## Docker Deployment
-
-### Multi-Stage Production Docker Build
-
-The project includes a highly optimized multi-stage Dockerfile:
-
-**Stage 1 (Builder):** Development dependencies and build tools  
-**Stage 2 (Production):** Minimal runtime with only numpy dependency
-
-### Building Docker Images
-
-```bash
-# Build production image (recommended)
-docker build --target production -t biorythm:latest .
-
-# Or use the build script
-./build-docker.sh
-
-# Build development image (includes build tools)
-docker build --target builder -t biorythm:dev .
-```
-
-### Running with Docker
+### Command Line
 
 ```bash
 # Interactive mode
-docker run -it biorythm:latest
+python main.py
 
-# With command line arguments
-docker run biorythm:latest python main.py -y 1990 -m 5 -d 15
-
-# Generate JSON output
-docker run biorythm:latest python main.py -y 1990 -m 5 -d 15 --orientation json-vertical
-
-# Using docker-compose
-docker-compose up biorythm
-
-# Development container (with volume mount)
-docker-compose --profile dev up biorythm-dev
+# Direct calculation  
+python main.py -y 1990 -m 5 -d 15 --orientation vertical
+python main.py -y 1990 -m 5 -d 15 --orientation json-horizontal
 ```
 
-### Docker Image Details
+## 🔧 GitHub Actions Workflows (Educational Focus)
 
-**Production Image Features:**
-- ✅ **Minimal size** - Python 3.12 slim base with only numpy
-- ✅ **Security** - Non-root user execution  
-- ✅ **Health checks** - Built-in application health monitoring
-- ✅ **No test dependencies** - Tests, coverage, and dev tools excluded
-- ✅ **Multi-architecture** - Compatible with AMD64 and ARM64
+### Core CI/CD Pipeline (`ci.yml`)
+**What it demonstrates:**
+- **Matrix Testing** across Python 3.9-3.12
+- **Quality Gates** with Ruff linting and 90%+ test coverage  
+- **Security Scanning** with Bandit and Safety
+- **Docker Testing** with multi-stage builds
+- **Performance Benchmarking** with regression detection
 
-**Image Layers:**
-```dockerfile
-# Only essential components in production image:
-python:3.12-slim           # Base runtime
-numpy>=1.20.0             # Required dependency  
-biorythm.py + main.py     # Application code
-Non-root user setup       # Security hardening
+```yaml
+# Key features showcased:
+strategy:
+  matrix:
+    python-version: ['3.9', '3.10', '3.11', '3.12']
 ```
 
-**Excluded from Production Image:**
-- All test files (`tests/`)
-- Coverage reports (`htmlcov/`, `.coverage`)
-- Development dependencies (`pytest`, `ruff`, etc.)
-- Build tools (`gcc`, `g++`)
-- Documentation files
+### Semantic Release Automation (`semantic-release.yml`)
+**What it demonstrates:**
+- **Conventional Commits** driving version bumps
+- **Automated Changelog** generation
+- **Git Tag Management** and GitHub releases
+- **Cross-workflow Triggers** for downstream builds
 
-## License
+### Multi-Environment Docker (`dev-docker.yml`, `docker-publish.yml`)
+**What it demonstrates:**
+- **Environment-specific Builds** (dev/staging/prod)
+- **Semantic Versioning** for container tags
+- **Multi-architecture Builds** (AMD64/ARM64)
+- **Blue-green Deployment** manifest generation
+
+### Security & Compliance (`codeql.yml`, `sbom.yml`)
+**What it demonstrates:**
+- **Static Code Analysis** with CodeQL
+- **Software Bill of Materials** (BSI TR-03183-2-2 compliant)
+- **Vulnerability Scanning** with Trivy
+- **Security Attestation** and supply chain security
+
+### Manual Deployment (`manual-deploy.yml`)
+**What it demonstrates:**
+- **Workflow Dispatch** with input parameters
+- **Rolling vs Blue-Green** deployment strategies
+- **Environment Gates** and approvals
+- **Rollback Procedures** and traffic switching
+
+### Documentation Automation (`docs.yml`)
+**What it demonstrates:**
+- **MkDocs** automated deployment to GitHub Pages
+- **Link Validation** and content checking
+- **Multi-environment** documentation builds
+- **PR Preview** generation
+
+## 🧪 Local Testing with `act`
+
+This project includes comprehensive local testing tools:
+
+```bash
+# Quick development tests (30 seconds)
+./local-test.sh quick
+
+# Test specific workflow
+./local-test.sh job test ci.yml
+
+# List all available workflows
+./local-test.sh list
+
+# Validate workflow syntax
+./local-test.sh validate
+```
+
+**Educational Value**: Learn how to test GitHub Actions locally before pushing to save time and CI credits.
+
+## 📊 Quality Metrics & Monitoring
+
+The project maintains enterprise-grade quality standards:
+
+- ✅ **90.33% Test Coverage** (enforced at 85%+ minimum)
+- ✅ **72 Passing Tests** across all components
+- ✅ **Zero Security Vulnerabilities** (automated scanning)
+- ✅ **BSI-Compliant SBOM** for supply chain transparency
+- ✅ **Multi-architecture Docker** support (ARM64/AMD64)
+- ✅ **Conventional Commits** with semantic versioning
+
+## 🏗️ Architecture & Design Patterns
+
+### DevOps Patterns Demonstrated
+
+1. **GitFlow with Semantic Release**
+   ```
+   feature/* → develop → main → v1.2.3 (automated)
+   ```
+
+2. **Multi-Stage Docker Builds**
+   ```dockerfile
+   # Builder stage for dependencies
+   FROM python:3.12-slim as builder
+   # Production stage for runtime
+   FROM python:3.12-slim as production
+   ```
+
+3. **Blue-Green Deployments**
+   ```bash
+   # Deploy to inactive slot
+   kubectl apply -f deployment-blue.yaml
+   # Switch traffic after validation  
+   kubectl patch service app -p '{"spec":{"selector":{"slot":"blue"}}}'
+   ```
+
+4. **Security-First Development**
+   - SBOM generation for all dependencies
+   - Multi-layer vulnerability scanning
+   - Signed container attestations
+   - Automated security patch detection
+
+## 📚 Documentation
+
+For comprehensive documentation and advanced usage:
+
+- **[📖 Complete Documentation](docs/)** - Architecture, setup, and advanced features
+- **[🚀 Quick Start Guide](docs/user-guide/quick-start.md)** - Get started in 5 minutes
+- **[⚙️ Developer Guide](docs/developer-guide/setup.md)** - Contributing and local development
+- **[🚢 Deployment Guide](docs/deployment/)** - Docker, Kubernetes, and CI/CD
+- **[🔧 GitHub Actions Guide](docs/workflows/)** - Understanding the CI/CD workflows
+
+## 🔬 Scientific Disclaimer
+
+**Important**: This software implements biorhythm theory, which is considered **pseudoscience**. Extensive scientific research has found **NO VALIDITY** to biorhythm theory beyond coincidence.
+
+**This implementation is provided FOR EDUCATIONAL PURPOSES ONLY** to demonstrate:
+- Modern Python packaging and distribution
+- Comprehensive CI/CD pipeline implementation
+- Security scanning and compliance practices
+- Multi-environment deployment strategies
+- Documentation automation
+
+The biorhythm calculations serve as a simple, understandable domain for showcasing these DevOps practices.
+
+## 🤝 Contributing
+
+This project welcomes contributions that improve the **DevOps and CI/CD demonstrations**:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-workflow`)
+3. **Follow** conventional commits (`feat: add new deployment strategy`)
+4. **Test** locally with `act` before pushing
+5. **Submit** a pull request
+
+See [Contributing Guide](docs/developer-guide/contributing.md) for detailed guidelines.
+
+## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## Contributing
+## 🏷️ Keywords
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## Documentation
-
-For comprehensive documentation, see the `/docs` directory:
-
-- **User Guide**: [Quick Start](docs/user-guide/quick-start.md) | [CLI Reference](docs/user-guide/cli.md) | [Output Formats](docs/user-guide/output-formats.md)
-- **API Reference**: [Calculator API](docs/api/calculator.md) | [Core Functions](docs/api/core.md) | [JSON Schema](docs/api/json-schema.md)
-- **Developer Guide**: [Setup](docs/developer-guide/setup.md) | [Testing](docs/developer-guide/testing.md) | [Architecture](docs/developer-guide/architecture.md)
-- **Deployment**: [Docker](docs/deployment/docker.md) | [Kubernetes](docs/deployment/kubernetes.md) | [Security](docs/deployment/security.md)
-- **Workflows**: [GitHub Actions](docs/workflows/github-actions.md) | [Blue-Green Deployment](docs/workflows/blue-green.md)
-
-## Educational Resources
-
-- [Wikipedia: Biorhythm (pseudoscience)](https://en.wikipedia.org/wiki/Biorhythm_(pseudoscience))
-- [The Skeptic's Dictionary: Biorhythms](http://skepdic.com/biorhyth.html)
-- "Comprehensive Review of Biorhythm Theory" by Terence Hines (1998)
+`github-actions` `ci-cd` `devops` `docker` `python` `testing` `security` `automation` `deployment` `blue-green` `semantic-release` `sbom` `educational`
 
 ---
 
-**Remember**: This is pseudoscience with no proven validity! Use for entertainment and educational purposes only.
+**Remember**: The real value here is in the **DevOps patterns and GitHub Actions workflows**, not the biorhythm calculations! 🎯

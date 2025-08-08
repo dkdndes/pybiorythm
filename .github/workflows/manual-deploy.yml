@@ -24,6 +24,19 @@ on:
           - rolling
           - blue-green
         default: 'rolling'
+      deployment_slot:
+        description: 'Blue-green deployment slot (only for blue-green)'
+        required: false
+        type: choice
+        options:
+          - blue
+          - green
+        default: 'blue'
+      switch_traffic:
+        description: 'Switch traffic after deployment (blue-green only)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   deploy:
@@ -42,13 +55,25 @@ jobs:
         echo ""
         
         if [ "${{ github.event.inputs.deployment_type }}" = "blue-green" ]; then
+          SLOT="${{ github.event.inputs.deployment_slot }}"
+          OTHER_SLOT=$([ "$SLOT" = "blue" ] && echo "green" || echo "blue")
+          
           echo "🔄 Blue-Green Deployment Process:"
           echo "1. ✅ Validate deployment inputs"
           echo "2. 🔍 Check if image exists: ghcr.io/dkdndes/pybiorythm:${{ github.event.inputs.image_tag }}"
-          echo "3. 🚢 Deploy to inactive slot"
-          echo "4. 🏥 Run health checks"
-          echo "5. 🔀 Switch traffic (manual approval required)"
-          echo "6. 🧹 Clean up old deployment"
+          echo "3. 🚢 Deploy to $SLOT slot (inactive)"
+          echo "4. 🏥 Run health checks on $SLOT slot"
+          echo "Target slot: $SLOT"
+          echo "Current active slot: $OTHER_SLOT"
+          
+          if [ "${{ github.event.inputs.switch_traffic }}" = "true" ]; then
+            echo "5. 🔀 Switch traffic from $OTHER_SLOT to $SLOT"
+            echo "6. 🧹 Scale down $OTHER_SLOT slot"
+            echo "✅ Traffic will be switched automatically"
+          else
+            echo "5. ⏸️  Traffic switch skipped (manual intervention required)"
+            echo "   Use: kubectl patch service app-${{ github.event.inputs.environment }} -p '{\"spec\":{\"selector\":{\"slot\":\"$SLOT\"}}}'"
+          fi
         else
           echo "📈 Rolling Deployment Process:"
           echo "1. ✅ Validate deployment inputs" 

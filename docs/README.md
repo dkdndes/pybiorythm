@@ -1,85 +1,136 @@
 # PyBiorythm Documentation
 
-Welcome to the comprehensive documentation for PyBiorythm - a Python library for biorhythm calculations and visualizations.
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://python.org)
+[![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
+[![Coverage](https://img.shields.io/badge/coverage-90.33%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
+[![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
+[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/Dockerfile)
+[![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dkdndes/pybiorythm/blob/main/LICENSE)
 
-## 📚 Documentation Structure
+Welcome to PyBiorythm - a comprehensive Python library for generating biorhythm charts and timeseries data.
 
-### User Guide
-- [Quick Start](user-guide/quick-start.md) - Get up and running quickly
-- [Installation](user-guide/installation.md) - Installation options and requirements
-- [Usage Examples](user-guide/usage-examples.md) - Common use cases and examples
-- [Command Line Interface](user-guide/cli.md) - Command line reference
-- [Output Formats](user-guide/output-formats.md) - Chart types and JSON output
+!!! warning "Scientific Disclaimer"
+    **This software implements biorhythm theory, which is considered PSEUDOSCIENCE.** Extensive scientific research has found NO VALIDITY to biorhythm theory beyond coincidence. Multiple controlled studies have consistently failed to find any correlation between the proposed 23, 28, and 33-day cycles and human performance or life events.
 
-### Developer Guide
-- [Development Setup](developer-guide/setup.md) - Setting up development environment
-- [Testing](developer-guide/testing.md) - Running tests and coverage
-- [Code Quality](developer-guide/code-quality.md) - Linting, formatting, and standards
-- [Contributing](developer-guide/contributing.md) - How to contribute to the project
-- [Architecture](developer-guide/architecture.md) - Code structure and design
+    **This implementation is provided FOR ENTERTAINMENT PURPOSES ONLY** and should NOT be used for making any important life decisions.
 
-### API Reference
-- [BiorhythmCalculator](api/calculator.md) - Main calculator class
-- [Core Functions](api/core.md) - Core calculation functions
-- [JSON Schema](api/json-schema.md) - JSON output format specification
-- [Error Handling](api/errors.md) - Exception types and handling
+## What is PyBiorythm?
 
-### Deployment & DevOps
-- [Deployment Guide](deployment/deployment-guide.md) - Complete deployment strategies
-- [Docker Setup](deployment/docker.md) - Container deployment
-- [Kubernetes](deployment/kubernetes.md) - K8s deployment manifests
-- [Local Testing](deployment/local-testing.md) - Testing workflows locally
-- [Security](deployment/security.md) - Security guidelines and SBOM
+PyBiorythm is a modern Python library that implements the classical biorhythm theory with multiple output formats, comprehensive testing, and enterprise-grade CI/CD pipelines. It's designed for educational purposes, data analysis experiments, and entertainment applications.
 
-### Workflows & CI/CD
-- [GitHub Actions](workflows/github-actions.md) - All workflow documentation
-- [Semantic Versioning](workflows/semantic-versioning.md) - Version management
-- [Blue-Green Deployment](workflows/blue-green.md) - Zero-downtime deployment
-- [Security Scanning](workflows/security.md) - Security and vulnerability scanning
+### Key Features
 
-## 🚀 Quick Links
+=== "Multiple Output Formats"
+    - **ASCII Charts**: Traditional vertical and horizontal biorhythm charts
+    - **JSON Data**: Structured timeseries data for analysis and visualization
+    - **Configurable Parameters**: Adjustable chart width, time periods, and orientations
 
-| Task | Documentation |
-|------|---------------|
-| **First time setup** | [Installation Guide](user-guide/installation.md) |
-| **Basic usage** | [Quick Start](user-guide/quick-start.md) |
-| **Command line** | [CLI Reference](user-guide/cli.md) |
-| **Docker deployment** | [Docker Guide](deployment/docker.md) |
-| **Development** | [Dev Setup](developer-guide/setup.md) |
-| **Local GitHub Actions** | [act Testing](deployment/local-github-actions.md) |
-| **API integration** | [API Reference](api/calculator.md) |
+=== "Developer Friendly"
+    - **90.33% Test Coverage** with comprehensive test suite
+    - **Modern Python**: Type hints, dataclasses, and clean architecture
+    - **Docker Support**: Multi-stage builds for production deployment
+    - **CI/CD Ready**: GitHub Actions workflows for quality assurance
 
-## 🔬 Scientific Disclaimer
+=== "Data Analysis Ready"
+    - **JSON Timeseries**: Perfect for pandas, matplotlib, and data science workflows
+    - **Critical Day Detection**: Identifies when cycles cross zero
+    - **Statistical Properties**: Comprehensive metadata for analysis
+    - **Feature Engineering**: Ready for machine learning experiments
 
-**Important**: This software implements biorhythm theory, which is considered **pseudoscience**. Extensive scientific research has found **NO VALIDITY** to biorhythm theory beyond coincidence. This implementation is provided **FOR ENTERTAINMENT PURPOSES ONLY**.
+## Quick Start
 
-## 📖 Viewing Documentation
+### Installation
 
-### Option 1: MkDocs Server (Recommended)
-```bash
-# Install MkDocs
-uv add --dev mkdocs mkdocs-material
+```bash tab="pip"
+# Install from PyPI (when published)
+pip install biorythm
 
-# Serve documentation locally
-uv run mkdocs serve
-
-# View at http://127.0.0.1:8000
+# Or install from source
+git clone https://github.com/dkdndes/pybiorythm.git
+cd pybiorythm
+pip install .
 ```
 
-### Option 2: Static Files
-All documentation is written in Markdown and can be viewed directly on GitHub or in any Markdown viewer.
+```bash tab="uv"
+# Using uv (recommended)
+uv add biorythm
 
-### Option 3: GitHub Pages
-The documentation is automatically deployed to GitHub Pages: [Documentation Site](https://dkdndes.github.io/pybiorythm/)
+# Or from source with uv
+git clone https://github.com/dkdndes/pybiorythm.git
+cd pybiorythm
+uv pip install -e .
+```
 
-## 🔄 Keeping Documentation Updated
+```bash tab="Docker"
+# Using Docker (easiest)
+docker run -it biorythm:latest
 
-Documentation is automatically validated and updated through our CI/CD pipeline:
-- ✅ **Link Validation**: All links are checked for validity
-- ✅ **Code Examples**: Examples are tested in CI
-- ✅ **Version Sync**: API docs are updated with releases
-- ✅ **Screenshots**: Docker and deployment guides include current screenshots
+# Or build locally
+git clone https://github.com/dkdndes/pybiorythm.git
+cd pybiorythm
+docker build -t biorythm:latest .
+docker run -it biorythm:latest
+```
 
-## 📝 Contributing to Documentation
+See the [Quick Start Guide](user-guide/quick-start.md) for detailed usage instructions and examples.
 
-See [Contributing Guide](developer-guide/contributing.md#documentation) for information on improving the documentation.
+## Documentation Structure
+
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch:{ .lg .middle } __User Guide__
+
+    ---
+
+    Get started quickly with installation, usage examples, and CLI reference.
+
+    [:octicons-arrow-right-24: User Guide](user-guide/quick-start.md)
+
+-   :material-code-braces:{ .lg .middle } __API Reference__
+
+    ---
+
+    Comprehensive API documentation for the BiorhythmCalculator class and core functions.
+
+    [:octicons-arrow-right-24: API Reference](api/calculator.md)
+
+-   :material-tools:{ .lg .middle } __Developer Guide__
+
+    ---
+
+    Development setup, testing, code quality, and contribution guidelines.
+
+    [:octicons-arrow-right-24: Developer Guide](developer-guide/setup.md)
+
+-   :material-cloud-upload:{ .lg .middle } __Deployment__
+
+    ---
+
+    Docker deployment, Kubernetes manifests, and production deployment strategies.
+
+    [:octicons-arrow-right-24: Deployment](deployment/deployment-guide.md)
+
+</div>
+
+## Chart Examples
+
+For chart examples and detailed output format documentation, see:
+- [Output Formats Guide](user-guide/output-formats.md) - All chart types and formats
+- [Usage Examples](user-guide/usage-examples.md) - Practical use cases 
+- [JSON Schema](api/json-schema.md) - Complete JSON structure reference
+
+## What's Next?
+
+- **New Users**: Start with the [Quick Start Guide](user-guide/quick-start.md)
+- **Developers**: Check out the [Development Setup](developer-guide/setup.md) and [Architecture Overview](developer-guide/architecture.md)
+- **Contributors**: Review the [Code Quality Standards](developer-guide/code-quality.md) and [Contributing Guidelines](developer-guide/contributing.md)
+- **Data Scientists**: Explore the [JSON Schema](api/json-schema.md) and [Output Formats](user-guide/output-formats.md)
+- **DevOps**: Review the [Deployment Guide](deployment/deployment-guide.md) and [Security Best Practices](deployment/security.md)
+
+## Version Information
+
+**Current Version**: 1.2.1  
+**Python Compatibility**: 3.9+  
+**License**: MIT  
+**Repository**: [GitHub](https://github.com/dkdndes/pybiorythm)
