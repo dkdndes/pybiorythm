@@ -42,9 +42,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/peterrosemann/biorythm"
-Repository = "https://github.com/peterrosemann/biorythm"
-Issues = "https://github.com/peterrosemann/biorythm/issues"
+Homepage = "https://github.com/dkdndes/pybiorythm"
+Repository = "https://github.com/dkdndes/pybiorythm"
+Issues = "https://github.com/dkdndes/pybiorythm/issues"
 
 [dependency-groups]
 dev = [
@@ -78,10 +78,6 @@ tag-pattern = "v(?P<version>.*)"
 # Version is available via importlib.metadata
 
 [tool.semantic_release]
-version_toml = ["pyproject.toml:project.version"]
-version_variables = [
-    "biorythm/__init__.py:__version__",
-]
 build_command = "uv run python -m build"
 dist_path = "dist/"
 upload_to_vcs_release = true
@@ -126,8 +122,3 @@ ignore_token_for_push = false
 dist_glob_patterns = ["dist/*"]
 upload_to_vcs_release = true
 
-[tool.ruff]
-extend-exclude = ["_version.py"]
-
-[tool.ruff.format]
-exclude = ["_version.py"]
