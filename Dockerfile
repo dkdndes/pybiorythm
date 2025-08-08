@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir uv
 # Copy source code needed for installation
 COPY biorythm/ ./biorythm/
 COPY main.py ./
-COPY _version.py ./
+# _version.py not needed - using hatchling dynamic versioning
 
 # Install dependencies
 RUN uv pip install --system --no-cache -e .
@@ -35,7 +35,7 @@ COPY --from=builder /usr/local/bin/uv /usr/local/bin/uv
 # Copy application files
 COPY --from=builder /app/biorythm ./biorythm/
 COPY --from=builder /app/main.py ./
-COPY --from=builder /app/_version.py ./
+# _version.py not needed - using hatchling dynamic versioning
 COPY --from=builder /app/pyproject.toml ./
 
 # Change ownership to non-root user

@@ -2703,7 +2703,6 @@ wheels = [
 ]
 
 [[package]]
-<<<<<<< HEAD
 name = "userpath"
 version = "1.9.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2742,8 +2741,6 @@ wheels = [
 ]
 
 [[package]]
-=======
->>>>>>> 12b766e (Feat/pre commit (#11))
 name = "virtualenv"
 version = "20.33.1"
 source = { registry = "https://pypi.org/simple" }

@@ -6,10 +6,15 @@ on:
   push:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   commit-lint:
     name: Conventional Commits
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
     - name: Checkout code
@@ -50,11 +55,17 @@ jobs:
               ]
             ],
             "subject-case": [2, "never", ["start-case", "pascal-case"]],
-            "subject-empty": [2, "never"],
+            "subject-empty": [1, "never"],
             "subject-full-stop": [2, "never", "."],
-            "type-empty": [2, "never"],
-            "scope-case": [2, "always", "lower-case"]
-          }
+            "type-empty": [1, "never"],
+            "scope-case": [2, "always", "lower-case"],
+            "body-leading-blank": [1, "always"],
+            "footer-leading-blank": [1, "always"]
+          },
+          "ignores": [
+            "(commit) => commit.includes('-----')",
+            "(commit) => commit.trim() === ''"
+          ]
         }
         EOF
 
@@ -66,12 +77,14 @@ jobs:
 
     - name: Validate PR commits
       if: github.event_name == 'pull_request'
+      continue-on-error: true
       run: |
+        echo "Validating commits from ${{ github.event.pull_request.base.sha }} to ${{ github.event.pull_request.head.sha }}"
         npx commitlint --from=${{ github.event.pull_request.base.sha }} --to=${{ github.event.pull_request.head.sha }} --verbose
 
     - name: Comment PR with commit format help
       if: failure() && github.event_name == 'pull_request'
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           const body = `

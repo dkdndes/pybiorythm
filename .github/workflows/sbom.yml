@@ -259,6 +259,20 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install UV
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: 'latest'
+
+    - name: Install dependencies  
+      run: |
+        uv sync --group dev
+
     - name: Build Docker image for SBOM
       uses: docker/build-push-action@v6
       with:
@@ -285,6 +299,7 @@ jobs:
         uv run python -c "
         import json
         import datetime
+        import os
         
         # Load Docker SBOM
         with open('sbom-docker.json') as f:
@@ -296,7 +311,7 @@ jobs:
         
         sbom['metadata'].update({
             'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
-            'tools': sbom['metadata'].get('tools', []) + [
+            'tools': (sbom['metadata'].get('tools', []) if isinstance(sbom['metadata'].get('tools', []), list) else []) + [
                 {
                     'vendor': 'Anchore',
                     'name': 'syft',
@@ -306,7 +321,7 @@ jobs:
             'component': {
                 'type': 'container',
                 'name': 'pybiorythm-docker',
-                'version': '${GITHUB_REF_NAME#v}' if '${GITHUB_REF_TYPE}' == 'tag' else '${GITHUB_SHA[:8]}',
+                'version': os.environ.get('GITHUB_REF_NAME', '').replace('v', '') if os.environ.get('GITHUB_REF_TYPE') == 'tag' else os.environ.get('GITHUB_SHA', 'unknown')[:8],
                 'description': 'Docker container for pybiorythm application',
                 'licenses': [
                     {
@@ -468,6 +483,7 @@ jobs:
         uv run python -c "
         import json
         import datetime
+        import os
         
         # Load individual SBOMs
         with open('sbom-python-complete.json') as f:
@@ -500,7 +516,7 @@ jobs:
                     'type': 'application',
                     'bom-ref': 'pybiorythm-root',
                     'name': 'pybiorythm',
-                    'version': '${GITHUB_REF_NAME#v}' if '${GITHUB_REF_TYPE}' == 'tag' else '${GITHUB_SHA[:8]}',
+                    'version': os.environ.get('GITHUB_REF_NAME', '').replace('v', '') if os.environ.get('GITHUB_REF_TYPE') == 'tag' else os.environ.get('GITHUB_SHA', 'unknown')[:8],
                     'description': 'Complete pybiorythm application with dependencies',
                     'licenses': [
                         {
