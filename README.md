@@ -266,7 +266,7 @@ The project maintains enterprise-grade quality standards:
 
 For comprehensive documentation and advanced usage:
 
-- **[📖 Complete Documentation](docs/)** - Architecture, setup, and advanced features
+- **[📖 Complete Documentation](docs/README.md)** - Architecture, setup, and advanced features
 - **[🚀 Quick Start Guide](docs/user-guide/quick-start.md)** - Get started in 5 minutes
 - **[⚙️ Developer Guide](docs/developer-guide/setup.md)** - Contributing and local development
 - **[🚢 Deployment Guide](docs/deployment/)** - Docker, Kubernetes, and CI/CD
