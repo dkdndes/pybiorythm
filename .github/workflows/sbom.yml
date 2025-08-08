@@ -49,7 +49,7 @@ jobs:
     - name: Enhance SBOM with BSI TR-03183-2-2 compliance
       run: |
         # Transform SBOM to BSI TR-03183-2-2 compliant format
-        python -c "
+        uv run python -c "
         import json
         import datetime
         import uuid
@@ -194,7 +194,7 @@ jobs:
     - name: Validate Python SBOM
       run: |
         # Validate SBOM format
-        python -c "
+        uv run python -c "
         import json
         
         with open('sbom-python-complete.json') as f:
@@ -282,7 +282,7 @@ jobs:
 
     - name: Enhance Docker SBOM metadata
       run: |
-        python -c "
+        uv run python -c "
         import json
         import datetime
         
@@ -346,7 +346,7 @@ jobs:
 
     - name: Generate SBOM summary report
       run: |
-        python -c "
+        uv run python -c "
         import json
         
         # Load both SBOMs
@@ -398,7 +398,7 @@ jobs:
     - name: Validate Docker SBOM
       run: |
         # Validate SBOM format and content
-        python -c "
+        uv run python -c "
         import json
         
         with open('sbom-docker-complete.json') as f:
@@ -465,7 +465,7 @@ jobs:
 
     - name: Create combined SBOM
       run: |
-        python -c "
+        uv run python -c "
         import json
         import datetime
         
@@ -562,7 +562,7 @@ jobs:
     - name: Generate SBOM attestation
       run: |
         # Create SBOM attestation metadata
-        python -c "
+        uv run python -c "
         import json
         import hashlib
         

@@ -142,7 +142,7 @@ jobs:
         docker run --rm pybiorythm:test python main.py -y 1990 -m 5 -d 15 --orientation json-vertical 2>/dev/null | tail -n +9 > output.json
         
         # Validate JSON output
-        python -c "
+        uv run python -c "
         import json
         try:
             with open('output.json', 'r') as f:
@@ -204,10 +204,10 @@ jobs:
         uv sync --group dev
 
     - name: Build package
-      run: python -m build
+      run: uv run python -m build
 
     - name: Check package
-      run: twine check dist/*
+      run: uv run twine check dist/*
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -270,14 +270,14 @@ jobs:
     - name: Run integration tests
       run: |
         # Test CLI with various inputs
-        python main.py -y 1990 -m 5 -d 15
-        python main.py -y 1985 -m 12 -d 25 --orientation horizontal --days 30
+        uv run python main.py -y 1990 -m 5 -d 15
+        uv run python main.py -y 1985 -m 12 -d 25 --orientation horizontal --days 30
         
         # Test CLI JSON output - capture JSON only, filter out warnings
-        python main.py -y 2000 -m 1 -d 1 --orientation json-vertical 2>/dev/null | tail -n +9 > test_output.json
+        uv run python main.py -y 2000 -m 1 -d 1 --orientation json-vertical 2>/dev/null | tail -n +9 > test_output.json
         
         # Validate JSON structure
-        python -c "
+        uv run python -c "
         import json
         try:
             with open('test_output.json', 'r') as f:
@@ -328,7 +328,7 @@ jobs:
 
     - name: Run performance benchmarks
       run: |
-        python -c "
+        uv run python -c "
         import time
         from datetime import datetime
         import biorythm
