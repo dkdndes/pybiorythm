@@ -25,28 +25,29 @@ PyBiorythm is a modern Python library that implements the classical biorhythm th
 
 ### Key Features
 
-=== "Multiple Output Formats"
-    - **ASCII Charts**: Traditional vertical and horizontal biorhythm charts
-    - **JSON Data**: Structured timeseries data for analysis and visualization
-    - **Configurable Parameters**: Adjustable chart width, time periods, and orientations
+**🎯 Multiple Output Formats**
+- **ASCII Charts**: Traditional vertical and horizontal biorhythm charts
+- **JSON Data**: Structured timeseries data for analysis and visualization
+- **Configurable Parameters**: Adjustable chart width, time periods, and orientations
 
-=== "Developer Friendly"
-    - **90.33% Test Coverage** with comprehensive test suite
-    - **Modern Python**: Type hints, dataclasses, and clean architecture
-    - **Docker Support**: Multi-stage builds for production deployment
-    - **CI/CD Ready**: GitHub Actions workflows for quality assurance
+**👨‍💻 Developer Friendly**
+- **90.33% Test Coverage** with comprehensive test suite
+- **Modern Python**: Type hints, dataclasses, and clean architecture
+- **Docker Support**: Multi-stage builds for production deployment
+- **CI/CD Ready**: GitHub Actions workflows for quality assurance
 
-=== "Data Analysis Ready"
-    - **JSON Timeseries**: Perfect for pandas, matplotlib, and data science workflows
-    - **Critical Day Detection**: Identifies when cycles cross zero
-    - **Statistical Properties**: Comprehensive metadata for analysis
-    - **Feature Engineering**: Ready for machine learning experiments
+**📊 Data Analysis Ready**
+- **JSON Timeseries**: Perfect for pandas, matplotlib, and data science workflows
+- **Critical Day Detection**: Identifies when cycles cross zero
+- **Statistical Properties**: Comprehensive metadata for analysis
+- **Feature Engineering**: Ready for machine learning experiments
 
 ## Quick Start
 
 ### Installation
 
-```bash tab="pip"
+**With pip (recommended):**
+```bash
 # Install from PyPI (when published)
 pip install biorythm
 
@@ -56,8 +57,9 @@ cd pybiorythm
 pip install .
 ```
 
-```bash tab="uv"
-# Using uv (recommended)
+**With uv (fastest):**
+```bash
+# Using uv package manager
 uv add biorythm
 
 # Or from source with uv
@@ -66,8 +68,9 @@ cd pybiorythm
 uv pip install -e .
 ```
 
-```bash tab="Docker"
-# Using Docker (easiest)
+**With Docker (easiest):**
+```bash
+# Using Docker
 docker run -it biorythm:latest
 
 # Or build locally
@@ -81,41 +84,36 @@ See the [Quick Start Guide](user-guide/quick-start.md) for detailed usage instru
 
 ## Documentation Structure
 
-<div class="grid cards" markdown>
+### 🚀 User Guide
+Get started quickly with installation, usage examples, and CLI reference.
+- **[Quick Start Guide](user-guide/quick-start.md)** - Get up and running in 5 minutes
+- **[Installation Guide](user-guide/installation.md)** - Multiple installation methods
+- **[CLI Reference](user-guide/cli.md)** - Command line interface documentation
+- **[Usage Examples](user-guide/usage-examples.md)** - Practical examples and use cases
+- **[Output Formats](user-guide/output-formats.md)** - Chart types and JSON formats
 
--   :material-rocket-launch:{ .lg .middle } __User Guide__
+### 💻 API Reference
+Comprehensive API documentation for the BiorhythmCalculator class and core functions.
+- **[Calculator API](api/calculator.md)** - Main BiorhythmCalculator class
+- **[Core Functions](api/core.md)** - Low-level calculation functions
+- **[JSON Schema](api/json-schema.md)** - Complete JSON output specification
+- **[Error Handling](api/errors.md)** - Exception types and error handling
 
-    ---
+### 🛠 Developer Guide
+Development setup, testing, code quality, and contribution guidelines.
+- **[Development Setup](developer-guide/setup.md)** - Environment configuration
+- **[Architecture](developer-guide/architecture.md)** - Project structure and design
+- **[Testing Guide](developer-guide/testing.md)** - Testing framework and coverage
+- **[Code Quality](developer-guide/code-quality.md)** - Linting, formatting, and standards
+- **[Contributing](developer-guide/contributing.md)** - How to contribute to the project
 
-    Get started quickly with installation, usage examples, and CLI reference.
-
-    [:octicons-arrow-right-24: User Guide](user-guide/quick-start.md)
-
--   :material-code-braces:{ .lg .middle } __API Reference__
-
-    ---
-
-    Comprehensive API documentation for the BiorhythmCalculator class and core functions.
-
-    [:octicons-arrow-right-24: API Reference](api/calculator.md)
-
--   :material-tools:{ .lg .middle } __Developer Guide__
-
-    ---
-
-    Development setup, testing, code quality, and contribution guidelines.
-
-    [:octicons-arrow-right-24: Developer Guide](developer-guide/setup.md)
-
--   :material-cloud-upload:{ .lg .middle } __Deployment__
-
-    ---
-
-    Docker deployment, Kubernetes manifests, and production deployment strategies.
-
-    [:octicons-arrow-right-24: Deployment](deployment/deployment-guide.md)
-
-</div>
+### 🚢 Deployment
+Docker deployment, Kubernetes manifests, and production deployment strategies.
+- **[Deployment Guide](deployment/deployment-guide.md)** - Production deployment strategies
+- **[Docker Setup](deployment/docker.md)** - Container deployment
+- **[Kubernetes](deployment/kubernetes.md)** - Cluster deployment with manifests
+- **[Security & Compliance](deployment/security.md)** - Security best practices
+- **[Local GitHub Actions](deployment/local-github-actions.md)** - Testing workflows locally
 
 ## Chart Examples
 
