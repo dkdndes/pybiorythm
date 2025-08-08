@@ -19,6 +19,9 @@ jobs:
   python-sbom:
     name: Generate Python SBOM
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
     
     steps:
     - name: Checkout code
@@ -251,6 +254,9 @@ jobs:
     name: Generate Docker SBOM
     runs-on: ubuntu-latest
     needs: python-sbom
+    permissions:
+      contents: write
+      packages: read
     
     steps:
     - name: Checkout code
