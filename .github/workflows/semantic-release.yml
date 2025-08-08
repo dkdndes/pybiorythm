@@ -65,6 +65,7 @@ jobs:
         GIT_COMMITTER_EMAIL: "semantic-release@github.com"
         GIT_AUTHOR_NAME: "semantic-release" 
         GIT_AUTHOR_EMAIL: "semantic-release@github.com"
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         echo "Running semantic-release version check..."
         uv run semantic-release version --print
