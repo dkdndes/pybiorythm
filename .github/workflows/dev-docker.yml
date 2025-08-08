@@ -313,6 +313,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [version, build-and-push, generate-manifests]
     if: success()
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
 
     steps:
     - name: Create deployment summary

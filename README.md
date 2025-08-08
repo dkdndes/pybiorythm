@@ -4,7 +4,13 @@
 [![Tests](https://img.shields.io/badge/tests-72%20passed-green.svg)](https://github.com/dkdndes/pybiorythm)
 [![Coverage](https://img.shields.io/badge/coverage-90.33%25-brightgreen.svg)](https://github.com/dkdndes/pybiorythm)
 [![CI/CD](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/ci.yml)
+[![Docker](https://img.shields.io/badge/docker-multi--stage-blue.svg)](Dockerfile)
+[![Security](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/codeql.yml)
+[![SBOM](https://github.com/dkdndes/pybiorythm/actions/workflows/sbom.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/sbom.yml)
+[![Documentation](https://github.com/dkdndes/pybiorythm/actions/workflows/docs.yml/badge.svg)](https://github.com/dkdndes/pybiorythm/actions/workflows/docs.yml)
+[![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
 > **Educational Note**: This project serves as a **comprehensive example of modern DevOps practices** and GitHub Actions workflows. While it implements biorhythm calculations (pseudoscience), its primary purpose is to demonstrate professional CI/CD pipelines, security practices, and deployment strategies.
 
@@ -60,6 +66,86 @@ python main.py
 # Direct calculation  
 python main.py -y 1990 -m 5 -d 15 --orientation vertical
 python main.py -y 1990 -m 5 -d 15 --orientation json-horizontal
+
+# Different chart orientations
+python main.py -y 1990 -m 5 -d 15 --orientation horizontal --days 30
+
+# Generate JSON output for data analysis
+python main.py -y 1990 -m 5 -d 15 --orientation json-vertical
+```
+
+## Chart Types
+
+### Vertical Chart (Traditional)
+Time flows top-to-bottom, cycles displayed across width:
+```
+Mon May 15    p     :     e i    
+Tue May 16       p  :  e      i  
+Wed May 17          : p    e   i 
+```
+
+### Horizontal Chart (Timeline)
+Time flows left-to-right, cycles displayed as wave patterns:
+```
+BIORHYTHM WAVE (all cycles)
+                    e               
+            p               i       
+                        e           
+```
+
+### JSON Output
+Structured data suitable for analysis, visualization, and testing.
+
+## Features
+
+- **Multiple Output Formats**: ASCII charts (vertical/horizontal) and JSON data
+- **Critical Day Detection**: Identifies days when cycles cross zero
+- **Cycle Information**: Shows when cycles repeat (644 days for physical+emotional, 21,252 days for all three)
+- **Scientific Context**: Includes historical background and scientific disclaimers
+- **Robust Error Handling**: Input validation and comprehensive error messages
+- **Configurable Parameters**: Adjustable chart width, time periods, and orientations
+
+## API Reference
+
+### BiorhythmCalculator
+
+Main class for generating biorhythm calculations and charts.
+
+```python
+BiorhythmCalculator(width=55, days=29, orientation="vertical")
+```
+
+**Parameters:**
+- `width` (int): Chart width in characters (minimum 12)
+- `days` (int): Number of days to plot
+- `orientation` (str): "vertical" or "horizontal"
+
+**Methods:**
+
+#### `generate_chart(birthdate, plot_date=None)`
+Generate and print ASCII chart to stdout.
+
+#### `generate_timeseries_json(birthdate, plot_date=None, chart_orientation="vertical")`
+Generate JSON payload with timeseries data and metadata.
+
+#### `calculate_biorhythm_values(birthdate, target_date)`
+Calculate raw cycle values for a specific date.
+
+Returns tuple: `(physical, emotional, intellectual)` values between -1.0 and +1.0.
+
+## Command Line Arguments
+
+```
+python main.py [OPTIONS]
+
+Options:
+  -y, --year YEAR              Birth year (1-9999)
+  -m, --month MONTH            Birth month (1-12)  
+  -d, --day DAY                Birth day (1-31)
+  --orientation {vertical,horizontal,json-vertical,json-horizontal}
+                               Chart orientation (default: vertical)
+  --days DAYS                  Number of days to plot (default: 29)
+  -h, --help                   Show help message
 ```
 
 ## 🔧 GitHub Actions Workflows (Educational Focus)
@@ -180,7 +266,7 @@ The project maintains enterprise-grade quality standards:
 
 For comprehensive documentation and advanced usage:
 
-- **[📖 Complete Documentation](docs/)** - Architecture, setup, and advanced features
+- **[📖 Complete Documentation](docs/README.md)** - Architecture, setup, and advanced features
 - **[🚀 Quick Start Guide](docs/user-guide/quick-start.md)** - Get started in 5 minutes
 - **[⚙️ Developer Guide](docs/developer-guide/setup.md)** - Contributing and local development
 - **[🚢 Deployment Guide](docs/deployment/)** - Docker, Kubernetes, and CI/CD

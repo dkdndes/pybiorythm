@@ -92,8 +92,7 @@ jobs:
       run: uv run safety check --json
 
     - name: Run bandit security linter
-      run: uv run bandit -r . -f json -o bandit-report.json
-      continue-on-error: true
+      run: uv run bandit -r biorythm/ main.py -f json -o bandit-report.json
 
     - name: Upload bandit results
       uses: actions/upload-artifact@v4
@@ -112,6 +111,21 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install UV
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: ${{ env.UV_VERSION }}
+
+    - name: Install dependencies
+      timeout-minutes: 3
+      run: |
+        uv sync --group dev
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -142,7 +156,7 @@ jobs:
         docker run --rm pybiorythm:test python main.py -y 1990 -m 5 -d 15 --orientation json-vertical 2>/dev/null | tail -n +9 > output.json
         
         # Validate JSON output
-        python -c "
+        uv run python -c "
         import json
         try:
             with open('output.json', 'r') as f:
@@ -204,10 +218,10 @@ jobs:
         uv sync --group dev
 
     - name: Build package
-      run: python -m build
+      run: uv run python -m build
 
     - name: Check package
-      run: twine check dist/*
+      run: uv run twine check dist/*
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -215,33 +229,7 @@ jobs:
         name: dist
         path: dist/
 
-  # Job 5: Documentation Check
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Check README links
-      uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
-        config-file: '.github/workflows/mlc_config.json'
-
-    - name: Validate Docker documentation
-      run: |
-        # Check that Docker files exist and are valid
-        [ -f Dockerfile ] || exit 1
-        [ -f docker-compose.local.yml ] || exit 1
-        [ -f .dockerignore ] || exit 1
-        [ -f DOCKER_M2_GUIDE.md ] || exit 1
-        echo "All Docker documentation files present"
-
-  # Job 6: Integration Tests
+  # Job 5: Integration Tests
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
@@ -270,14 +258,14 @@ jobs:
     - name: Run integration tests
       run: |
         # Test CLI with various inputs
-        python main.py -y 1990 -m 5 -d 15
-        python main.py -y 1985 -m 12 -d 25 --orientation horizontal --days 30
+        uv run python main.py -y 1990 -m 5 -d 15
+        uv run python main.py -y 1985 -m 12 -d 25 --orientation horizontal --days 30
         
         # Test CLI JSON output - capture JSON only, filter out warnings
-        python main.py -y 2000 -m 1 -d 1 --orientation json-vertical 2>/dev/null | tail -n +9 > test_output.json
+        uv run python main.py -y 2000 -m 1 -d 1 --orientation json-vertical 2>/dev/null | tail -n +9 > test_output.json
         
         # Validate JSON structure
-        python -c "
+        uv run python -c "
         import json
         try:
             with open('test_output.json', 'r') as f:
@@ -299,7 +287,7 @@ jobs:
             exit(1)
         "
 
-  # Job 7: Performance Benchmark
+  # Job 6: Performance Benchmark
   performance:
     name: Performance Tests
     runs-on: ubuntu-latest
@@ -328,7 +316,7 @@ jobs:
 
     - name: Run performance benchmarks
       run: |
-        python -c "
+        uv run python -c "
         import time
         from datetime import datetime
         import biorythm
@@ -353,7 +341,7 @@ jobs:
             print('Performance benchmark passed')
         "
 
-  # Job 8: Quick Validation (SBOM handled by dedicated workflow)
+  # Job 7: Quick Validation (SBOM handled by dedicated workflow)
   quick-validation:
     name: Quick Validation
     runs-on: ubuntu-latest
