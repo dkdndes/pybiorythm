@@ -1,9 +1,0 @@
-{% for section, commits in release.items() %}
-{% if commits %}
-### {{ section | title }}
-{% for commit in commits %}
-- {{ commit.commit.message.split('\n')[0] }} ([{{ commit.commit.hexsha[:7] }}]({{ context.repo_url }}/commit/{{ commit.commit.hexsha }}))
-{%- endfor %}
-
-{% endif %}
-{%- endfor %}

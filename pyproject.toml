@@ -108,7 +108,6 @@ prerelease = true
 upload_to_vcs_release = false
 
 [tool.semantic_release.changelog]
-template_dir = "templates"
 exclude_commit_patterns = []
 
 [tool.semantic_release.changelog.default_templates]
