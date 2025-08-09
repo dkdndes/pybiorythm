@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "biorythm"
-version = "2.1.0"
+version = "2.2.0"
 description = "A Python library for biorhythm calculations"
 readme = "README.md"
 license = {file = "LICENSE"}
