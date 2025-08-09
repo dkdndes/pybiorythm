@@ -2,7 +2,7 @@
 {% if commits %}
 ### {{ section | title }}
 {% for commit in commits %}
-- {{ commit.commit.message | truncate }}{% if commit.commit.author %} by @{{ commit.commit.author.login }}{% endif %} ([{{ commit.commit.hexsha[:7] }}]({{ context.repo_url }}/commit/{{ commit.commit.hexsha }}))
+- {{ commit.commit.message.split('\n')[0] }} ([{{ commit.commit.hexsha[:7] }}]({{ context.repo_url }}/commit/{{ commit.commit.hexsha }}))
 {%- endfor %}
 
 {% endif %}
