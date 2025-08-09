@@ -464,11 +464,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: sbom-python
+        run-id: ${{ github.run_id }}
 
     - name: Download Docker SBOM
       uses: actions/download-artifact@v4
       with:
         name: sbom-docker
+        run-id: ${{ github.run_id }}
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -501,7 +503,7 @@ jobs:
         # Create combined SBOM
         combined_sbom = {
             'bomFormat': 'CycloneDX',
-            'specVersion': '1.5',
+            'specVersion': '1.6',
             'serialNumber': f'urn:uuid:pybiorythm-combined-{datetime.datetime.utcnow().strftime(\"%Y%m%d%H%M%S\")}',
             'version': 1,
             'metadata': {
@@ -533,7 +535,7 @@ jobs:
                     ],
                     'supplier': {
                         'name': 'dkdndes',
-                        'url': ['https://github.com/dkdndes/pybiorythm']
+                        'urls': ['https://github.com/dkdndes/pybiorythm']
                     }
                 },
                 'properties': [
@@ -587,6 +589,8 @@ jobs:
         uv run python -c "
         import json
         import hashlib
+        import datetime
+        import os
         
         # Calculate SBOM hash
         with open('sbom-combined.json', 'rb') as f:
@@ -594,20 +598,20 @@ jobs:
         
         attestation = {
             'version': '1.0',
-            'timestamp': '$(date -u +%Y-%m-%dT%H:%M:%SZ)',
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
             'sbom': {
                 'format': 'CycloneDX',
-                'version': '1.4',
+                'version': '1.6',
                 'hash': sbom_hash,
                 'file': 'sbom-combined.json'
             },
             'build': {
-                'repository': '${GITHUB_REPOSITORY}',
-                'commit': '${GITHUB_SHA}',
-                'ref': '${GITHUB_REF}',
-                'workflow': '${GITHUB_WORKFLOW}',
-                'run_id': '${GITHUB_RUN_ID}',
-                'actor': '${GITHUB_ACTOR}'
+                'repository': os.environ.get('GITHUB_REPOSITORY', ''),
+                'commit': os.environ.get('GITHUB_SHA', ''),
+                'ref': os.environ.get('GITHUB_REF', ''),
+                'workflow': os.environ.get('GITHUB_WORKFLOW', ''),
+                'run_id': os.environ.get('GITHUB_RUN_ID', ''),
+                'actor': os.environ.get('GITHUB_ACTOR', '')
             }
         }
         
