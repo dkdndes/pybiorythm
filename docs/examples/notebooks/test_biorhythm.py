@@ -799,11 +799,13 @@ analysis_summary = {
     },
 }
 
+
 # Export to JSON
 def json_serializer(obj):
     if isinstance(obj, bool):
         return obj
     return str(obj)
+
 
 with open("biorhythm_analysis_results.json", "w") as f:
     json.dump(analysis_summary, f, indent=2, default=json_serializer)
@@ -884,7 +886,9 @@ print("• biorhythm_timeseries_data.csv - Time series data (CSV)")
 print("• biorhythm_analysis_report.txt - Summary report (Text)")
 print(f"\n📊 Dataset size: {len(df):,} records")
 total_size = (
-    len(json.dumps(analysis_summary, default=json_serializer)) + len(export_df.to_csv()) + len(report)
+    len(json.dumps(analysis_summary, default=json_serializer))
+    + len(export_df.to_csv())
+    + len(report)
 ) / 1024
 print(f"💾 Total export size: ~{total_size:.0f} KB")
 
