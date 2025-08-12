@@ -1,27 +1,59 @@
 #!/usr/bin/env python3
-"""
+r"""
 Sample Biorhythm Dataset Generator
 
 This script generates various sample biorhythm datasets for analysis and experimentation.
 Perfect for analysts who want to explore biorhythm patterns without generating data themselves.
+
+## Setup Instructions:
+
+### Using uv (recommended):
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create virtual environment and install dependencies
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv add pandas
+
+# Run the generator
+python sample-data-generator.py --output-dir sample_data
+```
+
+### Using pip:
+```bash
+pip install pandas
+python sample-data-generator.py --output-dir sample_data
+```
+
+## Standalone Usage:
+This script is completely self-contained and includes mathematical fallback implementations.
+No PyBiorythm library required - it will work independently.
 """
 
 import json
-import pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
 import argparse
+import math
+import sys
 
-# Import biorythm if available, otherwise use fallback
+# Always use mathematical fallback for standalone operation
+BIORYTHM_AVAILABLE = False
+print("🔄 Using standalone mathematical implementation (no PyBiorythm required)")
+
+# Check for pandas availability
 try:
-    from biorythm import BiorhythmCalculator
-    BIORYTHM_AVAILABLE = True
+    import pandas as pd
+    PANDAS_AVAILABLE = True
+    print("✅ pandas available for CSV export")
 except ImportError:
-    BIORYTHM_AVAILABLE = False
-    print("Warning: biorythm package not found. Using mathematical fallback.")
-    import math
+    PANDAS_AVAILABLE = False
+    print("⚠️  pandas not found - JSON export only")
+    print("    Install with: uv add pandas  or  pip install pandas")
     
-    class BiorhythmCalculator:
+class BiorhythmCalculator:
         """Fallback implementation for generating sample data."""
         def __init__(self, days=30, width=55, orientation="vertical"):
             self.days = days
@@ -142,25 +174,34 @@ def generate_sample_datasets():
 def export_to_csv(json_data, filename):
     """Convert JSON biorhythm data to CSV format."""
     
-    # Handle multiple people dataset
-    if isinstance(json_data, dict) and 'metadata' not in json_data:
-        # This is a multiple people dataset
-        all_dataframes = []
-        for person_id, person_data in json_data.items():
-            df = pd.json_normalize(person_data['timeseries'])
-            df['person_id'] = person_id
-            df['birthdate'] = person_data['metadata']['birthdate']
-            all_dataframes.append(df)
-        
-        combined_df = pd.concat(all_dataframes, ignore_index=True)
-        combined_df.to_csv(filename, index=False)
-        return len(combined_df)
+    if not PANDAS_AVAILABLE:
+        print(f"⚠️  Skipping CSV export for {filename} - pandas not available")
+        return 0
     
-    else:
-        # Single person dataset
-        df = pd.json_normalize(json_data['timeseries'])
-        df.to_csv(filename, index=False)
-        return len(df)
+    try:
+        # Handle multiple people dataset
+        if isinstance(json_data, dict) and 'metadata' not in json_data:
+            # This is a multiple people dataset
+            all_dataframes = []
+            for person_id, person_data in json_data.items():
+                df = pd.json_normalize(person_data['timeseries'])
+                df['person_id'] = person_id
+                df['birthdate'] = person_data['metadata']['birthdate']
+                all_dataframes.append(df)
+            
+            combined_df = pd.concat(all_dataframes, ignore_index=True)
+            combined_df.to_csv(filename, index=False)
+            return len(combined_df)
+        
+        else:
+            # Single person dataset
+            df = pd.json_normalize(json_data['timeseries'])
+            df.to_csv(filename, index=False)
+            return len(df)
+            
+    except Exception as e:
+        print(f"⚠️  CSV export failed for {filename}: {e}")
+        return 0
 
 def create_analysis_ready_files(datasets, output_dir):
     """Create analysis-ready files in various formats."""
@@ -177,12 +218,25 @@ def create_analysis_ready_files(datasets, output_dir):
             json.dump(data, f, indent=2, default=str)
         files_created.append(str(json_file))
         
-        # CSV format (timeseries only)
-        csv_file = output_path / f"{dataset_name}.csv"
-        row_count = export_to_csv(data, csv_file)
-        files_created.append(str(csv_file))
-        
-        print(f"Created {dataset_name}: {row_count} rows")
+        # CSV format (timeseries only) - only if pandas available
+        if PANDAS_AVAILABLE:
+            csv_file = output_path / f"{dataset_name}.csv"
+            row_count = export_to_csv(data, csv_file)
+            if row_count > 0:
+                files_created.append(str(csv_file))
+            print(f"Created {dataset_name}: JSON + CSV ({row_count} rows)")
+        else:
+            # Count rows from JSON data for reporting
+            if isinstance(data, dict) and 'timeseries' in data:
+                row_count = len(data['timeseries'])
+            elif isinstance(data, dict):
+                # Multiple people dataset
+                row_count = sum(len(person_data.get('timeseries', [])) 
+                              for person_data in data.values() 
+                              if isinstance(person_data, dict))
+            else:
+                row_count = 0
+            print(f"Created {dataset_name}: JSON only ({row_count} rows)")
     
     return files_created
 

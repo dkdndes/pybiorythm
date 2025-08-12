@@ -1,0 +1,25 @@
+[project]
+name = "biorhythm-django-sqlite-integration"
+version = "1.0.0"
+description = "Django + SQLite integration example for PyBiorythm data storage and analysis"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "django>=4.2.0",
+    "djangorestframework>=3.14.0",
+    "django-cors-headers>=4.0.0",
+    "python-dateutil>=2.8.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+    "biorythm @ git+https://github.com/dkdndes/pybiorythm.git",
+]
+
+[project.optional-dependencies]
+dev = [
+    "django-extensions",
+    "jupyter",
+    "plotly>=5.0.0",
+]
+
+[tool.django]
+settings_module = "biorhythm_storage.settings"

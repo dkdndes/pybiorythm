@@ -1,0 +1,950 @@
+{
+  "metadata": {
+    "birthdate": "1995-08-10",
+    "chart_start_date": "2024-01-01",
+    "chart_period_days": 90,
+    "generation_timestamp": "2025-08-10T15:41:48.552371",
+    "cycles": {
+      "physical": {
+        "period_days": 23,
+        "description": "Physical cycle"
+      },
+      "emotional": {
+        "period_days": 28,
+        "description": "Emotional cycle"
+      },
+      "intellectual": {
+        "period_days": 33,
+        "description": "Intellectual cycle"
+      }
+    }
+  },
+  "timeseries": [
+    {
+      "date": "2024-01-01",
+      "day_number": 10371,
+      "cycles": {
+        "physical": -0.519584,
+        "emotional": 0.62349,
+        "intellectual": 0.989821
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-02",
+      "day_number": 10372,
+      "cycles": {
+        "physical": -0.269797,
+        "emotional": 0.433884,
+        "intellectual": 0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-03",
+      "day_number": 10373,
+      "cycles": {
+        "physical": -0.0,
+        "emotional": 0.222521,
+        "intellectual": 0.866025
+      },
+      "critical_days": [
+        "physical_negative"
+      ]
+    },
+    {
+      "date": "2024-01-04",
+      "day_number": 10374,
+      "cycles": {
+        "physical": 0.269797,
+        "emotional": -0.0,
+        "intellectual": 0.75575
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-01-05",
+      "day_number": 10375,
+      "cycles": {
+        "physical": 0.519584,
+        "emotional": -0.222521,
+        "intellectual": 0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-06",
+      "day_number": 10376,
+      "cycles": {
+        "physical": 0.730836,
+        "emotional": -0.433884,
+        "intellectual": 0.458227
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-07",
+      "day_number": 10377,
+      "cycles": {
+        "physical": 0.887885,
+        "emotional": -0.62349,
+        "intellectual": 0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-08",
+      "day_number": 10378,
+      "cycles": {
+        "physical": 0.979084,
+        "emotional": -0.781831,
+        "intellectual": 0.095056
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-09",
+      "day_number": 10379,
+      "cycles": {
+        "physical": 0.997669,
+        "emotional": -0.900969,
+        "intellectual": -0.095056
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-10",
+      "day_number": 10380,
+      "cycles": {
+        "physical": 0.942261,
+        "emotional": -0.974928,
+        "intellectual": -0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-11",
+      "day_number": 10381,
+      "cycles": {
+        "physical": 0.81697,
+        "emotional": -1.0,
+        "intellectual": -0.458227
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-12",
+      "day_number": 10382,
+      "cycles": {
+        "physical": 0.631088,
+        "emotional": -0.974928,
+        "intellectual": -0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-13",
+      "day_number": 10383,
+      "cycles": {
+        "physical": 0.398401,
+        "emotional": -0.900969,
+        "intellectual": -0.75575
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-14",
+      "day_number": 10384,
+      "cycles": {
+        "physical": 0.136167,
+        "emotional": -0.781831,
+        "intellectual": -0.866025
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-15",
+      "day_number": 10385,
+      "cycles": {
+        "physical": -0.136167,
+        "emotional": -0.62349,
+        "intellectual": -0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-16",
+      "day_number": 10386,
+      "cycles": {
+        "physical": -0.398401,
+        "emotional": -0.433884,
+        "intellectual": -0.989821
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-17",
+      "day_number": 10387,
+      "cycles": {
+        "physical": -0.631088,
+        "emotional": -0.222521,
+        "intellectual": -0.998867
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-18",
+      "day_number": 10388,
+      "cycles": {
+        "physical": -0.81697,
+        "emotional": -0.0,
+        "intellectual": -0.971812
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-01-19",
+      "day_number": 10389,
+      "cycles": {
+        "physical": -0.942261,
+        "emotional": 0.222521,
+        "intellectual": -0.909632
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-20",
+      "day_number": 10390,
+      "cycles": {
+        "physical": -0.997669,
+        "emotional": 0.433884,
+        "intellectual": -0.814576
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-21",
+      "day_number": 10391,
+      "cycles": {
+        "physical": -0.979084,
+        "emotional": 0.62349,
+        "intellectual": -0.690079
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-22",
+      "day_number": 10392,
+      "cycles": {
+        "physical": -0.887885,
+        "emotional": 0.781831,
+        "intellectual": -0.540641
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-23",
+      "day_number": 10393,
+      "cycles": {
+        "physical": -0.730836,
+        "emotional": 0.900969,
+        "intellectual": -0.371662
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-24",
+      "day_number": 10394,
+      "cycles": {
+        "physical": -0.519584,
+        "emotional": 0.974928,
+        "intellectual": -0.189251
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-25",
+      "day_number": 10395,
+      "cycles": {
+        "physical": -0.269797,
+        "emotional": 1.0,
+        "intellectual": -0.0
+      },
+      "critical_days": [
+        "intellectual_negative"
+      ]
+    },
+    {
+      "date": "2024-01-26",
+      "day_number": 10396,
+      "cycles": {
+        "physical": -0.0,
+        "emotional": 0.974928,
+        "intellectual": 0.189251
+      },
+      "critical_days": [
+        "physical_negative"
+      ]
+    },
+    {
+      "date": "2024-01-27",
+      "day_number": 10397,
+      "cycles": {
+        "physical": 0.269797,
+        "emotional": 0.900969,
+        "intellectual": 0.371662
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-28",
+      "day_number": 10398,
+      "cycles": {
+        "physical": 0.519584,
+        "emotional": 0.781831,
+        "intellectual": 0.540641
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-29",
+      "day_number": 10399,
+      "cycles": {
+        "physical": 0.730836,
+        "emotional": 0.62349,
+        "intellectual": 0.690079
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-30",
+      "day_number": 10400,
+      "cycles": {
+        "physical": 0.887885,
+        "emotional": 0.433884,
+        "intellectual": 0.814576
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-01-31",
+      "day_number": 10401,
+      "cycles": {
+        "physical": 0.979084,
+        "emotional": 0.222521,
+        "intellectual": 0.909632
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-01",
+      "day_number": 10402,
+      "cycles": {
+        "physical": 0.997669,
+        "emotional": 0.0,
+        "intellectual": 0.971812
+      },
+      "critical_days": [
+        "emotional_positive"
+      ]
+    },
+    {
+      "date": "2024-02-02",
+      "day_number": 10403,
+      "cycles": {
+        "physical": 0.942261,
+        "emotional": -0.222521,
+        "intellectual": 0.998867
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-03",
+      "day_number": 10404,
+      "cycles": {
+        "physical": 0.81697,
+        "emotional": -0.433884,
+        "intellectual": 0.989821
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-04",
+      "day_number": 10405,
+      "cycles": {
+        "physical": 0.631088,
+        "emotional": -0.62349,
+        "intellectual": 0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-05",
+      "day_number": 10406,
+      "cycles": {
+        "physical": 0.398401,
+        "emotional": -0.781831,
+        "intellectual": 0.866025
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-06",
+      "day_number": 10407,
+      "cycles": {
+        "physical": 0.136167,
+        "emotional": -0.900969,
+        "intellectual": 0.75575
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-07",
+      "day_number": 10408,
+      "cycles": {
+        "physical": -0.136167,
+        "emotional": -0.974928,
+        "intellectual": 0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-08",
+      "day_number": 10409,
+      "cycles": {
+        "physical": -0.398401,
+        "emotional": -1.0,
+        "intellectual": 0.458227
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-09",
+      "day_number": 10410,
+      "cycles": {
+        "physical": -0.631088,
+        "emotional": -0.974928,
+        "intellectual": 0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-10",
+      "day_number": 10411,
+      "cycles": {
+        "physical": -0.81697,
+        "emotional": -0.900969,
+        "intellectual": 0.095056
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-11",
+      "day_number": 10412,
+      "cycles": {
+        "physical": -0.942261,
+        "emotional": -0.781831,
+        "intellectual": -0.095056
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-12",
+      "day_number": 10413,
+      "cycles": {
+        "physical": -0.997669,
+        "emotional": -0.62349,
+        "intellectual": -0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-13",
+      "day_number": 10414,
+      "cycles": {
+        "physical": -0.979084,
+        "emotional": -0.433884,
+        "intellectual": -0.458227
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-14",
+      "day_number": 10415,
+      "cycles": {
+        "physical": -0.887885,
+        "emotional": -0.222521,
+        "intellectual": -0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-15",
+      "day_number": 10416,
+      "cycles": {
+        "physical": -0.730836,
+        "emotional": -0.0,
+        "intellectual": -0.75575
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-02-16",
+      "day_number": 10417,
+      "cycles": {
+        "physical": -0.519584,
+        "emotional": 0.222521,
+        "intellectual": -0.866025
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-17",
+      "day_number": 10418,
+      "cycles": {
+        "physical": -0.269797,
+        "emotional": 0.433884,
+        "intellectual": -0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-18",
+      "day_number": 10419,
+      "cycles": {
+        "physical": 0.0,
+        "emotional": 0.62349,
+        "intellectual": -0.989821
+      },
+      "critical_days": [
+        "physical_positive"
+      ]
+    },
+    {
+      "date": "2024-02-19",
+      "day_number": 10420,
+      "cycles": {
+        "physical": 0.269797,
+        "emotional": 0.781831,
+        "intellectual": -0.998867
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-20",
+      "day_number": 10421,
+      "cycles": {
+        "physical": 0.519584,
+        "emotional": 0.900969,
+        "intellectual": -0.971812
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-21",
+      "day_number": 10422,
+      "cycles": {
+        "physical": 0.730836,
+        "emotional": 0.974928,
+        "intellectual": -0.909632
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-22",
+      "day_number": 10423,
+      "cycles": {
+        "physical": 0.887885,
+        "emotional": 1.0,
+        "intellectual": -0.814576
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-23",
+      "day_number": 10424,
+      "cycles": {
+        "physical": 0.979084,
+        "emotional": 0.974928,
+        "intellectual": -0.690079
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-24",
+      "day_number": 10425,
+      "cycles": {
+        "physical": 0.997669,
+        "emotional": 0.900969,
+        "intellectual": -0.540641
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-25",
+      "day_number": 10426,
+      "cycles": {
+        "physical": 0.942261,
+        "emotional": 0.781831,
+        "intellectual": -0.371662
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-26",
+      "day_number": 10427,
+      "cycles": {
+        "physical": 0.81697,
+        "emotional": 0.62349,
+        "intellectual": -0.189251
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-27",
+      "day_number": 10428,
+      "cycles": {
+        "physical": 0.631088,
+        "emotional": 0.433884,
+        "intellectual": 0.0
+      },
+      "critical_days": [
+        "intellectual_positive"
+      ]
+    },
+    {
+      "date": "2024-02-28",
+      "day_number": 10429,
+      "cycles": {
+        "physical": 0.398401,
+        "emotional": 0.222521,
+        "intellectual": 0.189251
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-02-29",
+      "day_number": 10430,
+      "cycles": {
+        "physical": 0.136167,
+        "emotional": -0.0,
+        "intellectual": 0.371662
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-03-01",
+      "day_number": 10431,
+      "cycles": {
+        "physical": -0.136167,
+        "emotional": -0.222521,
+        "intellectual": 0.540641
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-02",
+      "day_number": 10432,
+      "cycles": {
+        "physical": -0.398401,
+        "emotional": -0.433884,
+        "intellectual": 0.690079
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-03",
+      "day_number": 10433,
+      "cycles": {
+        "physical": -0.631088,
+        "emotional": -0.62349,
+        "intellectual": 0.814576
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-04",
+      "day_number": 10434,
+      "cycles": {
+        "physical": -0.81697,
+        "emotional": -0.781831,
+        "intellectual": 0.909632
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-05",
+      "day_number": 10435,
+      "cycles": {
+        "physical": -0.942261,
+        "emotional": -0.900969,
+        "intellectual": 0.971812
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-06",
+      "day_number": 10436,
+      "cycles": {
+        "physical": -0.997669,
+        "emotional": -0.974928,
+        "intellectual": 0.998867
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-07",
+      "day_number": 10437,
+      "cycles": {
+        "physical": -0.979084,
+        "emotional": -1.0,
+        "intellectual": 0.989821
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-08",
+      "day_number": 10438,
+      "cycles": {
+        "physical": -0.887885,
+        "emotional": -0.974928,
+        "intellectual": 0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-09",
+      "day_number": 10439,
+      "cycles": {
+        "physical": -0.730836,
+        "emotional": -0.900969,
+        "intellectual": 0.866025
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-10",
+      "day_number": 10440,
+      "cycles": {
+        "physical": -0.519584,
+        "emotional": -0.781831,
+        "intellectual": 0.75575
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-11",
+      "day_number": 10441,
+      "cycles": {
+        "physical": -0.269797,
+        "emotional": -0.62349,
+        "intellectual": 0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-12",
+      "day_number": 10442,
+      "cycles": {
+        "physical": -0.0,
+        "emotional": -0.433884,
+        "intellectual": 0.458227
+      },
+      "critical_days": [
+        "physical_negative"
+      ]
+    },
+    {
+      "date": "2024-03-13",
+      "day_number": 10443,
+      "cycles": {
+        "physical": 0.269797,
+        "emotional": -0.222521,
+        "intellectual": 0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-14",
+      "day_number": 10444,
+      "cycles": {
+        "physical": 0.519584,
+        "emotional": -0.0,
+        "intellectual": 0.095056
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-03-15",
+      "day_number": 10445,
+      "cycles": {
+        "physical": 0.730836,
+        "emotional": 0.222521,
+        "intellectual": -0.095056
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-16",
+      "day_number": 10446,
+      "cycles": {
+        "physical": 0.887885,
+        "emotional": 0.433884,
+        "intellectual": -0.281733
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-17",
+      "day_number": 10447,
+      "cycles": {
+        "physical": 0.979084,
+        "emotional": 0.62349,
+        "intellectual": -0.458227
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-18",
+      "day_number": 10448,
+      "cycles": {
+        "physical": 0.997669,
+        "emotional": 0.781831,
+        "intellectual": -0.618159
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-19",
+      "day_number": 10449,
+      "cycles": {
+        "physical": 0.942261,
+        "emotional": 0.900969,
+        "intellectual": -0.75575
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-20",
+      "day_number": 10450,
+      "cycles": {
+        "physical": 0.81697,
+        "emotional": 0.974928,
+        "intellectual": -0.866025
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-21",
+      "day_number": 10451,
+      "cycles": {
+        "physical": 0.631088,
+        "emotional": 1.0,
+        "intellectual": -0.945001
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-22",
+      "day_number": 10452,
+      "cycles": {
+        "physical": 0.398401,
+        "emotional": 0.974928,
+        "intellectual": -0.989821
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-23",
+      "day_number": 10453,
+      "cycles": {
+        "physical": 0.136167,
+        "emotional": 0.900969,
+        "intellectual": -0.998867
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-24",
+      "day_number": 10454,
+      "cycles": {
+        "physical": -0.136167,
+        "emotional": 0.781831,
+        "intellectual": -0.971812
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-25",
+      "day_number": 10455,
+      "cycles": {
+        "physical": -0.398401,
+        "emotional": 0.62349,
+        "intellectual": -0.909632
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-26",
+      "day_number": 10456,
+      "cycles": {
+        "physical": -0.631088,
+        "emotional": 0.433884,
+        "intellectual": -0.814576
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-27",
+      "day_number": 10457,
+      "cycles": {
+        "physical": -0.81697,
+        "emotional": 0.222521,
+        "intellectual": -0.690079
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-28",
+      "day_number": 10458,
+      "cycles": {
+        "physical": -0.942261,
+        "emotional": -0.0,
+        "intellectual": -0.540641
+      },
+      "critical_days": [
+        "emotional_negative"
+      ]
+    },
+    {
+      "date": "2024-03-29",
+      "day_number": 10459,
+      "cycles": {
+        "physical": -0.997669,
+        "emotional": -0.222521,
+        "intellectual": -0.371662
+      },
+      "critical_days": []
+    },
+    {
+      "date": "2024-03-30",
+      "day_number": 10460,
+      "cycles": {
+        "physical": -0.979084,
+        "emotional": -0.433884,
+        "intellectual": -0.189251
+      },
+      "critical_days": []
+    }
+  ]
+}
