@@ -35,9 +35,12 @@ def main():
     tests = [
         (["uv", "run", "python", "manage.py", "check"], "Django System Check"),
         (["uv", "run", "python", "manage.py", "migrate", "--check"], "Migration Check"),
-        (["uv", "run", "ruff", "check", "biorhythm_api/", "api/", "biorhythm_data/"], "Ruff Linting"),
-        (["uv", "run", "ruff", "format", "--check", "biorhythm_api/", "api/", "biorhythm_data/"], "Ruff Formatting"),
-        (["uv", "run", "bandit", "-r", "biorhythm_api/", "api/", "--skip", "B104", "-q"], "Security Scan (Skip B104 dev setting)")
+        (["uv", "run", "ruff", "check", "biorhythm_api/", "api/", "biorhythm_data/"], 
+         "Ruff Linting"),
+        (["uv", "run", "ruff", "format", "--check", "biorhythm_api/", "api/", "biorhythm_data/"], 
+         "Ruff Formatting"),
+        (["uv", "run", "bandit", "-r", "biorhythm_api/", "api/", "--skip", "B104", "-q"], 
+         "Security Scan (Skip B104 dev setting)")
     ]
 
     passed = 0

@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import warnings
+from datetime import datetime, timedelta
+import json
+
+warnings.filterwarnings('ignore')
+
 # # 🔬 Comprehensive Biorhythm Analysis (Standalone)
 # 
 # This notebook demonstrates a complete analytical workflow for biorhythm data, perfect for data scientists and analysts exploring time series patterns. **This notebook is completely self-contained and works independently.**
@@ -71,9 +77,6 @@ print("🔧 STANDALONE BIORHYTHM ANALYSIS NOTEBOOK")
 print("=" * 50)
 print("\n📦 Checking dependencies...")
 
-import warnings
-warnings.filterwarnings('ignore')
-
 # Check and import dependencies with helpful error messages
 missing_packages = []
 
@@ -121,14 +124,11 @@ if missing_packages:
     print("\nThen restart the notebook kernel (Kernel → Restart).")
     raise ImportError(f"Missing required packages: {', '.join(missing_packages)}")
 
-from datetime import datetime, timedelta
-import json
-
 # Configure plotting for better visualization
 try:
     plt.style.use('seaborn-v0_8')
     print("✅ Using seaborn-v0_8 style")
-except:
+except Exception:
     plt.style.use('default')
     print("✅ Using default matplotlib style")
 
@@ -228,7 +228,7 @@ BIRTHDATE = datetime(1990, 5, 15)  # Example person born May 15, 1990
 START_DATE = datetime(2024, 1, 1)  # Analysis start date
 ANALYSIS_PERIOD = 365              # One year of data
 
-print(f"📅 Generating biorhythm data for:")
+print("📅 Generating biorhythm data for:")
 print(f"   Birth date: {BIRTHDATE.strftime('%Y-%m-%d')}")
 print(f"   Analysis period: {START_DATE.strftime('%Y-%m-%d')} to {(START_DATE + timedelta(days=ANALYSIS_PERIOD-1)).strftime('%Y-%m-%d')}")
 print(f"   Duration: {ANALYSIS_PERIOD} days")
@@ -237,7 +237,7 @@ print(f"   Duration: {ANALYSIS_PERIOD} days")
 calc = BiorhythmCalculator(days=ANALYSIS_PERIOD)
 raw_data = calc.generate_timeseries_json(BIRTHDATE, START_DATE)
 
-print(f"\n✅ Data generated successfully!")
+print("\n✅ Data generated successfully!")
 print(f"   Metadata keys: {list(raw_data.keys())}")
 print(f"   Time series entries: {len(raw_data['timeseries'])}")
 
@@ -420,7 +420,7 @@ ax2.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print(f"📊 Visualization complete!")
+print("📊 Visualization complete!")
 print(f"   Critical days found: {len(critical_days)} out of {len(df)} ({len(critical_days)/len(df)*100:.1f}%)")
 
 
