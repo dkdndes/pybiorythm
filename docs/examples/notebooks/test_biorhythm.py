@@ -144,15 +144,15 @@ print("\n🧮 Using standalone mathematical implementation")
 print("   (No PyBiorythm library required)")
 
 class BiorhythmCalculator:
-    \"\"\"Standalone biorhythm calculator using pure mathematics.\"\"\"
+    """Standalone biorhythm calculator using pure mathematics."""
 
-    def __init__(self, days=30, width=55, orientation=\"vertical\"):
+    def __init__(self, days=30, width=55, orientation="vertical"):
         self.days = days
         self.width = width
         self.orientation = orientation
 
     def calculate_biorhythm_values(self, birthdate, target_date):
-        \"\"\"Calculate biorhythm values for a specific date.\"\"\"
+        """Calculate biorhythm values for a specific date."""
         day_number = (target_date - birthdate).days
 
         physical = np.sin(2 * np.pi * day_number / 23)
@@ -162,7 +162,7 @@ class BiorhythmCalculator:
         return physical, emotional, intellectual
 
     def generate_timeseries_json(self, birthdate, start_date=None):
-        \"\"\"Generate complete timeseries data in JSON format.\"\"\"
+        """Generate complete timeseries data in JSON format."""
         if start_date is None:
             start_date = datetime.now()
 
@@ -186,30 +186,30 @@ class BiorhythmCalculator:
                 critical_days.append(f"intellectual_{'positive' if intellectual >= 0 else 'negative'}")
 
             entry = {
-                \"date\": current_date.strftime('%Y-%m-%d'),
-                \"day_number\": day_number,
-                \"cycles\": {
-                    \"physical\": round(physical, 6),
-                    \"emotional\": round(emotional, 6),
-                    \"intellectual\": round(intellectual, 6)
+                "date": current_date.strftime('%Y-%m-%d'),
+                "day_number": day_number,
+                "cycles": {
+                    "physical": round(physical, 6),
+                    "emotional": round(emotional, 6),
+                    "intellectual": round(intellectual, 6)
                 },
-                \"critical_days\": critical_days
+                "critical_days": critical_days
             }
             timeseries.append(entry)
 
         return {
-            \"metadata\": {
-                \"birthdate\": birthdate.strftime('%Y-%m-%d'),
-                \"chart_start_date\": start_date.strftime('%Y-%m-%d'),
-                \"chart_period_days\": self.days,
-                \"generation_timestamp\": datetime.now().isoformat(),
-                \"cycles\": {
-                    \"physical\": {\"period_days\": 23, \"description\": \"Physical cycle\"},
-                    \"emotional\": {\"period_days\": 28, \"description\": \"Emotional cycle\"},
-                    \"intellectual\": {\"period_days\": 33, \"description\": \"Intellectual cycle\"}
+            "metadata": {
+                "birthdate": birthdate.strftime('%Y-%m-%d'),
+                "chart_start_date": start_date.strftime('%Y-%m-%d'),
+                "chart_period_days": self.days,
+                "generation_timestamp": datetime.now().isoformat(),
+                "cycles": {
+                    "physical": {"period_days": 23, "description": "Physical cycle"},
+                    "emotional": {"period_days": 28, "description": "Emotional cycle"},
+                    "intellectual": {"period_days": 33, "description": "Intellectual cycle"}
                 }
             },
-            \"timeseries\": timeseries
+            "timeseries": timeseries
         }
 
 print("🔬 Ready for biorhythm analysis!")
