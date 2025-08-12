@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "biorythm"
-version = "2.8.0-dev.7"
+dynamic = ["version"]
 description = "A Python library for biorhythm calculations"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -78,14 +78,19 @@ docs = [
     "mkdocs-mermaid2-plugin>=1.2.1",
 ]
 
-# Version is managed by semantic-release only
-# No hatchling VCS versioning to avoid conflicts
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "biorythm/_version.py"
 
 [tool.semantic_release]
-version_toml = ["pyproject.toml:project.version"]
 build_command = "uv build"
 dist_path = "dist/"
 upload_to_vcs_release = true
+version_variables = [
+    "biorythm/__init__.py:__version__",
+]
 
 [tool.semantic_release.branches.main]
 match = "main"

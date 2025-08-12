@@ -130,16 +130,27 @@ This repository uses comprehensive GitHub Actions workflows for CI/CD, security,
 - `vulnerability-report.json` - Security assessment
 
 ### 7. Semantic Release (`semantic-release.yml`)
-**Triggers:** Push to main, manual dispatch
+**Triggers:** Push to main/develop only (NO feature branches)
 **Purpose:** Automated version management and release
 
+**Branch-Specific Behavior:**
+- **Main Branch**: Full production releases (1.0.0, 1.1.0, 2.0.0)
+- **Develop Branch**: Prerelease versions (1.0.0-dev.1, 1.0.0-dev.2)
+- **Feature Branches**: NO execution (prevents circular references)
+
 **Features:**
-- **Conventional Commits**: Automatic version calculation
-- **Changelog Generation**: Automated release notes
+- **Conventional Commits**: Automatic version calculation from commit messages
+- **Dynamic Versioning**: Git tags as single source of truth, no file conflicts
+- **Changelog Generation**: Automated release notes from conventional commits
 - **Version Tagging**: Git tag creation with semantic versioning
-- **Multi-file Updates**: Version synchronization across files
-- **Release Artifacts**: GitHub release creation
-- **Integration**: Triggers Docker and SBOM workflows
+- **Branch Protection**: Only runs on release branches (main/develop)
+- **Release Artifacts**: GitHub release creation for main branch only
+- **Integration**: Triggers Docker and SBOM workflows for production releases
+
+**Fixed Issues:**
+- ✅ No more "Detached HEAD" errors on feature branches
+- ✅ No circular version conflicts between files and semantic-release
+- ✅ Clear separation: feature testing vs. release automation
 
 ### 8. Documentation Build (`docs.yml`)
 **Triggers:** Push to main, PRs to main
