@@ -5,13 +5,6 @@ on:
     branches:
       - main
       - develop
-      - 'feat/**'
-      - 'fix/**'
-      - 'chore/**'
-  pull_request:
-    branches:
-      - main
-      - develop
   workflow_dispatch:
 
 permissions:
@@ -68,17 +61,7 @@ jobs:
           git commit -m "chore: create initial CHANGELOG.md [skip ci]" || true
         fi
 
-    - name: Run Semantic Release (Dry Run for Feature Branches)
-      if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        echo "Running semantic-release dry run for feature branch..."
-        echo "Current branch: ${{ github.ref }}"
-        uv run semantic-release version --print || echo "No release needed for feature branch"
-
-    - name: Run Semantic Release (Full Release)
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    - name: Run Semantic Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_COMMITTER_NAME: "semantic-release"
@@ -87,7 +70,7 @@ jobs:
         GIT_AUTHOR_EMAIL: "semantic-release@github.com"
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
-        echo "Running semantic-release full process for main/develop branch..."
+        echo "Running semantic-release process..."
         echo "Current branch: ${{ github.ref }}"
         
         echo "Running semantic-release version check..."
@@ -100,7 +83,7 @@ jobs:
         uv run semantic-release publish
 
     - name: Update version in files
-      if: success() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+      if: success()
       run: |
         # Get the new version from git tags
         NEW_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
