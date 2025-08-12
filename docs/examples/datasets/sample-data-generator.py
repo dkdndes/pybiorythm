@@ -37,7 +37,6 @@ from datetime import datetime, timedelta
 from pathlib import Path
 import argparse
 import math
-import sys
 
 # Always use mathematical fallback for standalone operation
 BIORYTHM_AVAILABLE = False
@@ -424,12 +423,12 @@ Biorhythm theory is considered pseudoscience. These datasets are provided for ed
     files_created.append(str(readme_file))
     
     # Summary
-    print(f"\n✅ Dataset generation complete!")
+    print("\n✅ Dataset generation complete!")
     print(f"Files created: {len(files_created)}")
     for file in files_created:
         print(f"  - {file}")
     
-    print(f"\n📊 Ready for analysis!")
+    print("\n📊 Ready for analysis!")
     print(f"Total data points generated: {sum(len(d.get('timeseries', [])) if isinstance(d, dict) and 'timeseries' in d else sum(len(sub_d.get('timeseries', [])) for sub_d in d.values() if isinstance(sub_d, dict)) for d in datasets.values())}")
 
 if __name__ == "__main__":

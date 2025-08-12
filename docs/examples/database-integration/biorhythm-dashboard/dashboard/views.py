@@ -7,15 +7,12 @@ interactive Plotly visualizations using HTMX for dynamic updates.
 
 import logging
 from datetime import date, datetime, timedelta
-from typing import Dict, Any, Optional
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.cache import never_cache
-from django.core.cache import cache
-from django.conf import settings
 
 from .services import api_client
 from .plotly_utils import (

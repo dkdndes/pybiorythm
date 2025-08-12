@@ -7,8 +7,8 @@ server that manages biorhythm data and calculations.
 
 import requests
 import logging
-from datetime import date, datetime
-from typing import Dict, List, Optional, Any
+from datetime import date
+from typing import Dict, Optional, Any
 from django.conf import settings
 from django.core.cache import cache
 

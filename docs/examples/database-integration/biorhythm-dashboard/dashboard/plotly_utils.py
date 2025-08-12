@@ -6,12 +6,10 @@ from the PyBiorythm notebooks, adapted for web display with HTMX integration.
 """
 
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.utils import PlotlyJSONEncoder
-from datetime import datetime, date, timedelta
 import json
 import pandas as pd
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from django.conf import settings
 
 
@@ -113,9 +111,9 @@ def create_biorhythm_line_chart(biorhythm_data: List[Dict], person_name: str) ->
     original_df['date'] = pd.to_datetime(original_df['date'])
     
     critical_dates = original_df[
-        (original_df['is_physical_critical'] == True) | 
-        (original_df['is_emotional_critical'] == True) | 
-        (original_df['is_intellectual_critical'] == True)
+        (original_df['is_physical_critical']) | 
+        (original_df['is_emotional_critical']) | 
+        (original_df['is_intellectual_critical'])
     ]['date']
     
     if not critical_dates.empty:
@@ -158,7 +156,7 @@ def create_biorhythm_line_chart(biorhythm_data: List[Dict], person_name: str) ->
     )
     
     # Configure Plotly settings
-    config = settings.PLOTLY_CONFIG.copy()
+    settings.PLOTLY_CONFIG.copy()
     
     return json.dumps(fig, cls=PlotlyJSONEncoder)
 

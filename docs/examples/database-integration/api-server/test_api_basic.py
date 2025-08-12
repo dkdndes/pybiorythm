@@ -8,8 +8,9 @@ import json
 import subprocess
 import sys
 import time
-from urllib.request import urlopen
 from urllib.error import URLError
+from urllib.request import urlopen
+
 
 def test_django_check():
     """Test that Django system check passes."""
@@ -19,7 +20,7 @@ def test_django_check():
         capture_output=True,
         text=True
     )
-    
+
     if result.returncode == 0:
         print("✅ Django system check passed")
         return True
@@ -35,7 +36,7 @@ def test_migrations():
         capture_output=True,
         text=True
     )
-    
+
     if result.returncode == 0:
         print("✅ Database migrations are up to date")
         return True
@@ -46,7 +47,7 @@ def test_migrations():
 def test_server_start():
     """Test that the server can start."""
     print("Testing server startup...")
-    
+
     # Start server in background
     process = subprocess.Popen(
         ["uv", "run", "python", "manage.py", "runserver", "127.0.0.1:8003"],
@@ -54,22 +55,22 @@ def test_server_start():
         stderr=subprocess.PIPE,
         text=True
     )
-    
+
     # Wait for server to start
     time.sleep(3)
-    
+
     try:
         # Test root API endpoint
         response = urlopen("http://127.0.0.1:8003/")
         data = json.loads(response.read().decode())
-        
+
         if "api_name" in data:
             print("✅ Server started and root API endpoint accessible")
             success = True
         else:
             print("❌ API endpoint returned unexpected data")
             success = False
-            
+
     except URLError as e:
         print(f"❌ Could not connect to server: {e}")
         success = False
@@ -80,29 +81,29 @@ def test_server_start():
         # Stop server
         process.terminate()
         process.wait()
-    
+
     return success
 
 def main():
     """Run all tests."""
     print("🧪 Running API Server Basic Tests\n")
-    
+
     tests = [
         test_django_check,
-        test_migrations, 
+        test_migrations,
         test_server_start
     ]
-    
+
     passed = 0
     total = len(tests)
-    
+
     for test in tests:
         if test():
             passed += 1
         print()
-    
+
     print(f"📊 Test Results: {passed}/{total} tests passed")
-    
+
     if passed == total:
         print("🎉 All tests passed!")
         sys.exit(0)

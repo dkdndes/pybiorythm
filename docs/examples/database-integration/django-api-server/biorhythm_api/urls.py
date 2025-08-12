@@ -9,7 +9,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from rest_framework.permissions import AllowAny
 
 @require_http_methods(["GET"])
 def api_root(request):

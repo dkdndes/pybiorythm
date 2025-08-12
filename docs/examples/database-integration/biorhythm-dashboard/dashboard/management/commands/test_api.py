@@ -85,7 +85,7 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 "🎉 API test completed!\n"
-                f"   Dashboard URL: http://localhost:8000/\n"
+                "   Dashboard URL: http://localhost:8000/\n"
                 "   You can now start the dashboard server with: python manage.py runserver"
             )
         )

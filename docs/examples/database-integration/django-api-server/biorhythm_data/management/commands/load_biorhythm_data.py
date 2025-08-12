@@ -16,7 +16,6 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction, models
 from datetime import datetime, date
 from biorhythm_data.models import Person, BiorhythmCalculation, BiorhythmData
-import sys
 
 # Import PyBiorythm
 try:
@@ -124,7 +123,7 @@ class Command(BaseCommand):
                     "Use --force to overwrite."
                 )
             else:
-                self.stdout.write(f"Person exists, will update data (--force specified)")
+                self.stdout.write("Person exists, will update data (--force specified)")
         except Person.DoesNotExist:
             person = None
 

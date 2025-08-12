@@ -11,19 +11,16 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.pagination import PageNumberPagination
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
 from django.db.models import Q, Count, Avg, Min, Max
 from django.utils import timezone
 from datetime import datetime, date, timedelta
-import pandas as pd
 
 from biorhythm_data.models import Person, BiorhythmCalculation, BiorhythmData, BiorhythmAnalysis
 from .serializers import (
     PersonSerializer, BiorhythmCalculationSerializer, BiorhythmDataSerializer,
     BiorhythmDataSimpleSerializer, BiorhythmAnalysisSerializer, UserSerializer,
-    PersonBiorhythmTimeseriesSerializer, BiorhythmCalculationRequestSerializer,
-    TokenAuthSerializer, ApiInfoSerializer, StatisticsSerializer
+    BiorhythmCalculationRequestSerializer,
+    ApiInfoSerializer, StatisticsSerializer
 )
 
 # Import PyBiorythm

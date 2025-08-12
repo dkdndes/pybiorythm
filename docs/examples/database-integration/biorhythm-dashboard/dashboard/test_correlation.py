@@ -41,7 +41,6 @@ def test_simple_heatmap():
 
 def test_real_correlation_heatmap():
     """Test with real correlation data similar to the actual function."""
-    import pandas as pd
     
     # Simulate real biorhythm data
     import math
