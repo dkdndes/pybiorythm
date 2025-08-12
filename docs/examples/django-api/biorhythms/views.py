@@ -178,11 +178,20 @@ def api_home(request):
         <style>
             body { font-family: Arial, sans-serif; margin: 40px; }
             .container { max-width: 800px; }
-            .endpoint { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
-            .example { background: #e8f4f8; padding: 10px; margin: 5px 0; border-radius: 3px; }
-            button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer; }
+            .endpoint { 
+                background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; 
+            }
+            .example { 
+                background: #e8f4f8; padding: 10px; margin: 5px 0; border-radius: 3px; 
+            }
+            button { 
+                background: #007cba; color: white; padding: 10px 20px; 
+                border: none; border-radius: 3px; cursor: pointer; 
+            }
             button:hover { background: #005a87; }
-            input { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; }
+            input { 
+                padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; 
+            }
         </style>
     </head>
     <body>

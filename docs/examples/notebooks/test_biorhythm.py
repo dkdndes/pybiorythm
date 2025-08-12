@@ -9,7 +9,9 @@ warnings.filterwarnings("ignore")
 
 # # 🔬 Comprehensive Biorhythm Analysis (Standalone)
 #
-# This notebook demonstrates a complete analytical workflow for biorhythm data, perfect for data scientists and analysts exploring time series patterns. **This notebook is completely self-contained and works independently.**
+# This notebook demonstrates a complete analytical workflow for biorhythm data, perfect
+# for data scientists and analysts exploring time series patterns. **This notebook is
+# completely self-contained and works independently.**
 #
 # ## 📋 **What You'll Accomplish:**
 # - Generate and prepare biorhythm data for analysis
@@ -67,7 +69,9 @@ warnings.filterwarnings("ignore")
 #
 # ---
 #
-# ⚠️ **Scientific Disclaimer:** Biorhythm theory is considered pseudoscience. This analysis is for educational and methodological demonstration purposes only. The techniques shown apply to legitimate cyclical data analysis."
+# ⚠️ **Scientific Disclaimer:** Biorhythm theory is considered pseudoscience. This
+# analysis is for educational and methodological demonstration purposes only. The
+# techniques shown apply to legitimate cyclical data analysis."
 
 # In[ ]:
 
@@ -234,7 +238,8 @@ print("=" * 50)
 
 # ## 1. Data Generation and Preparation
 #
-# Let's generate a comprehensive biorhythm dataset for analysis. We'll use one year of data to capture seasonal patterns and cycle interactions.
+# Let's generate a comprehensive biorhythm dataset for analysis. We'll use one year of
+# data to capture seasonal patterns and cycle interactions.
 
 # In[ ]:
 
@@ -246,9 +251,8 @@ ANALYSIS_PERIOD = 365  # One year of data
 
 print("📅 Generating biorhythm data for:")
 print(f"   Birth date: {BIRTHDATE.strftime('%Y-%m-%d')}")
-print(
-    f"   Analysis period: {START_DATE.strftime('%Y-%m-%d')} to {(START_DATE + timedelta(days=ANALYSIS_PERIOD - 1)).strftime('%Y-%m-%d')}"
-)
+end_date = (START_DATE + timedelta(days=ANALYSIS_PERIOD - 1)).strftime('%Y-%m-%d')
+print(f"   Analysis period: {START_DATE.strftime('%Y-%m-%d')} to {end_date}")
 print(f"   Duration: {ANALYSIS_PERIOD} days")
 
 # Generate biorhythm data
@@ -378,16 +382,19 @@ for i, cycle in enumerate(cycle_columns):
     # Print results
     print(f"\n{cycle.upper()} CYCLE:")
     print(
-        f"  Range: {results['min_value']:.3f} to {results['max_value']:.3f} ({'✅' if results['range_valid'] else '❌'})"
+        f"  Range: {results['min_value']:.3f} to {results['max_value']:.3f} "
+        f"({'✅' if results['range_valid'] else '❌'})"
     )
     print(f"  Mean: {results['mean']:.4f} ({'✅' if results['mean_valid'] else '❌'})")
     print(f"  Std: {results['std']:.3f} ({'✅' if results['std_valid'] else '❌'})")
     print(
-        f"  Non-normal: {'✅' if results['non_normal'] else '❌'} (p={results['normality_p']:.4f})"
+        f"  Non-normal: {'✅' if results['non_normal'] else '❌'} "
+        f"(p={results['normality_p']:.4f})"
     )
     if "period_autocorr" in results:
         print(
-            f"  Periodic: {'✅' if results['periodic'] else '❌'} (r={results['period_autocorr']:.3f})"
+            f"  Periodic: {'✅' if results['periodic'] else '❌'} "
+            f"(r={results['period_autocorr']:.3f})"
         )
 
 print("\n💡 Expected properties for sine waves:")
@@ -472,7 +479,8 @@ plt.show()
 
 print("📊 Visualization complete!")
 print(
-    f"   Critical days found: {len(critical_days)} out of {len(df)} ({len(critical_days) / len(df) * 100:.1f}%)"
+    f"   Critical days found: {len(critical_days)} out of {len(df)} "
+    f"({len(critical_days) / len(df) * 100:.1f}%)"
 )
 
 
@@ -614,7 +622,8 @@ for cycle in cycle_columns:
     f_stat, p_value = stats.f_oneway(*monthly_groups)
     significance = "Significant" if p_value < 0.05 else "Not significant"
     print(
-        f"Monthly variation - {cycle.title()}: F={f_stat:.3f}, p={p_value:.4f} ({significance})"
+        f"Monthly variation - {cycle.title()}: F={f_stat:.3f}, "
+        f"p={p_value:.4f} ({significance})"
     )
 
 # Test weekly differences
@@ -624,7 +633,8 @@ for cycle in cycle_columns:
     f_stat, p_value = stats.f_oneway(*weekly_groups)
     significance = "Significant" if p_value < 0.05 else "Not significant"
     print(
-        f"Weekly variation - {cycle.title()}: F={f_stat:.3f}, p={p_value:.4f} ({significance})"
+        f"Weekly variation - {cycle.title()}: F={f_stat:.3f}, "
+        f"p={p_value:.4f} ({significance})"
     )
 
 
@@ -681,13 +691,15 @@ for cycle, color in colors.items():
 
         print(f"\n{cycle.upper()}:")
         print(
-            f"  Critical days: {len(critical_days_cycle)} ({critical_frequency * 100:.1f}% of year)"
+            f"  Critical days: {len(critical_days_cycle)} "
+            f"({critical_frequency * 100:.1f}% of year)"
         )
         print(f"  Expected: {expected_frequency * 100:.1f}%")
         print(f"  Ratio: {critical_frequency / expected_frequency:.2f}")
         if critical_intervals.notna().sum() > 0:
             print(
-                f"  Mean interval: {critical_intervals.mean():.1f} ± {critical_intervals.std():.1f} days"
+                f"  Mean interval: {critical_intervals.mean():.1f} ± "
+                f"{critical_intervals.std():.1f} days"
             )
 
         # Plot critical days
@@ -741,7 +753,8 @@ print(
     f"\n📈 Total critical days in dataset: {len(df[df['critical_days'].str.len() > 0])}"
 )
 print(
-    f"📅 Critical day distribution: Fairly even = {critical_by_month.std():.1f} std deviation"
+    f"📅 Critical day distribution: Fairly even = "
+    f"{critical_by_month.std():.1f} std deviation"
 )
 
 
@@ -813,7 +826,7 @@ BIORHYTHM ANALYSIS REPORT
 
 Analysis Date: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 Subject Birthdate: {BIRTHDATE.strftime("%Y-%m-%d")}
-Analysis Period: {START_DATE.strftime("%Y-%m-%d")} to {(START_DATE + timedelta(days=ANALYSIS_PERIOD - 1)).strftime("%Y-%m-%d")}
+Analysis Period: {START_DATE.strftime("%Y-%m-%d")} to {end_date}
 Total Days: {ANALYSIS_PERIOD}
 
 KEY FINDINGS:
@@ -821,8 +834,13 @@ KEY FINDINGS:
 
 Statistical Properties:
 • All cycles show expected mathematical properties of sine waves
-• Mean values close to zero: Physical={validation_results["physical"]["mean"]:.4f}, Emotional={validation_results["emotional"]["mean"]:.4f}, Intellectual={validation_results["intellectual"]["mean"]:.4f}
-• Standard deviations near theoretical 0.707: Physical={validation_results["physical"]["std"]:.3f}, Emotional={validation_results["emotional"]["std"]:.3f}, Intellectual={validation_results["intellectual"]["std"]:.3f}
+• Mean values close to zero: Physical={validation_results["physical"]["mean"]:.4f}, 
+  Emotional={validation_results["emotional"]["mean"]:.4f}, 
+  Intellectual={validation_results["intellectual"]["mean"]:.4f}
+• Standard deviations near theoretical 0.707: 
+  Physical={validation_results["physical"]["std"]:.3f}, 
+  Emotional={validation_results["emotional"]["std"]:.3f}, 
+  Intellectual={validation_results["intellectual"]["std"]:.3f}
 
 Correlations:
 • Physical ↔ Emotional: {df["physical"].corr(df["emotional"]):.4f}
@@ -830,9 +848,12 @@ Correlations:
 • Emotional ↔ Intellectual: {df["emotional"].corr(df["intellectual"]):.4f}
 
 Critical Days:
-• Physical: {critical_analysis.get("physical", {}).get("count", 0)} days ({critical_analysis.get("physical", {}).get("frequency", 0) * 100:.1f}%)
-• Emotional: {critical_analysis.get("emotional", {}).get("count", 0)} days ({critical_analysis.get("emotional", {}).get("frequency", 0) * 100:.1f}%)
-• Intellectual: {critical_analysis.get("intellectual", {}).get("count", 0)} days ({critical_analysis.get("intellectual", {}).get("frequency", 0) * 100:.1f}%)
+• Physical: {critical_analysis.get("physical", {}).get("count", 0)} days 
+  ({critical_analysis.get("physical", {}).get("frequency", 0) * 100:.1f}%)
+• Emotional: {critical_analysis.get("emotional", {}).get("count", 0)} days 
+  ({critical_analysis.get("emotional", {}).get("frequency", 0) * 100:.1f}%)
+• Intellectual: {critical_analysis.get("intellectual", {}).get("count", 0)} days 
+  ({critical_analysis.get("intellectual", {}).get("frequency", 0) * 100:.1f}%)
 
 SCIENTIFIC DISCLAIMER:
 {"=" * 50}
@@ -857,9 +878,10 @@ print("• biorhythm_analysis_results.json - Analysis summary (JSON)")
 print("• biorhythm_timeseries_data.csv - Time series data (CSV)")
 print("• biorhythm_analysis_report.txt - Summary report (Text)")
 print(f"\n📊 Dataset size: {len(df):,} records")
-print(
-    f"💾 Total export size: ~{(len(json.dumps(analysis_summary)) + len(export_df.to_csv()) + len(report)) / 1024:.0f} KB"
-)
+total_size = (
+    len(json.dumps(analysis_summary)) + len(export_df.to_csv()) + len(report)
+) / 1024
+print(f"💾 Total export size: ~{total_size:.0f} KB")
 
 # Display final summary
 print(report)
@@ -891,10 +913,13 @@ print(report)
 # 5. **Statistical modeling** - Build predictive models
 #
 # ### 🔬 **Scientific Note:**
-# Remember that biorhythm theory lacks scientific evidence. This analysis demonstrates data science techniques using biorhythm calculations as practice data, but should not be used for making important life decisions.
+# Remember that biorhythm theory lacks scientific evidence. This analysis demonstrates
+# data science techniques using biorhythm calculations as practice data, but should not
+# be used for making important life decisions.
 #
 # ---
 #
 # **Ready for more?** Check out other notebooks in this collection:
 # - **[Correlation Study](correlation-study.ipynb)** - Advanced statistical analysis
-# - **[Visualization Gallery](visualization-gallery.ipynb)** - Chart examples with multiple libraries
+# - **[Visualization Gallery](visualization-gallery.ipynb)** - Chart examples with
+#   multiple libraries
