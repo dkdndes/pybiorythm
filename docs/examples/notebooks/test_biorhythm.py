@@ -684,7 +684,6 @@ analysis_summary = {
 }
 
 # Export to JSON
-import json
 with open('biorhythm_analysis_results.json', 'w') as f:
     json.dump(analysis_summary, f, indent=2, default=str)
 
