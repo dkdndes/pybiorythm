@@ -290,7 +290,7 @@ class BiorhythmCalculator:
         self, birthdate: datetime, plot_date: datetime
     ) -> None:
         """
-        Draws a 'wave matrix' for each cycle: rows = amplitude levels 
+        Draws a 'wave matrix' for each cycle: rows = amplitude levels
         (high=+1, low=-1), columns=days.
         """
         cycles = [

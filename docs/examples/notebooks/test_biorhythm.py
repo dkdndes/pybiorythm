@@ -251,7 +251,7 @@ ANALYSIS_PERIOD = 365  # One year of data
 
 print("📅 Generating biorhythm data for:")
 print(f"   Birth date: {BIRTHDATE.strftime('%Y-%m-%d')}")
-end_date = (START_DATE + timedelta(days=ANALYSIS_PERIOD - 1)).strftime('%Y-%m-%d')
+end_date = (START_DATE + timedelta(days=ANALYSIS_PERIOD - 1)).strftime("%Y-%m-%d")
 print(f"   Analysis period: {START_DATE.strftime('%Y-%m-%d')} to {end_date}")
 print(f"   Duration: {ANALYSIS_PERIOD} days")
 
