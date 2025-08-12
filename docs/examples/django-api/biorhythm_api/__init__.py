@@ -1,1 +1,0 @@
-# Biorhythm Django API
