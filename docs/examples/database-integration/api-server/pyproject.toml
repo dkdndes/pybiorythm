@@ -1,0 +1,83 @@
+[project]
+name = "pybiorythm-django-api-server-example"
+dynamic = ["version"]
+description = "Django ASGI REST API server example for biorhythm data with token authentication"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "django>=5.2.5",
+    "djangorestframework>=3.14.0",
+    "django-cors-headers>=4.0.0",
+    "python-dateutil>=2.8.0",
+    "pandas>=2.0.0",
+    "daphne>=4.0.0",
+    "channels>=4.0.0",
+    "python-dotenv>=1.0.0",
+    "biorythm @ git+https://github.com/dkdndes/pybiorythm.git",
+]
+
+[project.optional-dependencies]
+dev = [
+    "django-extensions",
+    "httpie",
+    "ruff>=0.1.0",
+    "bandit[toml]>=1.7.10",
+    "safety>=3.0.0",
+    "pytest-django",
+    "coverage>=7.0.0",
+]
+
+[tool.django]
+settings_module = "biorhythm_api.settings"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.targets.wheel]
+packages = ["biorhythm_api", "api"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "biorhythm_api.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/migrations/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/tests/*",
+    "manage.py",
+    "*/settings/*",
+    "*/wsgi.py",
+    "*/asgi.py",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings  
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.bandit]
+exclude_dirs = ["tests", "migrations"]
+skips = ["B101"]

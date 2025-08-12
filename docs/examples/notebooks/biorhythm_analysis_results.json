@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "analysis_date": "2025-08-10T16:40:13.747565",
+    "birthdate": "1990-05-15T00:00:00",
+    "period_start": "2024-01-01T00:00:00",
+    "period_days": 365,
+    "total_records": 365
+  },
+  "descriptive_statistics": {
+    "physical": {
+      "count": 365.0,
+      "mean": 0.0,
+      "std": 0.7107,
+      "min": -0.9977,
+      "25%": -0.7308,
+      "50%": 0.0,
+      "75%": 0.7308,
+      "max": 0.9977
+    },
+    "emotional": {
+      "count": 365.0,
+      "mean": -0.0027,
+      "std": 0.7089,
+      "min": -1.0,
+      "25%": -0.7818,
+      "50%": 0.0,
+      "75%": 0.6235,
+      "max": 1.0
+    },
+    "intellectual": {
+      "count": 365.0,
+      "mean": 0.0054,
+      "std": 0.71,
+      "min": -0.9989,
+      "25%": -0.6901,
+      "50%": 0.0,
+      "75%": 0.6901,
+      "max": 0.9989
+    }
+  },
+  "correlations": {
+    "physical": {
+      "physical": 1.0,
+      "emotional": 0.0117,
+      "intellectual": 0.0016,
+      "all_cycles_avg": 0.5816,
+      "cycle_variance": 0.0016
+    },
+    "emotional": {
+      "physical": 0.0117,
+      "emotional": 1.0,
+      "intellectual": 0.0082,
+      "all_cycles_avg": 0.5839,
+      "cycle_variance": -0.0178
+    },
+    "intellectual": {
+      "physical": 0.0016,
+      "emotional": 0.0082,
+      "intellectual": 1.0,
+      "all_cycles_avg": 0.579,
+      "cycle_variance": 0.0193
+    },
+    "all_cycles_avg": {
+      "physical": 0.5816,
+      "emotional": 0.5839,
+      "intellectual": 0.579,
+      "all_cycles_avg": 1.0,
+      "cycle_variance": 0.0017
+    },
+    "cycle_variance": {
+      "physical": 0.0016,
+      "emotional": -0.0178,
+      "intellectual": 0.0193,
+      "all_cycles_avg": 0.0017,
+      "cycle_variance": 1.0
+    }
+  },
+  "critical_days": {
+    "physical": {
+      "count": 15,
+      "frequency_percent": 4.10958904109589,
+      "mean_interval_days": 23.0
+    },
+    "emotional": {
+      "count": 26,
+      "frequency_percent": 7.123287671232877,
+      "mean_interval_days": 14.0
+    },
+    "intellectual": {
+      "count": 11,
+      "frequency_percent": 3.0136986301369864,
+      "mean_interval_days": 33.0
+    }
+  },
+  "seasonal_patterns": {
+    "monthly_averages": {
+      "physical": {
+        "1": 0.2099,
+        "2": -0.0499,
+        "3": -0.1718,
+        "4": 0.1776,
+        "5": 0.0,
+        "6": -0.1776,
+        "7": 0.1718,
+        "8": 0.0,
+        "9": -0.1776,
+        "10": 0.1718,
+        "11": 0.0272,
+        "12": -0.1958
+      },
+      "emotional": {
+        "1": -0.0952,
+        "2": -0.0311,
+        "3": -0.0593,
+        "4": -0.0074,
+        "5": 0.0413,
+        "6": 0.0561,
+        "7": 0.0952,
+        "8": 0.0744,
+        "9": 0.0219,
+        "10": -0.0212,
+        "11": -0.0468,
+        "12": -0.0625
+      },
+      "intellectual": {
+        "1": -0.0607,
+        "2": -0.0833,
+        "3": -0.0061,
+        "4": 0.0367,
+        "5": 0.0485,
+        "6": 0.096,
+        "7": 0.0624,
+        "8": 0.0523,
+        "9": 0.0453,
+        "10": -0.0,
+        "11": -0.0453,
+        "12": -0.0856
+      }
+    },
+    "weekly_averages": {
+      "physical": {
+        "Mon": -0.0,
+        "Tue": 0.0077,
+        "Wed": 0.0049,
+        "Thu": 0.0017,
+        "Fri": -0.0017,
+        "Sat": -0.0049,
+        "Sun": -0.0077
+      },
+      "emotional": {
+        "Mon": -0.0184,
+        "Tue": 0.0,
+        "Wed": -0.0,
+        "Thu": 0.0,
+        "Fri": 0.0,
+        "Sat": 0.0,
+        "Sun": 0.0
+      },
+      "intellectual": {
+        "Mon": 0.021,
+        "Tue": 0.0027,
+        "Wed": 0.0029,
+        "Thu": 0.003,
+        "Fri": 0.0029,
+        "Sat": 0.0028,
+        "Sun": 0.0026
+      }
+    }
+  },
+  "validation_results": {
+    "physical": {
+      "range_valid": true,
+      "mean_valid": true,
+      "std_valid": true,
+      "periodic": true
+    },
+    "emotional": {
+      "range_valid": true,
+      "mean_valid": true,
+      "std_valid": true,
+      "periodic": true
+    },
+    "intellectual": {
+      "range_valid": true,
+      "mean_valid": true,
+      "std_valid": true,
+      "periodic": true
+    }
+  }
+}
