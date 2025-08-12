@@ -8,6 +8,7 @@ from .serializers import BiorhythmRequestSerializer
 # Import PyBiorythm
 try:
     from biorythm import BiorhythmCalculator
+
     BIORYTHM_AVAILABLE = True
 except ImportError:
     BIORYTHM_AVAILABLE = False
@@ -16,153 +17,155 @@ except ImportError:
 class BiorhythmCalculationView(APIView):
     """
     Simple API endpoint to calculate biorhythm data using PyBiorythm.
-    
+
     POST /api/calculate/
     {
         "birthdate": "1990-05-15",
         "target_date": "2024-08-10",  // optional, defaults to today
         "days": 30                    // optional, defaults to 30
     }
-    
+
     Returns PyBiorythm JSON format with biorhythm calculations.
     """
-    
+
     def get(self, request):
         """GET endpoint with example usage information."""
-        return Response({
-            "message": "PyBiorythm Django API Example",
-            "endpoints": {
-                "calculate": "/api/calculate/",
-                "quick": "/api/quick/"
-            },
-            "example_request": {
-                "method": "POST",
-                "url": "/api/calculate/",
-                "body": {
-                    "birthdate": "1990-05-15",
-                    "target_date": "2024-08-10",
-                    "days": 30
-                }
-            },
-            "library_available": BIORYTHM_AVAILABLE
-        })
-    
+        return Response(
+            {
+                "message": "PyBiorythm Django API Example",
+                "endpoints": {"calculate": "/api/calculate/", "quick": "/api/quick/"},
+                "example_request": {
+                    "method": "POST",
+                    "url": "/api/calculate/",
+                    "body": {
+                        "birthdate": "1990-05-15",
+                        "target_date": "2024-08-10",
+                        "days": 30,
+                    },
+                },
+                "library_available": BIORYTHM_AVAILABLE,
+            }
+        )
+
     def post(self, request):
         """Calculate biorhythm data based on input parameters."""
-        
+
         if not BIORYTHM_AVAILABLE:
-            return Response({
-                "error": "PyBiorythm library not available",
-                "message": "Please install PyBiorythm: pip install git+https://github.com/dkdndes/pybiorythm.git"
-            }, status=status.HTTP_503_SERVICE_UNAVAILABLE)
-        
+            return Response(
+                {
+                    "error": "PyBiorythm library not available",
+                    "message": "Please install PyBiorythm: pip install git+https://github.com/dkdndes/pybiorythm.git",
+                },
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
         # Validate request data
         serializer = BiorhythmRequestSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response({
-                "error": "Invalid input data",
-                "details": serializer.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
+            return Response(
+                {"error": "Invalid input data", "details": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         # Extract validated data
         validated_data = serializer.validated_data
-        birthdate = validated_data['birthdate']
-        target_date = validated_data.get('target_date', datetime.now().date())
-        days = validated_data.get('days', 30)
-        
+        birthdate = validated_data["birthdate"]
+        target_date = validated_data.get("target_date", datetime.now().date())
+        days = validated_data.get("days", 30)
+
         try:
             # Create biorhythm calculator
             calc = BiorhythmCalculator(days=days)
-            
+
             # Convert dates to datetime objects
             birthdate_dt = datetime.combine(birthdate, datetime.min.time())
             target_date_dt = datetime.combine(target_date, datetime.min.time())
-            
+
             # Generate biorhythm data
-            biorhythm_data = calc.generate_timeseries_json(
-                birthdate_dt,
-                target_date_dt
-            )
-            
+            biorhythm_data = calc.generate_timeseries_json(birthdate_dt, target_date_dt)
+
             # Add request metadata
             response_data = {
                 "request_info": {
                     "birthdate": birthdate.isoformat(),
                     "target_date": target_date.isoformat(),
                     "days_calculated": days,
-                    "api_timestamp": datetime.now().isoformat()
+                    "api_timestamp": datetime.now().isoformat(),
                 },
-                "biorhythm_data": biorhythm_data
+                "biorhythm_data": biorhythm_data,
             }
-            
+
             return Response(response_data, status=status.HTTP_200_OK)
-            
+
         except Exception as e:
-            return Response({
-                "error": "Calculation failed",
-                "message": str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Calculation failed", "message": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 class QuickBiorhythmView(APIView):
     """
     Quick biorhythm calculation with minimal input.
-    
+
     GET /api/quick/?birthdate=1990-05-15&days=7
-    
+
     Returns biorhythm data for the specified birthdate and number of days.
     """
-    
+
     def get(self, request):
         """Quick calculation via GET parameters."""
-        
+
         if not BIORYTHM_AVAILABLE:
-            return JsonResponse({
-                "error": "PyBiorythm library not available"
-            }, status=503)
-        
+            return JsonResponse(
+                {"error": "PyBiorythm library not available"}, status=503
+            )
+
         # Get parameters from query string
-        birthdate_str = request.GET.get('birthdate')
-        days_str = request.GET.get('days', '7')
-        
+        birthdate_str = request.GET.get("birthdate")
+        days_str = request.GET.get("days", "7")
+
         if not birthdate_str:
-            return JsonResponse({
-                "error": "Missing required parameter: birthdate",
-                "example": "/api/quick/?birthdate=1990-05-15&days=7"
-            }, status=400)
-        
+            return JsonResponse(
+                {
+                    "error": "Missing required parameter: birthdate",
+                    "example": "/api/quick/?birthdate=1990-05-15&days=7",
+                },
+                status=400,
+            )
+
         try:
             # Parse parameters
-            birthdate = datetime.strptime(birthdate_str, '%Y-%m-%d')
+            birthdate = datetime.strptime(birthdate_str, "%Y-%m-%d")
             days = int(days_str)
-            
+
             if days < 1 or days > 365:
                 raise ValueError("Days must be between 1 and 365")
-            
+
             # Calculate biorhythm
             calc = BiorhythmCalculator(days=days)
-            biorhythm_data = calc.generate_timeseries_json(
-                birthdate,
-                datetime.now()
-            )
-            
+            biorhythm_data = calc.generate_timeseries_json(birthdate, datetime.now())
+
             # Return simple response
-            return JsonResponse({
-                "birthdate": birthdate_str,
-                "calculation_date": datetime.now().isoformat(),
-                "days": days,
-                "biorhythm_data": biorhythm_data
-            })
-            
+            return JsonResponse(
+                {
+                    "birthdate": birthdate_str,
+                    "calculation_date": datetime.now().isoformat(),
+                    "days": days,
+                    "biorhythm_data": biorhythm_data,
+                }
+            )
+
         except ValueError as e:
-            return JsonResponse({
-                "error": f"Invalid parameter: {str(e)}",
-                "example": "/api/quick/?birthdate=1990-05-15&days=7"
-            }, status=400)
+            return JsonResponse(
+                {
+                    "error": f"Invalid parameter: {str(e)}",
+                    "example": "/api/quick/?birthdate=1990-05-15&days=7",
+                },
+                status=400,
+            )
         except Exception as e:
-            return JsonResponse({
-                "error": f"Calculation failed: {str(e)}"
-            }, status=500)
+            return JsonResponse({"error": f"Calculation failed: {str(e)}"}, status=500)
 
 
 def api_home(request):
@@ -255,4 +258,4 @@ def api_home(request):
     </body>
     </html>
     """
-    return HttpResponse(html_content, content_type='text/html')
+    return HttpResponse(html_content, content_type="text/html")

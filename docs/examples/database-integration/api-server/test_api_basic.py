@@ -16,9 +16,7 @@ def test_django_check():
     """Test that Django system check passes."""
     print("Testing Django system check...")
     result = subprocess.run(
-        ["uv", "run", "python", "manage.py", "check"],
-        capture_output=True,
-        text=True
+        ["uv", "run", "python", "manage.py", "check"], capture_output=True, text=True
     )
 
     if result.returncode == 0:
@@ -28,13 +26,12 @@ def test_django_check():
         print(f"❌ Django system check failed: {result.stderr}")
         return False
 
+
 def test_migrations():
     """Test that migrations can be applied."""
     print("Testing database migrations...")
     result = subprocess.run(
-        ["uv", "run", "python", "manage.py", "migrate", "--check"],
-        capture_output=True,
-        text=True
+        ["uv", "run", "python", "manage.py", "migrate", "--check"], capture_output=True, text=True
     )
 
     if result.returncode == 0:
@@ -43,6 +40,7 @@ def test_migrations():
     else:
         print(f"❌ Database migrations failed: {result.stderr}")
         return False
+
 
 def test_server_start():
     """Test that the server can start."""
@@ -53,7 +51,7 @@ def test_server_start():
         ["uv", "run", "python", "manage.py", "runserver", "127.0.0.1:8003"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        text=True
+        text=True,
     )
 
     # Wait for server to start
@@ -84,15 +82,12 @@ def test_server_start():
 
     return success
 
+
 def main():
     """Run all tests."""
     print("🧪 Running API Server Basic Tests\n")
 
-    tests = [
-        test_django_check,
-        test_migrations,
-        test_server_start
-    ]
+    tests = [test_django_check, test_migrations, test_server_start]
 
     passed = 0
     total = len(tests)
@@ -110,6 +105,7 @@ def main():
     else:
         print("❌ Some tests failed")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

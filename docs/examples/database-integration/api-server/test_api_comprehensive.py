@@ -18,15 +18,17 @@ def start_server():
         ["uv", "run", "python", "manage.py", "runserver", "127.0.0.1:8004"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        text=True
+        text=True,
     )
     time.sleep(3)  # Wait for server to start
     return process
+
 
 def stop_server(process):
     """Stop the Django server."""
     process.terminate()
     process.wait()
+
 
 def test_api_root():
     """Test API root endpoint."""
@@ -45,6 +47,7 @@ def test_api_root():
         print(f"❌ Error testing API root: {e}")
         return False
 
+
 def test_api_info():
     """Test API info endpoint."""
     print("Testing API info endpoint...")
@@ -62,14 +65,12 @@ def test_api_info():
         print(f"❌ Error testing API info: {e}")
         return False
 
+
 def test_protected_endpoints():
     """Test that protected endpoints require authentication."""
     print("Testing protected endpoint authentication...")
 
-    endpoints = [
-        "http://127.0.0.1:8004/api/people/",
-        "http://127.0.0.1:8004/api/statistics/"
-    ]
+    endpoints = ["http://127.0.0.1:8004/api/people/", "http://127.0.0.1:8004/api/statistics/"]
 
     for url in endpoints:
         try:
@@ -88,6 +89,7 @@ def test_protected_endpoints():
 
     return True
 
+
 def main():
     """Run comprehensive API tests."""
     print("🧪 Running Comprehensive API Server Tests\n")
@@ -97,11 +99,7 @@ def main():
     server_process = start_server()
 
     try:
-        tests = [
-            test_api_root,
-            test_api_info,
-            test_protected_endpoints
-        ]
+        tests = [test_api_root, test_api_info, test_protected_endpoints]
 
         passed = 0
         total = len(tests)
@@ -126,6 +124,7 @@ def main():
         stop_server(server_process)
 
     sys.exit(0 if success else 1)
+
 
 if __name__ == "__main__":
     main()

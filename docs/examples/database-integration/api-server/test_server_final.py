@@ -28,6 +28,7 @@ def run_command(cmd, description):
             print(f"Output: {result.stdout.strip()}")
         return False
 
+
 def main():
     """Run final validation tests."""
     print("🧪 Final API Server Validation\n")
@@ -35,12 +36,18 @@ def main():
     tests = [
         (["uv", "run", "python", "manage.py", "check"], "Django System Check"),
         (["uv", "run", "python", "manage.py", "migrate", "--check"], "Migration Check"),
-        (["uv", "run", "ruff", "check", "biorhythm_api/", "api/", "biorhythm_data/"], 
-         "Ruff Linting"),
-        (["uv", "run", "ruff", "format", "--check", "biorhythm_api/", "api/", "biorhythm_data/"], 
-         "Ruff Formatting"),
-        (["uv", "run", "bandit", "-r", "biorhythm_api/", "api/", "--skip", "B104", "-q"], 
-         "Security Scan (Skip B104 dev setting)")
+        (
+            ["uv", "run", "ruff", "check", "biorhythm_api/", "api/", "biorhythm_data/"],
+            "Ruff Linting",
+        ),
+        (
+            ["uv", "run", "ruff", "format", "--check", "biorhythm_api/", "api/", "biorhythm_data/"],
+            "Ruff Formatting",
+        ),
+        (
+            ["uv", "run", "bandit", "-r", "biorhythm_api/", "api/", "--skip", "B104", "-q"],
+            "Security Scan (Skip B104 dev setting)",
+        ),
     ]
 
     passed = 0
@@ -60,7 +67,7 @@ def main():
         "api/serializers.py",
         "biorhythm_data/models.py",
         "Dockerfile",
-        "pyproject.toml"
+        "pyproject.toml",
     ]
 
     files_exist = True
@@ -90,6 +97,7 @@ def main():
     else:
         print("❌ Some validation checks failed")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

@@ -99,7 +99,8 @@ class BiorhythmCalculator:
         self.midwidth = math.floor(self.width / 2)
         self.middays = math.floor(self.days / 2)
         self.logger.info(
-            f"BiorhythmCalculator initialized: width={self.width}, days={self.days}, orientation={self.orientation}"
+            f"BiorhythmCalculator initialized: width={self.width}, days={self.days}, "
+            f"orientation={self.orientation}"
         )
 
     def _validate_orientation(self, orientation: str) -> None:
@@ -278,7 +279,8 @@ class BiorhythmCalculator:
             for crit_date, cycles in critical_days:
                 cycles_str = ", ".join(cycles)
                 print(
-                    f"   {crit_date.strftime(shortdate_format)}: {cycles_str} cycle(s) near zero"
+                    f"   {crit_date.strftime(shortdate_format)}: {cycles_str} "
+                    f"cycle(s) near zero"
                 )
         else:
             print()
