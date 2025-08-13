@@ -15,6 +15,10 @@ RUN pip install --no-cache-dir uv
 COPY biorythm/ ./biorythm/
 COPY main.py ./
 
+# Accept version as build argument from CI environment
+ARG VERSION=""
+ENV SETUPTOOLS_SCM_PRETEND_VERSION=${VERSION}
+
 # Install dependencies without editable mode to avoid versioning issues
 RUN uv pip install --system --no-cache .
 
