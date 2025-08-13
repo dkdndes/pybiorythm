@@ -53,4 +53,5 @@ try:
 except Exception:
     # Fallback for development or build environments
     import os
+
     __version__ = os.environ.get("SETUPTOOLS_SCM_PRETEND_VERSION", "0.1.dev")
