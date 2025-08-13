@@ -81,8 +81,11 @@ jobs:
         # Install Syft for SBOM generation
         curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
         
+        # Get the actual image reference from metadata
+        IMAGE_REF=$(echo '${{ steps.meta.outputs.tags }}' | head -n1)
+        
         # Generate SBOM for the published image
-        syft ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+        syft $IMAGE_REF \
           --output cyclonedx-json=sbom-docker-published.json \
           --output spdx-json=sbom-docker-spdx.json
 
@@ -110,7 +113,7 @@ jobs:
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
         format: 'sarif'
         output: 'trivy-results.sarif'
       if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
@@ -124,16 +127,20 @@ jobs:
     - name: Test published image
       if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
       run: |
+        # Get the actual image reference from metadata
+        IMAGE_REF=$(echo '${{ steps.meta.outputs.tags }}' | head -n1)
+        
         # Wait for image to be available
         sleep 30
         
         # Test the published image
-        docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest python -c "
+        docker run --rm $IMAGE_REF python -c "
         import biorythm
         from datetime import datetime
         calc = biorythm.BiorhythmCalculator()
         result = calc.calculate_biorhythm_values(datetime(1990, 5, 15), datetime(2023, 6, 1))
         print('Published image test passed!')
+        print(f'Image: $IMAGE_REF')
         print(f'Result: {result}')
         "
 

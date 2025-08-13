@@ -11,12 +11,14 @@ COPY pyproject.toml uv.lock* LICENSE README.md ./
 # Install uv for faster dependency management
 RUN pip install --no-cache-dir uv
 
+# Copy git context for hatch-vcs versioning
+COPY .git/ ./.git/
+
 # Copy source code needed for installation
 COPY biorythm/ ./biorythm/
 COPY main.py ./
-# _version.py not needed - using hatchling dynamic versioning
 
-# Install dependencies
+# Install dependencies (hatch-vcs needs git context)
 RUN uv pip install --system --no-cache -e .
 
 # Stage 2: Production stage - minimal runtime image
@@ -45,7 +47,6 @@ USER biorythm
 # Add labels for metadata (updated)
 LABEL maintainer="Peter Rosemann <dkdndes@gmail.com>"
 LABEL description="Biorhythm chart generator (pseudoscience demonstration)"
-LABEL version="1.0.0"
 LABEL org.opencontainers.image.source="https://github.com/dkdndes/pybiorythm"
 LABEL org.opencontainers.image.documentation="https://github.com/dkdndes/pybiorythm"
 
