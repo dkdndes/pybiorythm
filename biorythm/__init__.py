@@ -48,4 +48,9 @@ try:
 except ImportError:
     from importlib_metadata import version  # for Python <3.8
 
-__version__ = version("biorythm")
+try:
+    __version__ = version("biorythm")
+except Exception:
+    # Fallback for development or build environments
+    import os
+    __version__ = os.environ.get("SETUPTOOLS_SCM_PRETEND_VERSION", "0.1.dev")

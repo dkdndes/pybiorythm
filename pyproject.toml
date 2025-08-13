@@ -80,9 +80,18 @@ docs = [
 
 [tool.hatch.version]
 source = "vcs"
+fallback-version = "0.1.dev"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "biorythm/_version.py"
+
+# Configure setuptools-scm for better compatibility
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+fallback_version = "0.1.dev"
+write_to = "biorythm/_version.py"
+tag_regex = "^v(?P<version>[^\\+]+)(?P<suffix>.*)?$"
 
 [tool.semantic_release]
 build_command = "uv build"
