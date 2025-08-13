@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools>=64", "setuptools_scm[toml]>=8"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [project]
 name = "biorythm"
 dynamic = ["version"]
 description = "A Python library for biorhythm calculations"
 readme = "README.md"
-license = "MIT"
-requires-python = ">=3.12"
+license = {file = "LICENSE"}
+requires-python = ">=3.9,<3.13"
 authors = [
     {name = "Peter Rosemann", email = "dkdndes@gmail.com"},
 ]
@@ -20,7 +20,11 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
@@ -56,6 +60,7 @@ dev = [
     "bandit[toml]>=1.7.10",
     "build>=1.2.2.post1",
     "cyclonedx-bom>=7.0.0",
+    "hatch>=1.14.1",
     "pandas>=2.0.3",
     "pre-commit>=4.2.0",
     "pytest>=8.3.5",
@@ -73,44 +78,91 @@ docs = [
     "mkdocs-mermaid2-plugin>=1.2.1",
 ]
 
-[tool.setuptools.packages.find]
-include = ["biorythm*"]
-exclude = ["tests*", "site*", "docs*"]
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.1.dev"
 
+[tool.hatch.build.hooks.vcs]
+version-file = "biorythm/_version.py"
+
+# Configure setuptools-scm for better compatibility
 [tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+fallback_version = "0.1.dev"
 write_to = "biorythm/_version.py"
+# Only use clean release tags, ignore dev/alpha/beta tags
+tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
 
 [tool.semantic_release]
-build_command = "uv lock && uv build"
+build_command = "uv build"
 dist_path = "dist/"
 upload_to_vcs_release = true
-version_toml = [
-    "pyproject.toml:project.version"
+version_variables = [
+    "biorythm/__init__.py:__version__",
 ]
-major_on_zero = true
-tag_format = "v{version}"
-commit_message = "release: v{version}"
 
 [tool.semantic_release.branches.main]
 match = "main"
+prerelease_token = "rc"
 prerelease = false
 
 [tool.semantic_release.branches.develop]
-match = "develop" 
+match = "develop"
+prerelease_token = "dev"
 prerelease = true
-prerelease_token = "a"
+upload_to_vcs_release = false
+
+[tool.semantic_release.branches.feature]
+match = "feat/*"
+prerelease_token = "alpha"
+prerelease = true
+upload_to_vcs_release = false
+
+[tool.semantic_release.branches.bugfix]
+match = "fix/*"
+prerelease_token = "beta"
+prerelease = true
+upload_to_vcs_release = false
+
+[tool.semantic_release.branches.chore]
+match = "chore/*"
+prerelease_token = "dev"
+prerelease = true
+upload_to_vcs_release = false
+
+[tool.semantic_release.changelog]
+exclude_commit_patterns = []
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+
+[tool.semantic_release.changelog.environment]
+block_start_string = "{%"
+block_end_string = "%}"
+variable_start_string = "{{"
+variable_end_string = "}}"
+comment_start_string = "{#"
+comment_end_string = "#}"
+trim_blocks = false
+lstrip_blocks = false
+
+[tool.semantic_release.commit_author]
+env = "GIT_COMMIT_AUTHOR"
+default = "semantic-release <semantic-release>"
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
 minor_tags = ["feat"]
 patch_tags = ["fix", "perf"]
 
-[tool.semantic_release.publish]
-dist_glob_patterns = ["dist/*"]
-upload_to_vcs_release = true
-
 [tool.semantic_release.remote]
 name = "origin"
 type = "github"
+ignore_token_for_push = false
 token = { env = "GITHUB_TOKEN" }
+
+[tool.semantic_release.publish]
+dist_glob_patterns = ["dist/*"]
+upload_to_vcs_release = true
 
