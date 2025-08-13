@@ -91,7 +91,8 @@ version_scheme = "guess-next-dev"
 local_scheme = "node-and-date"
 fallback_version = "0.1.dev"
 write_to = "biorythm/_version.py"
-tag_regex = "^v(?P<version>[^\\+]+)(?P<suffix>.*)?$"
+# Only use clean release tags, ignore dev/alpha/beta tags
+tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
 
 [tool.semantic_release]
 build_command = "uv build"
