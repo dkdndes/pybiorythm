@@ -11,15 +11,12 @@ COPY pyproject.toml uv.lock* LICENSE README.md ./
 # Install uv for faster dependency management
 RUN pip install --no-cache-dir uv
 
-# Copy git context for hatch-vcs versioning
-COPY .git/ ./.git/
-
 # Copy source code needed for installation
 COPY biorythm/ ./biorythm/
 COPY main.py ./
 
-# Install dependencies (hatch-vcs needs git context)
-RUN uv pip install --system --no-cache -e .
+# Install dependencies without editable mode to avoid versioning issues
+RUN uv pip install --system --no-cache .
 
 # Stage 2: Production stage - minimal runtime image
 FROM python:3.12-slim AS production
