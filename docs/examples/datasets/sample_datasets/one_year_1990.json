@@ -1,0 +1,3254 @@
+{
+  "meta": {
+    "generator": "biorhythm_enhanced.py",
+    "version": "2025-08-07",
+    "birthdate": "1990-05-15",
+    "plot_date": "2024-01-01",
+    "days_alive": 12284,
+    "cycle_lengths_days": {
+      "physical": 23,
+      "emotional": 28,
+      "intellectual": 33
+    },
+    "chart_orientation": "vertical",
+    "days": 365,
+    "width": 55,
+    "scientific_warning": "\u26a0\ufe0f  SCIENTIFIC WARNING \u26a0\ufe0f\nBiorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\nMultiple peer-reviewed studies have found NO correlation between\nbiorhythm cycles and human performance beyond random chance.\nThis program is provided for ENTERTAINMENT PURPOSES ONLY."
+  },
+  "cycle_repeats": {
+    "physical_emotional_repeat_in_days": 596,
+    "all_cycles_repeat_in_days": 8968
+  },
+  "critical_days": [
+    {
+      "date": "2023-07-11",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-07-12",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-07-22",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2023-07-25",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-08-08",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-08-14",
+      "cycles": "Physical, Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-08-22",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-09-05",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-09-06",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2023-09-16",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-09-19",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-09-29",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2023-10-03",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-10-17",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-10-19",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-10-22",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2023-10-31",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-11-14",
+      "cycles": "Physical, Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-11-21",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-11-28",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-12-07",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2023-12-12",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-12-24",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2023-12-26",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2023-12-30",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-01-09",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-01-22",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-01-23",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-01-26",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2024-02-06",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-02-14",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-02-20",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-02-28",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2024-03-05",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-03-08",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-03-19",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-03-31",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-04-01",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2024-04-02",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-04-16",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-04-23",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-04-30",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-05-04",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2024-05-14",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-05-16",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-05-28",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-06-06",
+      "cycles": "Intellectual cycle(s) near zero"
+    },
+    {
+      "date": "2024-06-08",
+      "cycles": "Physical cycle(s) near zero"
+    },
+    {
+      "date": "2024-06-11",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-06-25",
+      "cycles": "Emotional cycle(s) near zero"
+    },
+    {
+      "date": "2024-07-01",
+      "cycles": "Physical cycle(s) near zero"
+    }
+  ],
+  "data": [
+    {
+      "date": "2023-07-03",
+      "days_alive": 12102,
+      "physical": 0.8878852184023043,
+      "emotional": 0.9749279121817629,
+      "intellectual": -0.9898214418809135,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-04",
+      "days_alive": 12103,
+      "physical": 0.9790840876823054,
+      "emotional": 1.0,
+      "intellectual": -0.9988673391830062,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-05",
+      "days_alive": 12104,
+      "physical": 0.9976687691905715,
+      "emotional": 0.9749279121818882,
+      "intellectual": -0.9718115683235998,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-06",
+      "days_alive": 12105,
+      "physical": 0.9422609221188035,
+      "emotional": 0.9009688679024505,
+      "intellectual": -0.9096319953545495,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-07",
+      "days_alive": 12106,
+      "physical": 0.8169698930103735,
+      "emotional": 0.7818314824679385,
+      "intellectual": -0.8145759520502797,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-08",
+      "days_alive": 12107,
+      "physical": 0.6310879443262604,
+      "emotional": 0.6234898018591594,
+      "intellectual": -0.690079011482247,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-09",
+      "days_alive": 12108,
+      "physical": 0.3984010898464243,
+      "emotional": 0.433883739117852,
+      "intellectual": -0.5406408174556101,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-10",
+      "days_alive": 12109,
+      "physical": 0.1361666490963765,
+      "emotional": 0.2225209339564194,
+      "intellectual": -0.3716624556601821,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-11",
+      "days_alive": 12110,
+      "physical": -0.13616664909618434,
+      "emotional": -1.107835862805845e-13,
+      "intellectual": -0.1892512443605344,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-07-12",
+      "days_alive": 12111,
+      "physical": -0.39840108984582934,
+      "emotional": -0.22252093395619207,
+      "intellectual": -4.096333061494608e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-07-13",
+      "days_alive": 12112,
+      "physical": -0.6310879443261099,
+      "emotional": -0.4338837391176419,
+      "intellectual": 0.18925124436017648,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-14",
+      "days_alive": 12113,
+      "physical": -0.8169698930105239,
+      "emotional": -0.6234898018586215,
+      "intellectual": 0.37166245566026584,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-15",
+      "days_alive": 12114,
+      "physical": -0.9422609221187386,
+      "emotional": -0.7818314824677932,
+      "intellectual": 0.5406408174553035,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-16",
+      "days_alive": 12115,
+      "physical": -0.9976687691905272,
+      "emotional": -0.9009688679023492,
+      "intellectual": 0.6900790114819831,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-17",
+      "days_alive": 12116,
+      "physical": -0.9790840876823449,
+      "emotional": -0.9749279121818364,
+      "intellectual": 0.8145759520503321,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-18",
+      "days_alive": 12117,
+      "physical": -0.8878852184023935,
+      "emotional": -1.0,
+      "intellectual": 0.909631995354587,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-19",
+      "days_alive": 12118,
+      "physical": -0.730835964278415,
+      "emotional": -0.974927912181916,
+      "intellectual": 0.9718115683235139,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-20",
+      "days_alive": 12119,
+      "physical": -0.5195839500353508,
+      "emotional": -0.9009688679025044,
+      "intellectual": 0.9988673391830105,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-21",
+      "days_alive": 12120,
+      "physical": -0.26979677115686534,
+      "emotional": -0.7818314824680161,
+      "intellectual": 0.9898214418809007,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-22",
+      "days_alive": 12121,
+      "physical": -2.2144832827894405e-13,
+      "emotional": -0.6234898018589011,
+      "intellectual": 0.9450008187146874,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-07-23",
+      "days_alive": 12122,
+      "physical": 0.2697967711568768,
+      "emotional": -0.4338837391175544,
+      "intellectual": 0.8660254037843818,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-24",
+      "days_alive": 12123,
+      "physical": 0.5195839500353611,
+      "emotional": -0.2225209339560974,
+      "intellectual": 0.7557495743543693,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-25",
+      "days_alive": 12124,
+      "physical": 0.7308359642778024,
+      "emotional": -4.684312080438119e-13,
+      "intellectual": 0.618158986220961,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-07-26",
+      "days_alive": 12125,
+      "physical": 0.8878852184021897,
+      "emotional": 0.22252093395607073,
+      "intellectual": 0.45822652172766015,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-27",
+      "days_alive": 12126,
+      "physical": 0.9790840876823472,
+      "emotional": 0.43388373911752975,
+      "intellectual": 0.28173255684153464,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-28",
+      "days_alive": 12127,
+      "physical": 0.9976687691905264,
+      "emotional": 0.6234898018588797,
+      "intellectual": 0.09505604330412072,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-29",
+      "days_alive": 12128,
+      "physical": 0.9422609221188869,
+      "emotional": 0.781831482467999,
+      "intellectual": -0.09505604330396274,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-30",
+      "days_alive": 12129,
+      "physical": 0.816969893010517,
+      "emotional": 0.9009688679022952,
+      "intellectual": -0.2817325568413824,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-07-31",
+      "days_alive": 12130,
+      "physical": 0.6310879443261007,
+      "emotional": 0.9749279121818087,
+      "intellectual": -0.4582265217275191,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-01",
+      "days_alive": 12131,
+      "physical": 0.3984010898466527,
+      "emotional": 1.0,
+      "intellectual": -0.6181589862204788,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-02",
+      "days_alive": 12132,
+      "physical": 0.1361666490966231,
+      "emotional": 0.9749279121818425,
+      "intellectual": -0.7557495743542654,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-03",
+      "days_alive": 12133,
+      "physical": -0.13616664909638823,
+      "emotional": 0.9009688679023611,
+      "intellectual": -0.8660254037845297,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-04",
+      "days_alive": 12134,
+      "physical": -0.3984010898460181,
+      "emotional": 0.7818314824683773,
+      "intellectual": -0.9450008187146355,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-05",
+      "days_alive": 12135,
+      "physical": -0.6310879443259169,
+      "emotional": 0.6234898018589985,
+      "intellectual": -0.9898214418808781,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-06",
+      "days_alive": 12136,
+      "physical": -0.8169698930103803,
+      "emotional": 0.4338837391176666,
+      "intellectual": -0.9988673391830181,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-07",
+      "days_alive": 12137,
+      "physical": -0.9422609221188075,
+      "emotional": 0.22252093395621875,
+      "intellectual": -0.9718115683235513,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-08",
+      "days_alive": 12138,
+      "physical": -0.9976687691905102,
+      "emotional": 1.3815130059528003e-13,
+      "intellectual": -0.9096319953546529,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-08-09",
+      "days_alive": 12139,
+      "physical": -0.9790840876823955,
+      "emotional": -0.22252093395639272,
+      "intellectual": -0.8145759520504241,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-10",
+      "days_alive": 12140,
+      "physical": -0.8878852184022988,
+      "emotional": -0.4338837391174176,
+      "intellectual": -0.690079011482098,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-11",
+      "days_alive": 12141,
+      "physical": -0.7308359642782746,
+      "emotional": -0.623489801858427,
+      "intellectual": -0.5406408174558196,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-12",
+      "days_alive": 12142,
+      "physical": -0.5195839500355636,
+      "emotional": -0.7818314824679214,
+      "intellectual": -0.37166245566041317,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-13",
+      "days_alive": 12143,
+      "physical": -0.26979677115710504,
+      "emotional": -0.9009688679024386,
+      "intellectual": -0.1892512443603323,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-14",
+      "days_alive": 12144,
+      "physical": -1.5635864268344467e-14,
+      "emotional": -0.9749279121818822,
+      "intellectual": 2.509265087476029e-13,
+      "critical_cycles": [
+        "Physical",
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-08-15",
+      "days_alive": 12145,
+      "physical": 0.2697967711566371,
+      "emotional": -1.0,
+      "intellectual": 0.18925124436037857,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-16",
+      "days_alive": 12146,
+      "physical": 0.5195839500355369,
+      "emotional": -0.9749279121818701,
+      "intellectual": 0.3716624556604569,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-17",
+      "days_alive": 12147,
+      "physical": 0.7308359642782533,
+      "emotional": -0.9009688679024151,
+      "intellectual": 0.5406408174554767,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-18",
+      "days_alive": 12148,
+      "physical": 0.8878852184022844,
+      "emotional": -0.7818314824681714,
+      "intellectual": 0.6900790114818031,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-19",
+      "days_alive": 12149,
+      "physical": 0.9790840876822966,
+      "emotional": -0.6234898018587403,
+      "intellectual": 0.8145759520501876,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-20",
+      "days_alive": 12150,
+      "physical": 0.9976687691905434,
+      "emotional": -0.433883739117369,
+      "intellectual": 0.9096319953544836,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-21",
+      "days_alive": 12151,
+      "physical": 0.9422609221189703,
+      "emotional": -0.22252093395678343,
+      "intellectual": 0.9718115683234552,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-22",
+      "days_alive": 12152,
+      "physical": 0.8169698930106606,
+      "emotional": -2.626187440332123e-13,
+      "intellectual": 0.9988673391829986,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-08-23",
+      "days_alive": 12153,
+      "physical": 0.6310879443259411,
+      "emotional": 0.22252093395627137,
+      "intellectual": 0.9898214418809361,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-24",
+      "days_alive": 12154,
+      "physical": 0.3984010898460468,
+      "emotional": 0.4338837391177152,
+      "intellectual": 0.94500081871462,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-25",
+      "days_alive": 12155,
+      "physical": 0.1361666490964192,
+      "emotional": 0.6234898018586851,
+      "intellectual": 0.8660254037845063,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-26",
+      "days_alive": 12156,
+      "physical": -0.1361666490961416,
+      "emotional": 0.781831482467844,
+      "intellectual": 0.7557495743542345,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-27",
+      "days_alive": 12157,
+      "physical": -0.39840108984620687,
+      "emotional": 0.9009688679023845,
+      "intellectual": 0.6181589862204417,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-28",
+      "days_alive": 12158,
+      "physical": -0.6310879443257238,
+      "emotional": 0.9749279121817533,
+      "intellectual": 0.4582265217274772,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-29",
+      "days_alive": 12159,
+      "physical": -0.8169698930102367,
+      "emotional": 1.0,
+      "intellectual": 0.2817325568417735,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-30",
+      "days_alive": 12160,
+      "physical": -0.9422609221188765,
+      "emotional": 0.9749279121817966,
+      "intellectual": 0.09505604330436854,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-08-31",
+      "days_alive": 12161,
+      "physical": -0.9976687691905552,
+      "emotional": 0.9009688679022718,
+      "intellectual": -0.09505604330416761,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-01",
+      "days_alive": 12162,
+      "physical": -0.9790840876823537,
+      "emotional": 0.781831482468249,
+      "intellectual": -0.2817325568411435,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-02",
+      "days_alive": 12163,
+      "physical": -0.8878852184024134,
+      "emotional": 0.6234898018588375,
+      "intellectual": -0.45822652172729783,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-03",
+      "days_alive": 12164,
+      "physical": -0.730835964278134,
+      "emotional": 0.4338837391174811,
+      "intellectual": -0.6181589862206406,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-04",
+      "days_alive": 12165,
+      "physical": -0.5195839500357763,
+      "emotional": 0.22252093395646144,
+      "intellectual": -0.7557495743541023,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-05",
+      "days_alive": 12166,
+      "physical": -0.26979677115734474,
+      "emotional": -6.766116341531955e-14,
+      "intellectual": -0.8660254037844053,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-09-06",
+      "days_alive": 12167,
+      "physical": 1.9017659974225512e-13,
+      "emotional": -0.22252093395615002,
+      "intellectual": -0.9450008187147029,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-09-07",
+      "days_alive": 12168,
+      "physical": 0.26979677115683526,
+      "emotional": -0.43388373911719336,
+      "intellectual": -0.9898214418809074,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-08",
+      "days_alive": 12169,
+      "physical": 0.5195839500353242,
+      "emotional": -0.6234898018585878,
+      "intellectual": -0.9988673391830083,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-09",
+      "days_alive": 12170,
+      "physical": 0.7308359642780833,
+      "emotional": -0.7818314824680498,
+      "intellectual": -0.9718115683235028,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-10",
+      "days_alive": 12171,
+      "physical": 0.8878852184023791,
+      "emotional": -0.9009688679025278,
+      "intellectual": -0.9096319953545674,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-11",
+      "days_alive": 12172,
+      "physical": 0.979084087682246,
+      "emotional": -0.9749279121817256,
+      "intellectual": -0.8145759520505684,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-12",
+      "days_alive": 12173,
+      "physical": 0.9976687691905604,
+      "emotional": -1.0,
+      "intellectual": -0.6900790114822782,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-13",
+      "days_alive": 12174,
+      "physical": 0.9422609221187491,
+      "emotional": -0.9749279121818244,
+      "intellectual": -0.5406408174556464,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-14",
+      "days_alive": 12175,
+      "physical": 0.8169698930105419,
+      "emotional": -0.9009688679025232,
+      "intellectual": -0.37166245566064426,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-15",
+      "days_alive": 12176,
+      "physical": 0.6310879443261342,
+      "emotional": -0.781831482468043,
+      "intellectual": -0.18925124436057675,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-16",
+      "days_alive": 12177,
+      "physical": 0.3984010898462751,
+      "emotional": -0.6234898018585793,
+      "intellectual": 1.9916218717383598e-15,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-09-17",
+      "days_alive": 12178,
+      "physical": 0.13616664909666581,
+      "emotional": -0.433883739118003,
+      "intellectual": 0.18925124436013413,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-18",
+      "days_alive": 12179,
+      "physical": -0.136166649095895,
+      "emotional": -0.2225209339565828,
+      "intellectual": 0.3716624556602258,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-19",
+      "days_alive": 12180,
+      "physical": -0.39840108984597855,
+      "emotional": -5.680628002261271e-14,
+      "intellectual": 0.5406408174556497,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-09-20",
+      "days_alive": 12181,
+      "physical": -0.6310879443262362,
+      "emotional": 0.22252093395647202,
+      "intellectual": 0.6900790114822811,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-21",
+      "days_alive": 12182,
+      "physical": -0.8169698930103554,
+      "emotional": 0.4338837391174909,
+      "intellectual": 0.814575952050307,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-22",
+      "days_alive": 12183,
+      "physical": -0.9422609221187931,
+      "emotional": 0.6234898018584905,
+      "intellectual": 0.9096319953545691,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-23",
+      "days_alive": 12184,
+      "physical": -0.9976687691905383,
+      "emotional": 0.7818314824679722,
+      "intellectual": 0.9718115683235037,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-24",
+      "days_alive": 12185,
+      "physical": -0.9790840876824043,
+      "emotional": 0.9009688679022765,
+      "intellectual": 0.9988673391829869,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-25",
+      "days_alive": 12186,
+      "physical": -0.8878852184025279,
+      "emotional": 0.9749279121817991,
+      "intellectual": 0.9898214418809715,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-26",
+      "days_alive": 12187,
+      "physical": -0.7308359642779936,
+      "emotional": 1.0,
+      "intellectual": 0.9450008187147015,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-27",
+      "days_alive": 12188,
+      "physical": -0.5195839500352119,
+      "emotional": 0.9749279121817509,
+      "intellectual": 0.8660254037844033,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-28",
+      "days_alive": 12189,
+      "physical": -0.26979677115714656,
+      "emotional": 0.9009688679025771,
+      "intellectual": 0.7557495743543975,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-09-29",
+      "days_alive": 12190,
+      "physical": -5.875828713360942e-14,
+      "emotional": 0.7818314824681206,
+      "intellectual": 0.6181589862206374,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-09-30",
+      "days_alive": 12191,
+      "physical": 0.26979677115703343,
+      "emotional": 0.6234898018586766,
+      "intellectual": 0.4582265217272943,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-01",
+      "days_alive": 12192,
+      "physical": 0.5195839500351115,
+      "emotional": 0.43388373911770545,
+      "intellectual": 0.281732556841576,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-02",
+      "days_alive": 12193,
+      "physical": 0.7308359642779134,
+      "emotional": 0.2225209339562608,
+      "intellectual": 0.09505604330416365,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-03",
+      "days_alive": 12194,
+      "physical": 0.8878852184024738,
+      "emotional": 1.8127372346054499e-13,
+      "intellectual": -0.09505604330437249,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-10-04",
+      "days_alive": 12195,
+      "physical": 0.9790840876821953,
+      "emotional": -0.22252093395590733,
+      "intellectual": -0.28173255684134096,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-05",
+      "days_alive": 12196,
+      "physical": 0.9976687691905463,
+      "emotional": -0.43388373911737876,
+      "intellectual": -0.45822652172707656,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-06",
+      "days_alive": 12197,
+      "physical": 0.9422609221188324,
+      "emotional": -0.6234898018587487,
+      "intellectual": -0.6181589862204449,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-07",
+      "days_alive": 12198,
+      "physical": 0.8169698930104232,
+      "emotional": -0.7818314824681781,
+      "intellectual": -0.7557495743542371,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-08",
+      "days_alive": 12199,
+      "physical": 0.6310879443263273,
+      "emotional": -0.9009688679022225,
+      "intellectual": -0.8660254037842808,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-09",
+      "days_alive": 12200,
+      "physical": 0.3984010898465034,
+      "emotional": -0.9749279121817714,
+      "intellectual": -0.9450008187146214,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-10",
+      "days_alive": 12201,
+      "physical": 0.13616664909601142,
+      "emotional": -1.0,
+      "intellectual": -0.9898214418809367,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-11",
+      "days_alive": 12202,
+      "physical": -0.13616664909564838,
+      "emotional": -0.9749279121818798,
+      "intellectual": -0.9988673391830202,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-12",
+      "days_alive": 12203,
+      "physical": -0.39840108984616734,
+      "emotional": -0.9009688679024338,
+      "intellectual": -0.9718115683235614,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-13",
+      "days_alive": 12204,
+      "physical": -0.6310879443260431,
+      "emotional": -0.7818314824679148,
+      "intellectual": -0.9096319953544819,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-14",
+      "days_alive": 12205,
+      "physical": -0.8169698930104742,
+      "emotional": -0.623489801858774,
+      "intellectual": -0.8145759520501853,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-15",
+      "days_alive": 12206,
+      "physical": -0.9422609221187097,
+      "emotional": -0.4338837391178176,
+      "intellectual": -0.6900790114821292,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-16",
+      "days_alive": 12207,
+      "physical": -0.9976687691905213,
+      "emotional": -0.22252093395638214,
+      "intellectual": -0.5406408174554733,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-17",
+      "days_alive": 12208,
+      "physical": -0.9790840876822698,
+      "emotional": 1.4900618398798687e-13,
+      "intellectual": -0.3716624556604532,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-10-18",
+      "days_alive": 12209,
+      "physical": -0.8878852184024332,
+      "emotional": 0.22252093395622932,
+      "intellectual": -0.1892512443608212,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-19",
+      "days_alive": 12210,
+      "physical": -0.7308359642781636,
+      "emotional": 0.43388373911726663,
+      "intellectual": -2.4694326500412615e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-10-20",
+      "days_alive": 12211,
+      "physical": -0.5195839500354246,
+      "emotional": 0.6234898018586514,
+      "intellectual": 0.18925124436033622,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-21",
+      "days_alive": 12212,
+      "physical": -0.26979677115738626,
+      "emotional": 0.781831482467817,
+      "intellectual": 0.37166245565999473,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-22",
+      "days_alive": 12213,
+      "physical": -3.07693174009474e-13,
+      "emotional": 0.9009688679023659,
+      "intellectual": 0.5406408174554403,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-10-23",
+      "days_alive": 12214,
+      "physical": 0.26979677115679374,
+      "emotional": 0.9749279121818449,
+      "intellectual": 0.6900790114821009,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-24",
+      "days_alive": 12215,
+      "physical": 0.5195839500356759,
+      "emotional": 1.0,
+      "intellectual": 0.8145759520504263,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-25",
+      "days_alive": 12216,
+      "physical": 0.7308359642780539,
+      "emotional": 0.9749279121819074,
+      "intellectual": 0.9096319953544657,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-26",
+      "days_alive": 12217,
+      "physical": 0.8878852184023593,
+      "emotional": 0.9009688679024879,
+      "intellectual": 0.9718115683235522,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-27",
+      "days_alive": 12218,
+      "physical": 0.9790840876823297,
+      "emotional": 0.7818314824679924,
+      "intellectual": 0.9988673391830183,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-28",
+      "days_alive": 12219,
+      "physical": 0.9976687691905632,
+      "emotional": 0.6234898018588713,
+      "intellectual": 0.9898214418809422,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-29",
+      "days_alive": 12220,
+      "physical": 0.9422609221189158,
+      "emotional": 0.43388373911752,
+      "intellectual": 0.9450008187147829,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-30",
+      "days_alive": 12221,
+      "physical": 0.8169698930105668,
+      "emotional": 0.2225209339565035,
+      "intellectual": 0.8660254037845279,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-10-31",
+      "days_alive": 12222,
+      "physical": 0.6310879443265204,
+      "emotional": 4.302086103364095e-13,
+      "intellectual": 0.7557495743545605,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-11-01",
+      "days_alive": 12223,
+      "physical": 0.39840108984631467,
+      "emotional": -0.22252093395610797,
+      "intellectual": 0.6181589862208331,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-02",
+      "days_alive": 12224,
+      "physical": 0.13616664909625803,
+      "emotional": -0.4338837391175642,
+      "intellectual": 0.45822652172751555,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-03",
+      "days_alive": 12225,
+      "physical": -0.13616664909630277,
+      "emotional": -0.6234898018589097,
+      "intellectual": 0.28173255684137855,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-04",
+      "days_alive": 12226,
+      "physical": -0.39840108984593897,
+      "emotional": -0.7818314824677394,
+      "intellectual": 0.09505604330441146,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-05",
+      "days_alive": 12227,
+      "physical": -0.6310879443258499,
+      "emotional": -0.9009688679023118,
+      "intellectual": -0.09505604330412469,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-06",
+      "days_alive": 12228,
+      "physical": -0.8169698930105929,
+      "emotional": -0.9749279121818172,
+      "intellectual": -0.2817325568415385,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-07",
+      "days_alive": 12229,
+      "physical": -0.9422609221186263,
+      "emotional": -1.0,
+      "intellectual": -0.4582265217272595,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-08",
+      "days_alive": 12230,
+      "physical": -0.9976687691905354,
+      "emotional": -0.9749279121818339,
+      "intellectual": -0.6181589862206066,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-09",
+      "days_alive": 12231,
+      "physical": -0.9790840876823205,
+      "emotional": -0.9009688679023445,
+      "intellectual": -0.7557495743543718,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-10",
+      "days_alive": 12232,
+      "physical": -0.8878852184023385,
+      "emotional": -0.78183148246807,
+      "intellectual": -0.8660254037843838,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-11",
+      "days_alive": 12233,
+      "physical": -0.7308359642783334,
+      "emotional": -0.6234898018589685,
+      "intellectual": -0.94500081871454,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-12",
+      "days_alive": 12234,
+      "physical": -0.5195839500356373,
+      "emotional": -0.4338837391176321,
+      "intellectual": -0.9898214418809013,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-13",
+      "days_alive": 12235,
+      "physical": -0.2697967711567502,
+      "emotional": -0.2225209339561815,
+      "intellectual": -0.9988673391830103,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-14",
+      "days_alive": 12236,
+      "physical": -5.566280608853385e-13,
+      "emotional": -9.992870288787767e-14,
+      "intellectual": -0.9718115683236201,
+      "critical_cycles": [
+        "Physical",
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-11-15",
+      "days_alive": 12237,
+      "physical": 0.2697967711569919,
+      "emotional": 0.22252093395598663,
+      "intellectual": -0.9096319953545854,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-16",
+      "days_alive": 12238,
+      "physical": 0.5195839500354632,
+      "emotional": 0.4338837391174521,
+      "intellectual": -0.8145759520503297,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-17",
+      "days_alive": 12239,
+      "physical": 0.730835964277884,
+      "emotional": 0.6234898018584568,
+      "intellectual": -0.6900790114823094,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-18",
+      "days_alive": 12240,
+      "physical": 0.8878852184022448,
+      "emotional": 0.7818314824679453,
+      "intellectual": -0.5406408174556827,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-19",
+      "days_alive": 12241,
+      "physical": 0.9790840876822791,
+      "emotional": 0.9009688679024551,
+      "intellectual": -0.3716624556602621,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-20",
+      "days_alive": 12242,
+      "physical": 0.9976687691905182,
+      "emotional": 0.9749279121818907,
+      "intellectual": -0.18925124436017257,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-21",
+      "days_alive": 12243,
+      "physical": 0.9422609221189991,
+      "emotional": 1.0,
+      "intellectual": -4.113080099352659e-14,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-11-22",
+      "days_alive": 12244,
+      "physical": 0.8169698930104481,
+      "emotional": 0.9749279121818617,
+      "intellectual": 0.1892512443605383,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-23",
+      "days_alive": 12245,
+      "physical": 0.631087944326008,
+      "emotional": 0.9009688679023985,
+      "intellectual": 0.3716624556601858,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-24",
+      "days_alive": 12246,
+      "physical": 0.398401089846543,
+      "emotional": 0.7818314824681476,
+      "intellectual": 0.540640817455231,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-25",
+      "days_alive": 12247,
+      "physical": 0.13616664909650464,
+      "emotional": 0.6234898018587104,
+      "intellectual": 0.6900790114819207,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-26",
+      "days_alive": 12248,
+      "physical": -0.13616664909605616,
+      "emotional": 0.4338837391177443,
+      "intellectual": 0.814575952050282,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-27",
+      "days_alive": 12249,
+      "physical": -0.3984010898465449,
+      "emotional": 0.22252093395630285,
+      "intellectual": 0.9096319953545512,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-28",
+      "days_alive": 12250,
+      "physical": -0.6310879443260096,
+      "emotional": 2.2439614632580994e-13,
+      "intellectual": 0.9718115683234936,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-11-29",
+      "days_alive": 12251,
+      "physical": -0.8169698930104493,
+      "emotional": -0.22252093395630865,
+      "intellectual": 0.9988673391830064,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-11-30",
+      "days_alive": 12252,
+      "physical": -0.9422609221188476,
+      "emotional": -0.43388373911774963,
+      "intellectual": 0.9898214418809129,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-01",
+      "days_alive": 12253,
+      "physical": -0.9976687691905184,
+      "emotional": -0.6234898018583594,
+      "intellectual": 0.9450008187147156,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-02",
+      "days_alive": 12254,
+      "physical": -0.9790840876823712,
+      "emotional": -0.7818314824678677,
+      "intellectual": 0.8660254037844249,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-03",
+      "days_alive": 12255,
+      "physical": -0.887885218402453,
+      "emotional": -0.9009688679024012,
+      "intellectual": 0.7557495743541279,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-04",
+      "days_alive": 12256,
+      "physical": -0.7308359642785033,
+      "emotional": -0.9749279121817618,
+      "intellectual": 0.6181589862206713,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-05",
+      "days_alive": 12257,
+      "physical": -0.5195839500354614,
+      "emotional": -1.0,
+      "intellectual": 0.4582265217277368,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-06",
+      "days_alive": 12258,
+      "physical": -0.2697967711569899,
+      "emotional": -0.9749279121817882,
+      "intellectual": 0.2817325568416174,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-07",
+      "days_alive": 12259,
+      "physical": 1.0393175401172522e-13,
+      "emotional": -0.9009688679024526,
+      "intellectual": 0.09505604330420658,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-12-08",
+      "days_alive": 12260,
+      "physical": 0.2697967711567522,
+      "emotional": -0.7818314824682251,
+      "intellectual": -0.09505604330387689,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-09",
+      "days_alive": 12261,
+      "physical": 0.5195839500352505,
+      "emotional": -0.6234898018588076,
+      "intellectual": -0.2817325568412996,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-10",
+      "days_alive": 12262,
+      "physical": 0.7308359642780244,
+      "emotional": -0.4338837391174467,
+      "intellectual": -0.45822652172744244,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-11",
+      "days_alive": 12263,
+      "physical": 0.8878852184021303,
+      "emotional": -0.2225209339564242,
+      "intellectual": -0.618158986220411,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-12",
+      "days_alive": 12264,
+      "physical": 0.9790840876823209,
+      "emotional": -3.488635897637422e-13,
+      "intellectual": -0.7557495743542089,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-12-13",
+      "days_alive": 12265,
+      "physical": 0.9976687691905352,
+      "emotional": 0.2225209339561873,
+      "intellectual": -0.8660254037844867,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-14",
+      "days_alive": 12266,
+      "physical": 0.9422609221189302,
+      "emotional": 0.4338837391172278,
+      "intellectual": -0.9450008187146073,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-15",
+      "days_alive": 12267,
+      "physical": 0.8169698930105916,
+      "emotional": 0.6234898018586177,
+      "intellectual": -0.9898214418809306,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-16",
+      "days_alive": 12268,
+      "physical": 0.6310879443262011,
+      "emotional": 0.7818314824680737,
+      "intellectual": -0.9988673391830005,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-17",
+      "days_alive": 12269,
+      "physical": 0.39840108984593714,
+      "emotional": 0.9009688679025445,
+      "intellectual": -0.9718115683235716,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-18",
+      "days_alive": 12270,
+      "physical": 0.13616664909675127,
+      "emotional": 0.9749279121817341,
+      "intellectual": -0.9096319953546887,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-19",
+      "days_alive": 12271,
+      "physical": -0.13616664909626006,
+      "emotional": 1.0,
+      "intellectual": -0.8145759520504741,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-20",
+      "days_alive": 12272,
+      "physical": -0.39840108984631656,
+      "emotional": 0.9749279121818158,
+      "intellectual": -0.6900790114821604,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-21",
+      "days_alive": 12273,
+      "physical": -0.6310879443258165,
+      "emotional": 0.9009688679025065,
+      "intellectual": -0.5406408174558921,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-22",
+      "days_alive": 12274,
+      "physical": -0.8169698930103058,
+      "emotional": 0.7818314824680193,
+      "intellectual": -0.3716624556604933,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-23",
+      "days_alive": 12275,
+      "physical": -0.9422609221187642,
+      "emotional": 0.623489801858905,
+      "intellectual": -0.189251244360417,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-24",
+      "days_alive": 12276,
+      "physical": -0.9976687691905635,
+      "emotional": 0.43388373911755884,
+      "intellectual": 1.64681663017073e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2023-12-25",
+      "days_alive": 12277,
+      "physical": -0.9790840876824218,
+      "emotional": 0.22252093395654554,
+      "intellectual": 0.1892512443602939,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-26",
+      "days_alive": 12278,
+      "physical": -0.8878852184023583,
+      "emotional": 1.858368231521035e-14,
+      "intellectual": 0.37166245566037687,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2023-12-27",
+      "days_alive": 12279,
+      "physical": -0.7308359642780524,
+      "emotional": -0.2225209339565093,
+      "intellectual": 0.5406408174557866,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-28",
+      "days_alive": 12280,
+      "physical": -0.5195839500356741,
+      "emotional": -0.43388373911711564,
+      "intellectual": 0.6900790114820697,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-29",
+      "days_alive": 12281,
+      "physical": -0.2697967711572296,
+      "emotional": -0.6234898018585204,
+      "intellectual": 0.8145759520501376,
+      "critical_cycles": []
+    },
+    {
+      "date": "2023-12-30",
+      "days_alive": 12282,
+      "physical": -1.4500313286413932e-13,
+      "emotional": -0.781831482467996,
+      "intellectual": 0.9096319953544477,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2023-12-31",
+      "days_alive": 12283,
+      "physical": 0.2697967711565125,
+      "emotional": -0.9009688679022931,
+      "intellectual": 0.9718115683234348,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-01",
+      "days_alive": 12284,
+      "physical": 0.5195839500350378,
+      "emotional": -0.9749279121818076,
+      "intellectual": 0.9988673391829945,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-02",
+      "days_alive": 12285,
+      "physical": 0.7308359642781649,
+      "emotional": -1.0,
+      "intellectual": 0.9898214418809483,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-03",
+      "days_alive": 12286,
+      "physical": 0.8878852184024342,
+      "emotional": -0.9749279121818436,
+      "intellectual": 0.9450008187146484,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-04",
+      "days_alive": 12287,
+      "physical": 0.9790840876822703,
+      "emotional": -0.9009688679025606,
+      "intellectual": 0.8660254037845494,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-05",
+      "days_alive": 12288,
+      "physical": 0.9976687691905521,
+      "emotional": -0.7818314824680969,
+      "intellectual": 0.7557495743542909,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-06",
+      "days_alive": 12289,
+      "physical": 0.9422609221188614,
+      "emotional": -0.6234898018586468,
+      "intellectual": 0.6181589862205096,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-07",
+      "days_alive": 12290,
+      "physical": 0.8169698930107352,
+      "emotional": -0.433883739117671,
+      "intellectual": 0.45822652172755385,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-08",
+      "days_alive": 12291,
+      "physical": 0.6310879443260414,
+      "emotional": -0.22252093395666686,
+      "intellectual": 0.2817325568414199,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-09",
+      "days_alive": 12292,
+      "physical": 0.39840108984616546,
+      "emotional": -1.4305112575314262e-13,
+      "intellectual": 0.0950560433040017,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-01-10",
+      "days_alive": 12293,
+      "physical": 0.13616664909609685,
+      "emotional": 0.22252093395638795,
+      "intellectual": -0.09505604330408177,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-11",
+      "days_alive": 12294,
+      "physical": -0.13616664909601345,
+      "emotional": 0.43388373911741324,
+      "intellectual": -0.28173255684106074,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-12",
+      "days_alive": 12295,
+      "physical": -0.39840108984608824,
+      "emotional": 0.6234898018587786,
+      "intellectual": -0.45822652172722117,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-13",
+      "days_alive": 12296,
+      "physical": -0.6310879443259761,
+      "emotional": 0.781831482468202,
+      "intellectual": -0.6181589862205727,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-14",
+      "days_alive": 12297,
+      "physical": -0.8169698930101621,
+      "emotional": 0.9009688679022391,
+      "intellectual": -0.7557495743540458,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-15",
+      "days_alive": 12298,
+      "physical": -0.9422609221188332,
+      "emotional": 0.9749279121817799,
+      "intellectual": -0.8660254037843622,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-16",
+      "days_alive": 12299,
+      "physical": -0.9976687691905465,
+      "emotional": 1.0,
+      "intellectual": -0.9450008187146747,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-17",
+      "days_alive": 12300,
+      "physical": -0.97908408768238,
+      "emotional": 0.9749279121818712,
+      "intellectual": -0.9898214418808952,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-18",
+      "days_alive": 12301,
+      "physical": -0.8878852184024729,
+      "emotional": 0.9009688679024173,
+      "intellectual": -0.9988673391830124,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-19",
+      "days_alive": 12302,
+      "physical": -0.7308359642782224,
+      "emotional": 0.7818314824681745,
+      "intellectual": -0.9718115683235231,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-20",
+      "days_alive": 12303,
+      "physical": -0.5195839500354983,
+      "emotional": 0.623489801858744,
+      "intellectual": -0.9096319953544144,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-21",
+      "days_alive": 12304,
+      "physical": -0.2697967711574693,
+      "emotional": 0.4338837391177831,
+      "intellectual": -0.8145759520503547,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-22",
+      "days_alive": 12305,
+      "physical": 6.080933114646026e-14,
+      "emotional": 0.22252093395634487,
+      "intellectual": -0.6900790114820115,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-01-23",
+      "days_alive": 12306,
+      "physical": 0.26979677115714856,
+      "emotional": -1.8722878169538923e-13,
+      "intellectual": -0.540640817455719,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-01-24",
+      "days_alive": 12307,
+      "physical": 0.5195839500352136,
+      "emotional": -0.22252093395582326,
+      "intellectual": -0.37166245566072437,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-25",
+      "days_alive": 12308,
+      "physical": 0.730835964277995,
+      "emotional": -0.43388373911730105,
+      "intellectual": -0.18925124436066143,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-26",
+      "days_alive": 12309,
+      "physical": 0.8878852184023196,
+      "emotional": -0.6234898018586813,
+      "intellectual": -8.425322385879154e-14,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2024-01-27",
+      "days_alive": 12310,
+      "physical": 0.9790840876824047,
+      "emotional": -0.7818314824681244,
+      "intellectual": 0.18925124436049598,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-28",
+      "days_alive": 12311,
+      "physical": 0.9976687691905691,
+      "emotional": -0.9009688679023824,
+      "intellectual": 0.3716624556601457,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-29",
+      "days_alive": 12312,
+      "physical": 0.9422609221187924,
+      "emotional": -0.9749279121818534,
+      "intellectual": 0.5406408174555772,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-30",
+      "days_alive": 12313,
+      "physical": 0.8169698930103543,
+      "emotional": -1.0,
+      "intellectual": 0.6900790114822186,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-01-31",
+      "days_alive": 12314,
+      "physical": 0.6310879443262346,
+      "emotional": -0.974927912181899,
+      "intellectual": 0.814575952050257,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-01",
+      "days_alive": 12315,
+      "physical": 0.3984010898463938,
+      "emotional": -0.9009688679024712,
+      "intellectual": 0.9096319953545333,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-02",
+      "days_alive": 12316,
+      "physical": 0.13616664909634346,
+      "emotional": -0.7818314824679685,
+      "intellectual": 0.9718115683235906,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-03",
+      "days_alive": 12317,
+      "physical": -0.13616664909576684,
+      "emotional": -0.6234898018588414,
+      "intellectual": 0.9988673391830044,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-04",
+      "days_alive": 12318,
+      "physical": -0.39840108984585987,
+      "emotional": -0.4338837391178953,
+      "intellectual": 0.9898214418809838,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-05",
+      "days_alive": 12319,
+      "physical": -0.6310879443261358,
+      "emotional": -0.22252093395646622,
+      "intellectual": 0.9450008187147297,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-06",
+      "days_alive": 12320,
+      "physical": -0.8169698930105431,
+      "emotional": 6.276133825745696e-14,
+      "intellectual": 0.8660254037844465,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-02-07",
+      "days_alive": 12321,
+      "physical": -0.9422609221187498,
+      "emotional": 0.22252093395614525,
+      "intellectual": 0.755749574354454,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-08",
+      "days_alive": 12322,
+      "physical": -0.9976687691905295,
+      "emotional": 0.43388373911759864,
+      "intellectual": 0.6181589862207052,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-09",
+      "days_alive": 12323,
+      "physical": -0.9790840876823381,
+      "emotional": 0.6234898018589395,
+      "intellectual": 0.45822652172737094,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-10",
+      "days_alive": 12324,
+      "physical": -0.8878852184025874,
+      "emotional": 0.7818314824677632,
+      "intellectual": 0.28173255684165877,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-11",
+      "days_alive": 12325,
+      "physical": -0.7308359642783923,
+      "emotional": 0.9009688679023284,
+      "intellectual": 0.09505604330424951,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-12",
+      "days_alive": 12326,
+      "physical": -0.5195839500353224,
+      "emotional": 0.9749279121818257,
+      "intellectual": -0.09505604330428664,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-13",
+      "days_alive": 12327,
+      "physical": -0.26979677115727113,
+      "emotional": 1.0,
+      "intellectual": -0.28173255684125825,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-14",
+      "days_alive": 12328,
+      "physical": -1.8812555572940427e-13,
+      "emotional": 0.9749279121818255,
+      "intellectual": -0.4582265217274041,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-02-15",
+      "days_alive": 12329,
+      "physical": 0.26979677115690887,
+      "emotional": 0.9009688679025253,
+      "intellectual": -0.6181589862207345,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-16",
+      "days_alive": 12330,
+      "physical": 0.5195839500353895,
+      "emotional": 0.7818314824680461,
+      "intellectual": -0.7557495743541806,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-17",
+      "days_alive": 12331,
+      "physical": 0.7308359642778252,
+      "emotional": 0.6234898018589387,
+      "intellectual": -0.8660254037842378,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-18",
+      "days_alive": 12332,
+      "physical": 0.8878852184024143,
+      "emotional": 0.4338837391175977,
+      "intellectual": -0.9450008187145932,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-19",
+      "days_alive": 12333,
+      "physical": 0.979084087682354,
+      "emotional": 0.22252093395614422,
+      "intellectual": -0.9898214418809244,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-20",
+      "days_alive": 12334,
+      "physical": 0.9976687691905551,
+      "emotional": 5.164534560669394e-13,
+      "intellectual": -0.9988673391830243,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-02-21",
+      "days_alive": 12335,
+      "physical": 0.9422609221188758,
+      "emotional": -0.2225209339560239,
+      "intellectual": -0.9718115683235818,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-22",
+      "days_alive": 12336,
+      "physical": 0.8169698930104978,
+      "emotional": -0.4338837391174865,
+      "intellectual": -0.9096319953545178,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-23",
+      "days_alive": 12337,
+      "physical": 0.6310879443260748,
+      "emotional": -0.6234898018588422,
+      "intellectual": -0.8145759520502354,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-24",
+      "days_alive": 12338,
+      "physical": 0.3984010898466221,
+      "emotional": -0.7818314824679692,
+      "intellectual": -0.6900790114821916,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-25",
+      "days_alive": 12339,
+      "physical": 0.13616664909613957,
+      "emotional": -0.9009688679024718,
+      "intellectual": -0.5406408174555458,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-26",
+      "days_alive": 12340,
+      "physical": -0.13616664909642123,
+      "emotional": -0.974927912181798,
+      "intellectual": -0.37166245566011114,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-27",
+      "days_alive": 12341,
+      "physical": -0.39840108984604866,
+      "emotional": -1.0,
+      "intellectual": -0.18925124436045934,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-02-28",
+      "days_alive": 12342,
+      "physical": -0.6310879443259427,
+      "emotional": -0.9749279121818532,
+      "intellectual": -3.331881107346561e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2024-02-29",
+      "days_alive": 12343,
+      "physical": -0.8169698930103996,
+      "emotional": -0.900968867902382,
+      "intellectual": 0.18925124436025154,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-01",
+      "days_alive": 12344,
+      "physical": -0.9422609221186664,
+      "emotional": -0.7818314824681237,
+      "intellectual": 0.3716624556599146,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-02",
+      "days_alive": 12345,
+      "physical": -0.9976687691905125,
+      "emotional": -0.623489801859036,
+      "intellectual": 0.5406408174553679,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-03",
+      "days_alive": 12346,
+      "physical": -0.9790840876822962,
+      "emotional": -0.43388373911770983,
+      "intellectual": 0.6900790114820385,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-04",
+      "days_alive": 12347,
+      "physical": -0.8878852184022835,
+      "emotional": -0.22252093395626557,
+      "intellectual": 0.8145759520503764,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-05",
+      "days_alive": 12348,
+      "physical": -0.7308359642782518,
+      "emotional": -1.8617354861840757e-13,
+      "intellectual": 0.9096319953544298,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-03-06",
+      "days_alive": 12349,
+      "physical": -0.5195839500355351,
+      "emotional": 0.2225209339563459,
+      "intellectual": 0.9718115683235319,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-07",
+      "days_alive": 12350,
+      "physical": -0.26979677115707296,
+      "emotional": 0.4338837391177841,
+      "intellectual": 0.9988673391830142,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-08",
+      "days_alive": 12351,
+      "physical": -4.3706044260526883e-13,
+      "emotional": 0.6234898018583893,
+      "intellectual": 0.9898214418809546,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-03-09",
+      "days_alive": 12352,
+      "physical": 0.26979677115666917,
+      "emotional": 0.7818314824678916,
+      "intellectual": 0.9450008187146625,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-10",
+      "days_alive": 12353,
+      "physical": 0.5195839500355653,
+      "emotional": 0.9009688679024177,
+      "intellectual": 0.8660254037843436,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-11",
+      "days_alive": 12354,
+      "physical": 0.730835964278276,
+      "emotional": 0.9749279121818715,
+      "intellectual": 0.7557495743543192,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-12",
+      "days_alive": 12355,
+      "physical": 0.8878852184022997,
+      "emotional": 1.0,
+      "intellectual": 0.6181589862209009,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-13",
+      "days_alive": 12356,
+      "physical": 0.9790840876823034,
+      "emotional": 0.9749279121818809,
+      "intellectual": 0.4582265217275922,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-14",
+      "days_alive": 12357,
+      "physical": 0.997668769190541,
+      "emotional": 0.9009688679024359,
+      "intellectual": 0.2817325568414613,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-15",
+      "days_alive": 12358,
+      "physical": 0.9422609221189592,
+      "emotional": 0.7818314824682013,
+      "intellectual": 0.09505604330449731,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-16",
+      "days_alive": 12359,
+      "physical": 0.8169698930106414,
+      "emotional": 0.6234898018587778,
+      "intellectual": -0.09505604330403884,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-17",
+      "days_alive": 12360,
+      "physical": 0.6310879443259152,
+      "emotional": 0.4338837391174123,
+      "intellectual": -0.2817325568414557,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-18",
+      "days_alive": 12361,
+      "physical": 0.3984010898464333,
+      "emotional": 0.22252093395683026,
+      "intellectual": -0.4582265217271828,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-19",
+      "days_alive": 12362,
+      "physical": 0.13616664909638618,
+      "emotional": 3.106409920563398e-13,
+      "intellectual": -0.6181589862205389,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-03-20",
+      "days_alive": 12363,
+      "physical": -0.13616664909617462,
+      "emotional": -0.22252093395622455,
+      "intellectual": -0.7557495743543153,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-21",
+      "days_alive": 12364,
+      "physical": -0.39840108984623746,
+      "emotional": -0.4338837391176719,
+      "intellectual": -0.866025403784568,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-22",
+      "days_alive": 12365,
+      "physical": -0.6310879443257496,
+      "emotional": -0.6234898018586476,
+      "intellectual": -0.9450008187146605,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-23",
+      "days_alive": 12366,
+      "physical": -0.8169698930102559,
+      "emotional": -0.7818314824680975,
+      "intellectual": -0.9898214418809537,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-24",
+      "days_alive": 12367,
+      "physical": -0.9422609221188876,
+      "emotional": -0.9009688679023637,
+      "intellectual": -0.9988673391830144,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-25",
+      "days_alive": 12368,
+      "physical": -0.9976687691905265,
+      "emotional": -0.9749279121817426,
+      "intellectual": -0.9718115683236405,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-26",
+      "days_alive": 12369,
+      "physical": -0.9790840876823469,
+      "emotional": -1.0,
+      "intellectual": -0.9096319953546211,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-27",
+      "days_alive": 12370,
+      "physical": -0.887885218402398,
+      "emotional": -0.9749279121818074,
+      "intellectual": -0.8145759520503797,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-28",
+      "days_alive": 12371,
+      "physical": -0.7308359642784217,
+      "emotional": -0.90096886790249,
+      "intellectual": -0.6900790114823718,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-29",
+      "days_alive": 12372,
+      "physical": -0.5195839500357478,
+      "emotional": -0.7818314824682789,
+      "intellectual": -0.5406408174557553,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-30",
+      "days_alive": 12373,
+      "physical": -0.2697967711568748,
+      "emotional": -0.6234898018588751,
+      "intellectual": -0.37166245566034223,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-03-31",
+      "days_alive": 12374,
+      "physical": 2.234993722917949e-13,
+      "emotional": -0.4338837391175244,
+      "intellectual": -0.18925124436025725,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-04-01",
+      "days_alive": 12375,
+      "physical": 0.26979677115686734,
+      "emotional": -0.22252093395650827,
+      "intellectual": -1.273756467240565e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2024-04-02",
+      "days_alive": 12376,
+      "physical": 0.5195839500353526,
+      "emotional": 1.963891539219201e-14,
+      "intellectual": 0.18925124436045362,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-04-03",
+      "days_alive": 12377,
+      "physical": 0.730835964278106,
+      "emotional": 0.22252093395654657,
+      "intellectual": 0.37166245566052786,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-04",
+      "days_alive": 12378,
+      "physical": 0.8878852184021853,
+      "emotional": 0.43388373911715006,
+      "intellectual": 0.5406408174555409,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-05",
+      "days_alive": 12379,
+      "physical": 0.9790840876822527,
+      "emotional": 0.6234898018585503,
+      "intellectual": 0.6900790114818584,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-06",
+      "days_alive": 12380,
+      "physical": 0.997668769190527,
+      "emotional": 0.7818314824680199,
+      "intellectual": 0.8145759520502319,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-07",
+      "days_alive": 12381,
+      "physical": 0.9422609221187379,
+      "emotional": 0.900968867902507,
+      "intellectual": 0.9096319953545153,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-08",
+      "days_alive": 12382,
+      "physical": 0.8169698930105227,
+      "emotional": 0.9749279121818161,
+      "intellectual": 0.9718115683234733,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-09",
+      "days_alive": 12383,
+      "physical": 0.6310879443261084,
+      "emotional": 1.0,
+      "intellectual": 0.9988673391830023,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-10",
+      "days_alive": 12384,
+      "physical": 0.39840108984624456,
+      "emotional": 0.974927912181835,
+      "intellectual": 0.9898214418809252,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-11",
+      "days_alive": 12385,
+      "physical": 0.1361666490966328,
+      "emotional": 0.9009688679025439,
+      "intellectual": 0.9450008187147438,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-12",
+      "days_alive": 12386,
+      "physical": -0.13616664909592802,
+      "emotional": 0.781831482468073,
+      "intellectual": 0.866025403784468,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-13",
+      "days_alive": 12387,
+      "physical": -0.3984010898464262,
+      "emotional": 0.6234898018586169,
+      "intellectual": 0.7557495743541843,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-14",
+      "days_alive": 12388,
+      "physical": -0.6310879443255565,
+      "emotional": 0.4338837391180463,
+      "intellectual": 0.6181589862207391,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-15",
+      "days_alive": 12389,
+      "physical": -0.8169698930103747,
+      "emotional": 0.2225209339566296,
+      "intellectual": 0.45822652172740924,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-16",
+      "days_alive": 12390,
+      "physical": -0.9422609221188043,
+      "emotional": 1.0482852804574026e-13,
+      "intellectual": 0.2817325568412638,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-04-17",
+      "days_alive": 12391,
+      "physical": -0.9976687691905406,
+      "emotional": -0.22252093395642522,
+      "intellectual": 0.09505604330429243,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-18",
+      "days_alive": 12392,
+      "physical": -0.9790840876823975,
+      "emotional": -0.43388373911744765,
+      "intellectual": -0.09505604330379103,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-19",
+      "days_alive": 12393,
+      "physical": -0.8878852184025126,
+      "emotional": -0.6234898018588085,
+      "intellectual": -0.28173255684121684,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-20",
+      "days_alive": 12394,
+      "physical": -0.7308359642779708,
+      "emotional": -0.7818314824679423,
+      "intellectual": -0.4582265217273658,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-21",
+      "days_alive": 12395,
+      "physical": -0.519583950035572,
+      "emotional": -0.9009688679022557,
+      "intellectual": -0.6181589862203432,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-22",
+      "days_alive": 12396,
+      "physical": -0.2697967711571145,
+      "emotional": -0.9749279121817884,
+      "intellectual": -0.7557495743541524,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-23",
+      "days_alive": 12397,
+      "physical": -2.5435514584069645e-14,
+      "emotional": -1.0,
+      "intellectual": -0.8660254037844436,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-04-24",
+      "days_alive": 12398,
+      "physical": 0.2697967711570655,
+      "emotional": -0.9749279121817616,
+      "intellectual": -0.9450008187147279,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-25",
+      "days_alive": 12399,
+      "physical": 0.5195839500351399,
+      "emotional": -0.900968867902598,
+      "intellectual": -0.9898214418809183,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-26",
+      "days_alive": 12400,
+      "physical": 0.7308359642779362,
+      "emotional": -0.7818314824681506,
+      "intellectual": -0.9988673391830046,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-27",
+      "days_alive": 12401,
+      "physical": 0.8878852184024891,
+      "emotional": -0.6234898018587142,
+      "intellectual": -0.9718115683234848,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-28",
+      "days_alive": 12402,
+      "physical": 0.9790840876822946,
+      "emotional": -0.4338837391177487,
+      "intellectual": -0.9096319953545356,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-29",
+      "days_alive": 12403,
+      "physical": 0.997668769190544,
+      "emotional": -0.22252093395630762,
+      "intellectual": -0.8145759520505241,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-04-30",
+      "days_alive": 12404,
+      "physical": 0.9422609221188213,
+      "emotional": 2.254513794027916e-13,
+      "intellectual": -0.6900790114822228,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-05-01",
+      "days_alive": 12405,
+      "physical": 0.8169698930106662,
+      "emotional": 0.2225209339558605,
+      "intellectual": -0.5406408174559647,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-02",
+      "days_alive": 12406,
+      "physical": 0.6310879443263014,
+      "emotional": 0.4338837391173355,
+      "intellectual": -0.3716624556605733,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-03",
+      "days_alive": 12407,
+      "physical": 0.3984010898464729,
+      "emotional": 0.6234898018587112,
+      "intellectual": -0.1892512443605017,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-04",
+      "days_alive": 12408,
+      "physical": 0.1361666490959784,
+      "emotional": 0.7818314824681482,
+      "intellectual": 7.843681728654309e-14,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2024-05-05",
+      "days_alive": 12409,
+      "physical": -0.1361666490961319,
+      "emotional": 0.900968867902399,
+      "intellectual": 0.18925124436020918,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-06",
+      "days_alive": 12410,
+      "physical": -0.3984010898461979,
+      "emotional": 0.9749279121817607,
+      "intellectual": 0.37166245566029676,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-07",
+      "days_alive": 12411,
+      "physical": -0.6310879443260689,
+      "emotional": 1.0,
+      "intellectual": 0.5406408174557141,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-08",
+      "days_alive": 12412,
+      "physical": -0.816969893010231,
+      "emotional": 0.9749279121818905,
+      "intellectual": 0.6900790114820073,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-09",
+      "days_alive": 12413,
+      "physical": -0.9422609221187209,
+      "emotional": 0.9009688679024547,
+      "intellectual": 0.8145759520503514,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-10",
+      "days_alive": 12414,
+      "physical": -0.9976687691905546,
+      "emotional": 0.7818314824679446,
+      "intellectual": 0.9096319953546008,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-11",
+      "days_alive": 12415,
+      "physical": -0.9790840876824481,
+      "emotional": 0.623489801859167,
+      "intellectual": 0.9718115683235218,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-12",
+      "days_alive": 12416,
+      "physical": -0.8878852184024179,
+      "emotional": 0.4338837391178608,
+      "intellectual": 0.9988673391829905,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-13",
+      "days_alive": 12417,
+      "physical": -0.7308359642781408,
+      "emotional": 0.22252093395642897,
+      "intellectual": 0.9898214418809607,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-14",
+      "days_alive": 12418,
+      "physical": -0.5195839500353961,
+      "emotional": -1.0098393596485933e-13,
+      "intellectual": 0.9450008187146766,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-05-15",
+      "days_alive": 12419,
+      "physical": -0.2697967711573542,
+      "emotional": -0.22252093395618253,
+      "intellectual": 0.8660254037845925,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-16",
+      "days_alive": 12420,
+      "physical": -2.743704014599342e-13,
+      "emotional": -0.43388373911763306,
+      "intellectual": 0.7557495743543474,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-05-17",
+      "days_alive": 12421,
+      "physical": 0.2697967711572637,
+      "emotional": -0.6234898018586139,
+      "intellectual": 0.6181589862205773,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-18",
+      "days_alive": 12422,
+      "physical": 0.5195839500349273,
+      "emotional": -0.7818314824677871,
+      "intellectual": 0.4582265217276305,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-19",
+      "days_alive": 12423,
+      "physical": 0.7308359642780766,
+      "emotional": -0.900968867902345,
+      "intellectual": 0.28173255684150267,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-20",
+      "days_alive": 12424,
+      "physical": 0.8878852184023747,
+      "emotional": -0.9749279121818342,
+      "intellectual": 0.09505604330408755,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-21",
+      "days_alive": 12425,
+      "physical": 0.9790840876823365,
+      "emotional": -1.0,
+      "intellectual": -0.0950560433044486,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-22",
+      "days_alive": 12426,
+      "physical": 0.997668769190561,
+      "emotional": -0.9749279121819181,
+      "intellectual": -0.28173255684141435,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-23",
+      "days_alive": 12427,
+      "physical": 0.9422609221189047,
+      "emotional": -0.9009688679025087,
+      "intellectual": -0.4582265217275487,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-24",
+      "days_alive": 12428,
+      "physical": 0.8169698930102853,
+      "emotional": -0.7818314824680223,
+      "intellectual": -0.6181589862205049,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-25",
+      "days_alive": 12429,
+      "physical": 0.6310879443264945,
+      "emotional": -0.6234898018589088,
+      "intellectual": -0.7557495743539894,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-26",
+      "days_alive": 12430,
+      "physical": 0.3984010898462841,
+      "emotional": -0.4338837391175633,
+      "intellectual": -0.866025403784319,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-27",
+      "days_alive": 12431,
+      "physical": 0.13616664909622503,
+      "emotional": -0.22252093395610695,
+      "intellectual": -0.9450008187146464,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-28",
+      "days_alive": 12432,
+      "physical": -0.13616664909588527,
+      "emotional": -4.78230858359537e-13,
+      "intellectual": -0.9898214418808828,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-05-29",
+      "days_alive": 12433,
+      "physical": -0.39840108984596956,
+      "emotional": 0.22252093395606118,
+      "intellectual": -0.9988673391830165,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-30",
+      "days_alive": 12434,
+      "physical": -0.6310879443258758,
+      "emotional": 0.43388373911752093,
+      "intellectual": -0.9718115683235434,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-05-31",
+      "days_alive": 12435,
+      "physical": -0.8169698930106121,
+      "emotional": 0.6234898018588722,
+      "intellectual": -0.9096319953544502,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-01",
+      "days_alive": 12436,
+      "physical": -0.9422609221187898,
+      "emotional": 0.7818314824679929,
+      "intellectual": -0.8145759520504048,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-02",
+      "days_alive": 12437,
+      "physical": -0.9976687691905376,
+      "emotional": 0.900968867902291,
+      "intellectual": -0.690079011482074,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-03",
+      "days_alive": 12438,
+      "physical": -0.9790840876823137,
+      "emotional": 0.9749279121818065,
+      "intellectual": -0.5406408174554089,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-04",
+      "days_alive": 12439,
+      "physical": -0.8878852184025324,
+      "emotional": 1.0,
+      "intellectual": -0.37166245566038225,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-05",
+      "days_alive": 12440,
+      "physical": -0.7308359642783107,
+      "emotional": 0.9749279121818446,
+      "intellectual": -0.1892512443607461,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-06",
+      "days_alive": 12441,
+      "physical": -0.5195839500356088,
+      "emotional": 0.9009688679023654,
+      "intellectual": -1.7049806958932145e-13,
+      "critical_cycles": [
+        "Intellectual"
+      ]
+    },
+    {
+      "date": "2024-06-07",
+      "days_alive": 12442,
+      "physical": -0.26979677115671813,
+      "emotional": 0.7818314824678164,
+      "intellectual": 0.1892512443604113,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-08",
+      "days_alive": 12443,
+      "physical": -6.85579374493346e-14,
+      "emotional": 0.6234898018590062,
+      "intellectual": 0.37166245566006567,
+      "critical_cycles": [
+        "Physical"
+      ]
+    },
+    {
+      "date": "2024-06-09",
+      "days_alive": 12444,
+      "physical": 0.269796771157024,
+      "emotional": 0.4338837391176754,
+      "intellectual": 0.5406408174555046,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-10",
+      "days_alive": 12445,
+      "physical": 0.5195839500354916,
+      "emotional": 0.2225209339562283,
+      "intellectual": 0.6900790114821562,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-11",
+      "days_alive": 12446,
+      "physical": 0.7308359642779066,
+      "emotional": 1.479509509110052e-13,
+      "intellectual": 0.8145759520502069,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-06-12",
+      "days_alive": 12447,
+      "physical": 0.8878852184022601,
+      "emotional": -0.22252093395638317,
+      "intellectual": 0.9096319953544975,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-13",
+      "days_alive": 12448,
+      "physical": 0.9790840876822858,
+      "emotional": -0.4338837391174088,
+      "intellectual": 0.9718115683235703,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-14",
+      "days_alive": 12449,
+      "physical": 0.997668769190578,
+      "emotional": -0.6234898018584193,
+      "intellectual": 0.9988673391830003,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-15",
+      "days_alive": 12450,
+      "physical": 0.9422609221188357,
+      "emotional": -0.7818314824679153,
+      "intellectual": 0.9898214418809314,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-16",
+      "days_alive": 12451,
+      "physical": 0.8169698930104289,
+      "emotional": -0.9009688679024344,
+      "intellectual": 0.9450008187146092,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-17",
+      "days_alive": 12452,
+      "physical": 0.6310879443259821,
+      "emotional": -0.97492791218188,
+      "intellectual": 0.8660254037844896,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-18",
+      "days_alive": 12453,
+      "physical": 0.3984010898465124,
+      "emotional": -1.0,
+      "intellectual": 0.7557495743545104,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-19",
+      "days_alive": 12454,
+      "physical": 0.13616664909647164,
+      "emotional": -0.9749279121818724,
+      "intellectual": 0.618158986220773,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-20",
+      "days_alive": 12455,
+      "physical": -0.1361666490965397,
+      "emotional": -0.9009688679024194,
+      "intellectual": 0.4582265217274476,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-21",
+      "days_alive": 12456,
+      "physical": -0.39840108984574124,
+      "emotional": -0.7818314824681775,
+      "intellectual": 0.28173255684174153,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-22",
+      "days_alive": 12457,
+      "physical": -0.6310879443260354,
+      "emotional": -0.6234898018587479,
+      "intellectual": 0.09505604330433536,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-23",
+      "days_alive": 12458,
+      "physical": -0.8169698930104685,
+      "emotional": -0.4338837391173778,
+      "intellectual": -0.09505604330420078,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-24",
+      "days_alive": 12459,
+      "physical": -0.9422609221187065,
+      "emotional": -0.222520933956793,
+      "intellectual": -0.2817325568411755,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-25",
+      "days_alive": 12460,
+      "physical": -0.9976687691905206,
+      "emotional": -2.724183943489375e-13,
+      "intellectual": -0.4582265217273274,
+      "critical_cycles": [
+        "Emotional"
+      ]
+    },
+    {
+      "date": "2024-06-26",
+      "days_alive": 12461,
+      "physical": -0.9790840876823644,
+      "emotional": 0.22252093395626182,
+      "intellectual": -0.6181589862206667,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-27",
+      "days_alive": 12462,
+      "physical": -0.8878852184022286,
+      "emotional": 0.4338837391177064,
+      "intellectual": -0.7557495743544219,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-28",
+      "days_alive": 12463,
+      "physical": -0.7308359642784806,
+      "emotional": 0.6234898018586775,
+      "intellectual": -0.866025403784422,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-29",
+      "days_alive": 12464,
+      "physical": -0.519583950035433,
+      "emotional": 0.7818314824678378,
+      "intellectual": -0.945000818714565,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-06-30",
+      "days_alive": 12465,
+      "physical": -0.2697967711569578,
+      "emotional": 0.9009688679023803,
+      "intellectual": -0.9898214418809121,
+      "critical_cycles": []
+    },
+    {
+      "date": "2024-07-01",
+      "days_alive": 12466,
+      "physical": -3.1749282432519915e-13,
+      "emotional": 0.9749279121817511,
+      "intellectual": -0.9988673391830284,
+      "critical_cycles": [
+        "Physical"
+      ]
+    }
+  ]
+}

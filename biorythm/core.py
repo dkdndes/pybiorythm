@@ -99,7 +99,8 @@ class BiorhythmCalculator:
         self.midwidth = math.floor(self.width / 2)
         self.middays = math.floor(self.days / 2)
         self.logger.info(
-            f"BiorhythmCalculator initialized: width={self.width}, days={self.days}, orientation={self.orientation}"
+            f"BiorhythmCalculator initialized: width={self.width}, days={self.days}, "
+            f"orientation={self.orientation}"
         )
 
     def _validate_orientation(self, orientation: str) -> None:
@@ -278,7 +279,8 @@ class BiorhythmCalculator:
             for crit_date, cycles in critical_days:
                 cycles_str = ", ".join(cycles)
                 print(
-                    f"   {crit_date.strftime(shortdate_format)}: {cycles_str} cycle(s) near zero"
+                    f"   {crit_date.strftime(shortdate_format)}: {cycles_str} "
+                    f"cycle(s) near zero"
                 )
         else:
             print()
@@ -288,7 +290,8 @@ class BiorhythmCalculator:
         self, birthdate: datetime, plot_date: datetime
     ) -> None:
         """
-        Draws a 'wave matrix' for each cycle: rows = amplitude levels (high=+1, low=-1), columns=days.
+        Draws a 'wave matrix' for each cycle: rows = amplitude levels
+        (high=+1, low=-1), columns=days.
         """
         cycles = [
             ("Physical", 23, "p", "P"),
@@ -337,7 +340,7 @@ class BiorhythmCalculator:
         self, birthdate: datetime, plot_date: datetime
     ) -> None:
         """
-        Draws all three biorhythm curves in one 2D ASCII chart (height=20, width=terminal).
+        Draws all three biorhythm curves in one 2D ASCII chart (height=20, width=term).
         Overlapping cycles are marked with * (2 overlap) or ! (all three).
         """
         chart_height = 20
@@ -419,7 +422,7 @@ class BiorhythmCalculator:
         chart_orientation: str = "vertical",
     ) -> dict:
         """
-        Generate a biorhythm timeseries and critical days JSON payload for analytics use.
+        Generate a biorhythm timeseries and critical days JSON payload for analytics.
         """
         if plot_date is None:
             plot_date = datetime.now()
@@ -473,7 +476,13 @@ class BiorhythmCalculator:
                 "chart_orientation": chart_orientation,
                 "days": self.days,
                 "width": self.width,
-                "scientific_warning": "⚠️  SCIENTIFIC WARNING ⚠️\nBiorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\nMultiple peer-reviewed studies have found NO correlation between\nbiorhythm cycles and human performance beyond random chance.\nThis program is provided for ENTERTAINMENT PURPOSES ONLY.",
+                "scientific_warning": (
+                    "⚠️  SCIENTIFIC WARNING ⚠️\n"
+                    "Biorhythm theory is PSEUDOSCIENCE with NO scientific evidence.\n"
+                    "Multiple peer-reviewed studies have found NO correlation between\n"
+                    "biorhythm cycles and human performance beyond random chance.\n"
+                    "This program is provided for ENTERTAINMENT PURPOSES ONLY."
+                ),
             },
             "cycle_repeats": {
                 "physical_emotional_repeat_in_days": next_23_28,
@@ -554,7 +563,8 @@ class UserInterface:
                     f"Invalid orientation choice '{orientation_input}', using vertical"
                 )
             self.logger.info(
-                f"User input received: {year}-{month:02d}-{day:02d}, orientation={orientation}, days={days}"
+                f"User input received: {year}-{month:02d}-{day:02d}, "
+                f"orientation={orientation}, days={days}"
             )
             return year, month, day, orientation, days
         except Exception as e:
@@ -613,7 +623,8 @@ def main(
         else:
             width = max(width, MIN_CHART_WIDTH)
         logger.info(
-            f"Initializing BiorhythmCalculator with width={width}, orientation={orientation}, days={days}"
+            f"Initializing BiorhythmCalculator with width={width}, "
+            f"orientation={orientation}, days={days}"
         )
         if orientation.lower() not in (
             "vertical",
@@ -622,7 +633,8 @@ def main(
             "json-horizontal",
         ):
             raise ChartParameterError(
-                f"Invalid orientation '{orientation}', must be 'vertical', 'horizontal', 'json-vertical', or 'json-horizontal'"
+                f"Invalid orientation '{orientation}', must be 'vertical', "
+                f"'horizontal', 'json-vertical', or 'json-horizontal'"
             )
         # For JSON outputs, pass the base orientation to the calculator
         calc_orientation = (

@@ -1,0 +1,118 @@
+{
+  "overview": {
+    "description": "Biorhythm sample datasets for analysis and experimentation",
+    "source": "Generated using PyBiorythm library",
+    "license": "MIT License - Free for educational and commercial use",
+    "scientific_disclaimer": "Biorhythm theory is considered pseudoscience. Data provided for educational purposes only."
+  },
+  "datasets": {
+    "one_year_1990": {
+      "description": "One year of biorhythm data for person born 1990-05-15",
+      "period": "2024-01-01 to 2024-12-31",
+      "rows": 365,
+      "use_cases": [
+        "Basic time series analysis",
+        "Seasonal pattern detection",
+        "Statistical learning"
+      ]
+    },
+    "two_years_1985": {
+      "description": "Two years of biorhythm data for person born 1985-03-22",
+      "period": "2023-01-01 to 2024-12-30",
+      "rows": 730,
+      "use_cases": [
+        "Long-term trend analysis",
+        "Cycle validation",
+        "Advanced statistics"
+      ]
+    },
+    "quarterly_1995": {
+      "description": "90 days of biorhythm data for person born 1995-08-10",
+      "period": "2024-01-01 to 2024-03-30",
+      "rows": 90,
+      "use_cases": [
+        "Quick analysis",
+        "Visualization practice",
+        "Algorithm testing"
+      ]
+    },
+    "five_years_1980": {
+      "description": "Five years of biorhythm data for person born 1980-12-25",
+      "period": "2020-01-01 to 2024-12-30",
+      "rows": 1825,
+      "use_cases": [
+        "Big data analysis",
+        "Machine learning",
+        "Performance testing"
+      ]
+    },
+    "multiple_people_2024": {
+      "description": "Comparative data for 3 people born in different months of 1990",
+      "period": "2024-01-01 to 2024-12-31",
+      "rows": 1095,
+      "use_cases": [
+        "Comparative analysis",
+        "Group studies",
+        "Cohort analysis"
+      ]
+    }
+  },
+  "data_structure": {
+    "json_format": {
+      "metadata": {
+        "birthdate": "Birth date in YYYY-MM-DD format",
+        "chart_start_date": "First date in dataset",
+        "chart_period_days": "Number of days included",
+        "generation_timestamp": "When dataset was created",
+        "cycles": "Information about the three biorhythm cycles"
+      },
+      "timeseries": {
+        "date": "Date in YYYY-MM-DD format",
+        "day_number": "Days since birth",
+        "cycles": {
+          "physical": "Physical cycle value (-1.0 to +1.0)",
+          "emotional": "Emotional cycle value (-1.0 to +1.0)",
+          "intellectual": "Intellectual cycle value (-1.0 to +1.0)"
+        },
+        "critical_days": "List of critical day events (cycle zero crossings)"
+      }
+    },
+    "csv_format": {
+      "date": "Date in YYYY-MM-DD format",
+      "day_number": "Days since birth (integer)",
+      "cycles.physical": "Physical cycle value (float, -1.0 to +1.0)",
+      "cycles.emotional": "Emotional cycle value (float, -1.0 to +1.0)",
+      "cycles.intellectual": "Intellectual cycle value (float, -1.0 to +1.0)",
+      "critical_days": "JSON array of critical day events",
+      "person_id": "Person identifier (for multi-person datasets)",
+      "birthdate": "Birth date (for multi-person datasets)"
+    }
+  },
+  "cycle_information": {
+    "physical_cycle": {
+      "period_days": 23,
+      "description": "Affects physical strength, endurance, and energy levels",
+      "formula": "sin(2\u03c0 \u00d7 day_number / 23)"
+    },
+    "emotional_cycle": {
+      "period_days": 28,
+      "description": "Affects mood, creativity, and emotional sensitivity",
+      "formula": "sin(2\u03c0 \u00d7 day_number / 28)"
+    },
+    "intellectual_cycle": {
+      "period_days": 33,
+      "description": "Affects mental acuity, logic, and reasoning ability",
+      "formula": "sin(2\u03c0 \u00d7 day_number / 33)"
+    }
+  },
+  "analysis_suggestions": {
+    "descriptive_statistics": "Calculate mean, std, min, max for each cycle",
+    "correlation_analysis": "Examine relationships between cycles",
+    "time_series_plots": "Visualize cycles over time",
+    "critical_day_analysis": "Study zero-crossing patterns",
+    "seasonal_patterns": "Look for monthly or weekly patterns",
+    "frequency_analysis": "Validate cycle periods using FFT",
+    "comparative_analysis": "Compare cycles between different people",
+    "trend_analysis": "Examine long-term patterns using moving averages"
+  }
+}

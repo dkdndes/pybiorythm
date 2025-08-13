@@ -104,6 +104,10 @@ Brief description of what this PR does.
 - [x] GitHub Actions tested with act
 - [x] Documentation updated
 
+## Version Impact
+This PR will NOT trigger a version increment (feature branches don't run semantic-release).
+Version will only increment when merged to develop (prerelease) or main (full release).
+
 ## Related Issues
 Fixes #123
 EOF
@@ -112,14 +116,35 @@ EOF
 
 **Alternative**: Create PR via GitHub web interface at `https://github.com/dkdndes/pybiorythm/pulls`
 
+**⚠️ Important**: Feature branch PRs only run CI tests, NOT semantic-release. This prevents version conflicts and "Detached HEAD" errors.
+
 ### **Phase 4: Review & Merge (GitHub Only)**
 
-1. **Automated Checks**: GitHub Actions run CI/CD pipeline
+1. **Automated Checks**: GitHub Actions run CI/CD pipeline (CI tests only, no releases)
 2. **Code Review**: Review changes in GitHub PR interface  
 3. **Merge**: Use GitHub's "Merge pull request" button
-4. **Cleanup**: Delete merged branch via GitHub interface
+4. **Version Effect**: 
+   - **Merge to develop**: Triggers prerelease version (e.g., 2.8.0-dev.1)
+   - **Merge to main**: Triggers full release version (e.g., 2.8.0)
+5. **Cleanup**: Delete merged branch via GitHub interface
 
-### **Phase 5: Local Cleanup**
+### **Phase 5: Release Progression (Automated)**
+
+After merging to develop:
+```bash
+# This happens automatically via GitHub Actions
+Feature merged to develop → Prerelease created (2.8.0-dev.1)
+                         → Development Docker image built
+                         → No PyPI publishing
+
+# Later, when develop is merged to main:
+Develop merged to main → Full release created (2.8.0)
+                      → Production Docker image published  
+                      → PyPI package published
+                      → GitHub release created
+```
+
+### **Phase 6: Local Cleanup**
 
 ```bash
 # 7. Clean up local feature branch (after GitHub merge)

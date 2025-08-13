@@ -182,29 +182,85 @@ The version is maintained in multiple locations:
 - `_version.py` - Auto-generated version file
 - Git tags - Authoritative version source
 
+### Dynamic Versioning System
+Our project uses **dynamic versioning** to eliminate circular reference issues:
+
+#### Version Sources (Priority Order)
+1. **Git Tags**: Authoritative source created by semantic-release
+2. **Hatch VCS**: Reads version from git tags automatically  
+3. **Python Import**: `biorythm.__version__` via `importlib.metadata`
+4. **Build System**: Automatic version injection during package builds
+
+#### Configuration
+```toml
+# pyproject.toml
+[project]
+name = "biorythm"
+dynamic = ["version"]  # No hardcoded version
+
+[tool.hatch.version]
+source = "vcs"         # Read from git tags
+
+[tool.semantic_release]
+# No version_toml conflicts
+version_variables = [
+    "biorythm/__init__.py:__version__",
+]
+```
+
+#### Development Versions
+For unreleased code, hatch-vcs automatically generates development versions:
+- **Format**: `2.8.0b2.dev2+gf9d5af7b1.d20250812`
+- **Breakdown**: 
+  - `2.8.0b2`: Base version from latest tag
+  - `dev2`: 2 commits since tag  
+  - `gf9d5af7b1`: Git hash
+  - `d20250812`: Date stamp
+
 ### Version Synchronization
 All version locations are kept in sync by:
-1. **Hatch VCS**: Reads version from git tags
-2. **Semantic Release**: Updates all version files
+1. **Hatch VCS**: Reads version from git tags automatically
+2. **Semantic Release**: Creates git tags, no file conflicts
 3. **GitHub Actions**: Ensures consistency across releases
+4. **Dynamic Import**: Runtime version detection from package metadata
 
-## Branch Strategy
+## Branch Strategy & Version Flow
 
-### Main Branch
-- **Production ready**: All commits should be releasable
-- **Protected**: Requires PR reviews and status checks
-- **Semantic Release**: Every push triggers version analysis
-- **Clean History**: Prefer squash merges for PRs
+### Feature → Develop → Main Progression
 
-### Develop Branch (Optional)
-- **Integration**: Feature integration and testing
-- **Semantic Commits**: Same commit conventions apply
-- **Sync**: Automatically synced with main after releases
+Our workflow ensures versions only increment on successful merges to release branches:
 
-### Feature Branches
-- **Naming**: Use descriptive names (e.g., `feat/user-auth`, `fix/date-bug`)
-- **Commits**: Follow conventional commit format
-- **Squashing**: PR commits can be squashed if preferred
+```
+Feature Branch (fix/pytest-test-collection-issues)
+    ↓ (PR + CI tests only, NO version increment)
+Develop Branch (prerelease versions: 2.8.0-dev.1, 2.8.0-dev.2, etc.)
+    ↓ (Merge triggers prerelease versions)
+Main Branch (production releases: 2.8.0, 2.8.1, etc.)
+    ↓ (Merge triggers full releases)
+```
+
+### Branch Roles & Version Strategy
+
+#### Main Branch (`main`)
+- **Purpose**: Production-ready releases only
+- **Protection**: Requires PR reviews and all CI checks
+- **Versioning**: Full semantic releases (1.0.0, 1.1.0, 2.0.0)
+- **Triggers**: Docker publish, PyPI upload, GitHub releases
+- **Semantic Release**: Only runs on direct pushes to main
+
+#### Develop Branch (`develop`) 
+- **Purpose**: Integration and testing of features
+- **Protection**: Requires PR reviews and CI checks
+- **Versioning**: Prerelease versions (1.0.0-dev.1, 1.0.0-dev.2)
+- **Triggers**: Development Docker builds, no PyPI uploads
+- **Semantic Release**: Creates prerelease versions only
+
+#### Feature Branches (`feature/*`, `fix/*`, `docs/*`)
+- **Purpose**: Individual feature development
+- **Protection**: CI checks required, no direct pushes
+- **Versioning**: NO version increments (prevents circular references)
+- **Triggers**: CI tests only, no releases
+- **Semantic Release**: Does NOT run (prevents "Detached HEAD" errors)
 
 ## Best Practices
 
