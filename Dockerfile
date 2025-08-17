@@ -19,8 +19,10 @@ COPY main.py ./
 ARG VERSION=""
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=${VERSION}
 
-# Install dependencies without editable mode to avoid versioning issues
-RUN uv pip install --system --no-cache .
+# Install dependencies using uv
+RUN uv sync --system
+RUN uv build
+RUN uv pip install --system dist/*.whl
 
 # Stage 2: Production stage - minimal runtime image
 FROM python:3.12-slim AS production
