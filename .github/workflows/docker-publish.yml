@@ -1,23 +1,20 @@
-name: Docker Build and Publish
+name: Docker Build & Publish
 
 on:
-  push:
-    branches: [ main ]
-    tags: [ 'v*' ]
-  pull_request:
-    branches: [ main ]
+  workflow_run:
+    workflows: ["Python Semantic Release"]
+    types:
+      - completed
   workflow_dispatch:
     inputs:
-      ref:
-        description: 'Branch/tag to build from'
+      branch:
+        description: 'Branch to build from'
         required: false
         default: 'main'
-        type: string
-      push_image:
-        description: 'Push image to registry'
-        required: false
-        default: true
-        type: boolean
+        type: choice
+        options:
+          - main
+          - develop
 
 env:
   REGISTRY: ghcr.io
@@ -26,16 +23,25 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
     permissions:
-      contents: write
+      contents: read
       packages: write
-      security-events: write
 
     steps:
+    - name: Determine branch
+      id: branch
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "branch=${{ github.event.inputs.branch }}" >> $GITHUB_OUTPUT
+        else
+          echo "branch=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_OUTPUT
+        fi
+
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.inputs.ref || github.ref }}
+        ref: ${{ steps.branch.outputs.branch }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -50,17 +56,31 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Get package version
-      id: get-version
+    - name: Get latest release
+      id: get-release
       run: |
-        # Install dependencies and get version from hatch/setuptools-scm
-        uv sync --group dev
-        VERSION=$(uv run python -c "import biorythm; print(biorythm.__version__)" 2>/dev/null || echo "0.1.dev")
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "📦 Package version: $VERSION"
+        if [ "${{ steps.branch.outputs.branch }}" = "main" ]; then
+          LATEST_RELEASE=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name // empty')
+          if [ -n "$LATEST_RELEASE" ]; then
+            echo "version=${LATEST_RELEASE#v}" >> $GITHUB_OUTPUT
+            echo "tag=$LATEST_RELEASE" >> $GITHUB_OUTPUT
+          else
+            echo "version=0.1.0" >> $GITHUB_OUTPUT
+            echo "tag=v0.1.0" >> $GITHUB_OUTPUT
+          fi
+        else
+          # For develop branch, get the latest pre-release
+          LATEST_PRERELEASE=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[] | select(.prerelease == true) | .tag_name' | head -n1)
+          if [ -n "$LATEST_PRERELEASE" ]; then
+            echo "version=${LATEST_PRERELEASE#v}" >> $GITHUB_OUTPUT
+            echo "tag=$LATEST_PRERELEASE" >> $GITHUB_OUTPUT
+          else
+            echo "version=0.1.0-a.1" >> $GITHUB_OUTPUT
+            echo "tag=v0.1.0-a.1" >> $GITHUB_OUTPUT
+          fi
+        fi
 
     - name: Log in to Container Registry
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
@@ -73,12 +93,10 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}
-          type=raw,value=latest,enable={{is_default_branch}}
+          type=raw,value=${{ steps.get-release.outputs.version }}
+          type=raw,value=${{ steps.get-release.outputs.tag }}
+          type=raw,value=latest,enable=${{ steps.branch.outputs.branch == 'main' }}
+          type=raw,value=develop,enable=${{ steps.branch.outputs.branch == 'develop' }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
@@ -87,66 +105,16 @@ jobs:
         context: .
         target: production
         platforms: linux/amd64,linux/arm64
-        push: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true') }}
+        push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=Biorhythm calculation container
         build-args: |
-          VERSION=${{ steps.get-version.outputs.version }}
-
-    - name: Generate Docker SBOM
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
-      run: |
-        # Install Syft for SBOM generation
-        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-        
-        # Get the actual image reference from metadata
-        IMAGE_REF=$(echo '${{ steps.meta.outputs.tags }}' | head -n1)
-        
-        # Generate SBOM for the published image
-        syft $IMAGE_REF \
-          --output cyclonedx-json=sbom-docker-published.json \
-          --output spdx-json=sbom-docker-spdx.json
-
-    - name: Upload SBOM to release
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          sbom-docker-published.json
-          sbom-docker-spdx.json
-
-    - name: Attach SBOM to container image
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
-      run: |
-        # Install cosign for attestation
-        curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
-        sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-        sudo chmod +x /usr/local/bin/cosign
-        
-        # Attest SBOM to the container image (experimental)
-        # This creates a signed attestation that can be verified
-        echo "SBOM attestation would be created here in production"
-        echo "cosign attest --predicate sbom-docker-published.json ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
-
-    - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: 'trivy-results.sarif'
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
+          VERSION=${{ steps.get-release.outputs.version }}
 
     - name: Test published image
-      if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true')
       run: |
         # Get the actual image reference from metadata
         IMAGE_REF=$(echo '${{ steps.meta.outputs.tags }}' | head -n1)
@@ -165,12 +133,14 @@ jobs:
         print(f'Result: {result}')
         "
 
-    - name: Update Docker Hub description
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: peter-evans/dockerhub-description@v4
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        repository: ${{ github.repository }}
-        readme-filepath: ./DOCKER.md
-      continue-on-error: true
+    - name: Workflow summary
+      run: |
+        echo "## 🐳 Docker Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Branch**: ${{ steps.branch.outputs.branch }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: ${{ steps.get-release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Tag**: ${{ steps.get-release.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Registry**: ${{ env.REGISTRY }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Image**: ${{ env.IMAGE_NAME }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Published Tags:" >> $GITHUB_STEP_SUMMARY
+        echo '${{ steps.meta.outputs.tags }}' | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY

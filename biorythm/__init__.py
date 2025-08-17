@@ -44,14 +44,6 @@ __all__ = [
 ]
 
 try:
-    from importlib.metadata import version
+    from ._version import __version__
 except ImportError:
-    from importlib_metadata import version  # for Python <3.8
-
-try:
-    __version__ = version("biorythm")
-except Exception:
-    # Fallback for development or build environments
-    import os
-
-    __version__ = os.environ.get("SETUPTOOLS_SCM_PRETEND_VERSION", "0.1.dev")
+    __version__ = "unknown"

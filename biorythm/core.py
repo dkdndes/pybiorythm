@@ -57,6 +57,11 @@ import sys
 from datetime import datetime, timedelta
 from typing import List, Optional, Tuple
 
+try:
+    from ._version import __version__
+except ImportError:
+    __version__ = "unknown"
+
 # Constants
 PHYSICAL_CYCLE_DAYS = 23
 EMOTIONAL_CYCLE_DAYS = 28
@@ -464,7 +469,7 @@ class BiorhythmCalculator:
         return {
             "meta": {
                 "generator": "biorhythm_enhanced.py",
-                "version": "2025-08-07",
+                "version": __version__,
                 "birthdate": birthdate.strftime("%Y-%m-%d"),
                 "plot_date": plot_date.strftime("%Y-%m-%d"),
                 "days_alive": days_alive,
