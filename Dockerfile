@@ -20,7 +20,7 @@ ARG VERSION=""
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=${VERSION}
 
 # Install dependencies using uv
-RUN uv sync --system
+RUN uv sync
 RUN uv build
 RUN uv pip install --system dist/*.whl
 
