@@ -22,7 +22,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, 'chore(release)')"
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.12']
     
     steps:
     - name: Checkout code
@@ -133,7 +133,7 @@ jobs:
     - name: Get package version
       id: get-version
       run: |
-        # Get version from hatch/setuptools-scm (works because we have git context)
+        # Get version from setuptools-scm (works because we have git context)
         VERSION=$(uv run python -c "import biorythm; print(biorythm.__version__)" 2>/dev/null || echo "0.1.dev")
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "📦 Package version: $VERSION"
