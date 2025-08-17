@@ -46,11 +46,25 @@ jobs:
 
       - name: Python Semantic Release
         id: release
-        uses: python-semantic-release/python-semantic-release@v9.14.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_committer_name: "semantic-release"
-          git_committer_email: "semantic-release@users.noreply.github.com"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_COMMITTER_NAME: "semantic-release"
+          GIT_COMMITTER_EMAIL: "semantic-release@users.noreply.github.com"
+        run: |
+          # Run semantic-release using uv in the runner environment
+          uv run semantic-release version --print > version_output.txt 2>&1 || echo "no_release" > version_output.txt
+          
+          if grep -q "no_release" version_output.txt; then
+            echo "released=false" >> $GITHUB_OUTPUT
+            echo "No release needed"
+          else
+            echo "released=true" >> $GITHUB_OUTPUT
+            echo "Release will be created"
+            
+            # Create the actual release
+            uv run semantic-release version
+            uv run semantic-release publish
+          fi
 
       - name: Get version info
         id: get_version
