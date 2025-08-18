@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for Biorythm (M2 Mac optimized)
 # Stage 1: Build stage with dependencies
-FROM python:3.12-slim AS builder
+FROM python:3.13.7-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -24,7 +24,7 @@ RUN uv sync --frozen
 RUN uv pip install --system .
 
 # Stage 2: Production stage - minimal runtime image
-FROM python:3.12-slim AS production
+FROM python:3.13.7-slim AS production
 
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash biorythm
